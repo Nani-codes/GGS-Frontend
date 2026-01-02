@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { CONTACT_INFO, SOCIAL_LINKS } from '@/config/constants';
 import { IMAGE_PATHS } from '@/config/images';
+import { useEffect, useRef } from 'react';
 
 const BANNER_IMAGE_STYLES = {
   width: '100%',
@@ -18,87 +19,167 @@ const BANNER_IMAGE_STYLES = {
 
 export function HomeContent() {
   const t = useTranslations();
+  const swiperRef = useRef<any>(null);
+  
+  useEffect(() => {
+    // Initialize Swiper when component mounts
+    const initSwiper = () => {
+      const Swiper = (window as any).Swiper;
+      if (!Swiper) {
+        // If Swiper is not loaded yet, wait a bit and try again
+        setTimeout(initSwiper, 100);
+        return;
+      }
+
+      const carouselEl = document.querySelector('.banner-slider__carousel');
+      if (carouselEl && !swiperRef.current) {
+        swiperRef.current = new Swiper('.banner-slider__carousel', {
+          slidesPerView: 1,
+          spaceBetween: 0,
+          loop: true,
+          speed: 1000,
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: '.banner-slider__pagination',
+            clickable: true,
+            type: 'bullets',
+          },
+        });
+      }
+    };
+
+    initSwiper();
+
+    // Cleanup on unmount
+    return () => {
+      if (swiperRef.current) {
+        try {
+          swiperRef.current.destroy(true, true);
+          swiperRef.current = null;
+        } catch (e) {
+          // Ignore cleanup errors
+        }
+      }
+    };
+  }, []);
   
   return (
     <PageLayout variant="default" currentPage="/" showSidebar={true}>
-      {/* ===== BANNER SECTION ===== */}
-      <section className="banner-one">
-        <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/banner-one-shape-bg.png)' }}>
-        </div>
-        <div className="banner-one__shape-4 float-bob-x">
-          <img src="/assets/images/shapes/banner-one-shape-4.png" alt="" />
-        </div>
-        <div className="banner-one__shape-5 float-bob-y">
-          <img src="/assets/images/shapes/banner-one-shape-5.png" alt="" />
-        </div>
-        <div className="banner-one__shape-6">
-          <img src="/assets/images/shapes/banner-one-shape-6.png" alt="" />
-        </div>
-        <div className="banner-one__shape-7 img-bounce">
-          <img src="/assets/images/shapes/banner-one-shape-7.png" alt="" />
-        </div>
-        <div className="banner-one__shape-8 float-bob-y">
-          <img src="/assets/images/shapes/banner-one-shape-8.png" alt="" />
-        </div>
-        <div className="container">
-          <div className="banner-one__inner">
-            <div className="row">
-              <div className="col-xl-6 col-lg-6">
-                <div className="banner-one__left">
-                  <div className="banner-one__title-box">
-                    <div className="banner-one__sub-title">
-                      <p>{t('home.banner.subtitle')}</p>
-                    </div>
-                    <h2 className="banner-one__title">{t('home.banner.title')}</h2>
-                  </div>
-                  <p className="banner-one__text">
-                    {t('home.banner.description')}
-                  </p>
-                  <div className="banner-one__thm-and-other-btn-box">
-                    <div className="banner-one__btn-box">
-                      <Link className="thm-btn" href="/about#our-history">{t('common.exploreOurJourney')}
-                        <i className="fal fa-long-arrow-right" />
-                        <span className="hover-btn hover-bx" />
-                        <span className="hover-btn hover-bx2" />
-                        <span className="hover-btn hover-bx3" />
-                        <span className="hover-btn hover-bx4" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+      {/* ===== BANNER SLIDER SECTION ===== */}
+      <div className="banner-slider__carousel swiper-container">
+        <div className="swiper-wrapper">
+          {/* Slide 1 - Complete banner-one section */}
+          <div className="swiper-slide">
+            <section className="banner-one">
+              <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/banner-one-shape-bg.png)' }}>
               </div>
-              <div className="col-xl-6 col-lg-6">
-                <div className="banner-one__right">
-                  <div className="banner-one__img-box">
-                    <div className="banner-one__img">
-                      <img
-                        className="img-bounce"
-                        src={IMAGE_PATHS.bannerImage}
-                        alt={t('home.banner.title')}
-                        style={BANNER_IMAGE_STYLES}
-                      />
-                      <div className="banner-one__img-shape-box rotate-me">
-                        <div className="banner-one__img-shape-1">
-                          <div className="banner-one__img-shape-2" />
+              <div className="banner-one__shape-4 float-bob-x">
+                <img src="/assets/images/shapes/banner-one-shape-4.png" alt="" />
+              </div>
+              <div className="banner-one__shape-5 float-bob-y">
+                <img src="/assets/images/shapes/banner-one-shape-5.png" alt="" />
+              </div>
+              <div className="banner-one__shape-6">
+                <img src="/assets/images/shapes/banner-one-shape-6.png" alt="" />
+              </div>
+              <div className="banner-one__shape-7 img-bounce">
+                <img src="/assets/images/shapes/banner-one-shape-7.png" alt="" />
+              </div>
+              <div className="banner-one__shape-8 float-bob-y">
+                <img src="/assets/images/shapes/banner-one-shape-8.png" alt="" />
+              </div>
+              <div className="container">
+                <div className="banner-one__inner">
+                  <div className="row">
+                    <div className="col-xl-6 col-lg-6">
+                      <div className="banner-one__left">
+                        <div className="banner-one__title-box">
+                          <div className="banner-one__sub-title">
+                            <p>{t('home.banner.subtitle')}</p>
+                          </div>
+                          <h2 className="banner-one__title">{t('home.banner.title')}</h2>
                         </div>
-                        <div className="banner-one__shape-1">
-                          <img src="/assets/images/shapes/banner-one-shape-1.png" alt="" />
+                        <p className="banner-one__text">
+                          {t('home.banner.description')}
+                        </p>
+                        <div className="banner-one__thm-and-other-btn-box">
+                          <div className="banner-one__btn-box">
+                            <Link className="thm-btn" href="/about#our-history">{t('common.exploreOurJourney')}
+                              <i className="fal fa-long-arrow-right" />
+                              <span className="hover-btn hover-bx" />
+                              <span className="hover-btn hover-bx2" />
+                              <span className="hover-btn hover-bx3" />
+                              <span className="hover-btn hover-bx4" />
+                            </Link>
+                          </div>
                         </div>
-                        <div className="banner-one__shape-2 rotate-me">
-                          <img src="/assets/images/shapes/banner-one-shape-2.png" alt="" />
-                        </div>
-                        <div className="banner-one__shape-3">
-                          <img src="/assets/images/shapes/banner-one-shape-3.png" alt="" />
+                      </div>
+                    </div>
+                    <div className="col-xl-6 col-lg-6">
+                      <div className="banner-one__right">
+                        <div className="banner-one__img-box">
+                          <div className="banner-one__img">
+                            <img
+                              className="img-bounce"
+                              src={IMAGE_PATHS.bannerImage}
+                              alt={t('home.banner.title')}
+                              style={BANNER_IMAGE_STYLES}
+                            />
+                            <div className="banner-one__img-shape-box rotate-me">
+                              <div className="banner-one__img-shape-1">
+                                <div className="banner-one__img-shape-2" />
+                              </div>
+                              <div className="banner-one__shape-1">
+                                <img src="/assets/images/shapes/banner-one-shape-1.png" alt="" />
+                              </div>
+                              <div className="banner-one__shape-2 rotate-me">
+                                <img src="/assets/images/shapes/banner-one-shape-2.png" alt="" />
+                              </div>
+                              <div className="banner-one__shape-3">
+                                <img src="/assets/images/shapes/banner-one-shape-3.png" alt="" />
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
+          </div>
+          {/* Slide 2 - Indian farmer with bullock */}
+          <div className="swiper-slide">
+            <section className="banner-one" style={{ backgroundImage: 'url(/assets/images/backgrounds/indian-farmer-working-green-pigeon-peas-field-with-bullock.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundColor: 'transparent', minHeight: '800px' }}>
+            </section>
+          </div>
+          {/* Slide 3 - Smart agriculture IoT */}
+          <div className="swiper-slide">
+            <section className="banner-one" style={{ backgroundImage: 'url(/assets/images/backgrounds/smart-agriculture-iot-with-hand-planting-tree-background.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundColor: 'transparent', minHeight: '800px' }}>
+            </section>
+          </div>
+          {/* Slide 4 - Empty */}
+          <div className="swiper-slide">
+            <section className="banner-one" style={{ backgroundColor: 'transparent', minHeight: '800px' }}>
+            </section>
+          </div>
+          {/* Slide 5 - Empty */}
+          <div className="swiper-slide">
+            <section className="banner-one" style={{ backgroundColor: 'transparent', minHeight: '800px' }}>
+            </section>
+          </div>
+          {/* Slide 6 - Empty */}
+          <div className="swiper-slide">
+            <section className="banner-one" style={{ backgroundColor: 'transparent', minHeight: '800px' }}>
+            </section>
           </div>
         </div>
-      </section>
+        {/* Pagination dots */}
+        <div className="banner-slider__pagination swiper-pagination"></div>
+      </div>
           {/* ===== FEATURE SECTION ===== */}
           {false && <section className="feature-one">
             <div className="container">
@@ -241,38 +322,46 @@ export function HomeContent() {
               </div>
             </div>
           </section>
-          {/* ===== AUTHOR/VISION/MISSION SECTION ===== */}
-          <section className="author-one">
+          {/* ===== VISION/MISSION/VALUES DIAMOND FLOW SECTION ===== */}
+          <section className="vision-mission-flow-section">
             <div className="container">
-              <div className="row">
-                <div className="col-xl-4">
-                  <div className="author-one__Vission-mission">
-                    <h4 className="author-one__Vission-mission-title">{t('about.ourVision')}</h4>
-                    <ul className="author-one__Vission-mission-point list-unstyled">
-                      <li>
-                        <p dangerouslySetInnerHTML={{ __html: t('about.visionText') }} />
-                      </li>
-                    </ul>
+              <div className="vision-mission-flow vision-mission-flow--vshape">
+                {/* Diamond 1 - Vision */}
+                <div className="diamond-flow-item diamond-flow-item--vision">
+                  <div className="diamond-tile diamond-tile--vision">
+                    <div className="diamond-tile__number">1</div>
+                    <div className="diamond-tile__title">Vision</div>
+                  </div>
+                  <div className="diamond-flow-description diamond-flow-description--center">
+                    <p className="diamond-flow-description-text" dangerouslySetInnerHTML={{ __html: t('about.visionText') }} />
                   </div>
                 </div>
-                <div className="col-xl-4">
-                  <div className="author-one__Vission-mission">
-                    <h4 className="author-one__Vission-mission-title">{t('about.ourMission')}</h4>
-                    <ul className="author-one__Vission-mission-point list-unstyled">
-                      <li>
-                        <p dangerouslySetInnerHTML={{ __html: t('about.missionText') }} />
-                      </li>
-                    </ul>
+
+                {/* Connector 1-2 */}
+                <div className="diamond-flow-connector diamond-flow-connector--1-2"></div>
+
+                {/* Diamond 2 - Mission */}
+                <div className="diamond-flow-item diamond-flow-item--mission">
+                  <div className="diamond-tile diamond-tile--mission">
+                    <div className="diamond-tile__number">2</div>
+                    <div className="diamond-tile__title">Mission</div>
+                  </div>
+                  <div className="diamond-flow-description diamond-flow-description--center">
+                    <p className="diamond-flow-description-text" dangerouslySetInnerHTML={{ __html: t('about.missionText') }} />
                   </div>
                 </div>
-                <div className="col-xl-4">
-                  <div className="author-one__Vission-mission">
-                    <h4 className="author-one__Vission-mission-title">{t('home.values.title')}</h4>
-                    <ul className="author-one__Vission-mission-point list-unstyled">
-                      <li>
-                        <p>{t('home.values.description')}</p>
-                      </li>
-                    </ul>
+
+                {/* Connector 2-3 */}
+                <div className="diamond-flow-connector diamond-flow-connector--2-3"></div>
+
+                {/* Diamond 3 - Values */}
+                <div className="diamond-flow-item diamond-flow-item--values">
+                  <div className="diamond-tile diamond-tile--values">
+                    <div className="diamond-tile__number">3</div>
+                    <div className="diamond-tile__title">Values</div>
+                  </div>
+                  <div className="diamond-flow-description diamond-flow-description--center">
+                    <p className="diamond-flow-description-text">{t('home.values.description')}</p>
                   </div>
                 </div>
               </div>
@@ -595,7 +684,7 @@ export function HomeContent() {
                       </div>
                       <h3 className="counter-one__title">{t('home.counter.happyFarmers')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={340000} data-speed={1500}></h3>
+                        <h3 className="count-text" data-stop={340000} data-speed={1500} data-suffix="+"></h3>
                       </div>
                     </div>
                   </div>
@@ -611,7 +700,7 @@ export function HomeContent() {
                       </div>
                       <h3 className="counter-one__title">{t('home.counter.dealers')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={943} data-speed={1500}></h3>
+                        <h3 className="count-text" data-stop={943} data-speed={1500} data-suffix="+"></h3>
                       </div>
                     </div>
                   </div>
@@ -627,7 +716,7 @@ export function HomeContent() {
                       </div>
                       <h3 className="counter-one__title">{t('home.counter.hardWorkers')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={1463} data-speed={1500}></h3>
+                        <h3 className="count-text" data-stop={1463} data-speed={1500} data-suffix="+"></h3>
                       </div>
                     </div>
                   </div>
@@ -642,7 +731,7 @@ export function HomeContent() {
                       </div>
                       <h3 className="counter-one__title">{t('home.counter.products')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={47} data-speed={1500}></h3>
+                        <h3 className="count-text" data-stop={93} data-speed={1500} data-suffix="+"></h3>
                       </div>
                     </div>
                   </div>

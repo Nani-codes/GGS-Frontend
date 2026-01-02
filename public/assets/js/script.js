@@ -842,23 +842,25 @@
     $(".count-box").appear(
       function () {
         var $t = $(this),
-          n = $t.find(".count-text").attr("data-stop"),
-          r = parseInt($t.find(".count-text").attr("data-speed"), 10);
+          $countText = $t.find(".count-text"),
+          n = $countText.attr("data-stop"),
+          r = parseInt($countText.attr("data-speed"), 10),
+          suffix = $countText.attr("data-suffix") || "";
 
         if (!$t.hasClass("counted")) {
           $t.addClass("counted");
           $({
-            countNum: $t.find(".count-text").text()
+            countNum: $countText.text()
           }).animate({
             countNum: n
           }, {
             duration: r,
             easing: "linear",
             step: function () {
-              $t.find(".count-text").text(Math.floor(this.countNum));
+              $countText.text(Math.floor(this.countNum) + suffix);
             },
             complete: function () {
-              $t.find(".count-text").text(this.countNum);
+              $countText.text(this.countNum + suffix);
             }
           });
         }

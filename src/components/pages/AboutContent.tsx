@@ -106,38 +106,46 @@ export function AboutContent() {
           </div>
         </div>
       </section>
-      {/* ===== VISION & MISSION SECTION ===== */}
-      <section className="author-one">
+      {/* ===== VISION/MISSION/VALUES DIAMOND FLOW SECTION ===== */}
+      <section className="vision-mission-flow-section">
         <div className="container">
-          <div className="row">
-            <div className="col-xl-4">
-              <div className="author-one__Vission-mission">
-                <h4 className="author-one__Vission-mission-title">{t('about.ourVision')}</h4>
-                <ul className="author-one__Vission-mission-point list-unstyled">
-                  <li>
-                    <p dangerouslySetInnerHTML={{ __html: t('about.visionText') }} />
-                  </li>
-                </ul>
+          <div className="vision-mission-flow vision-mission-flow--vshape">
+            {/* Diamond 1 - Vision */}
+            <div className="diamond-flow-item diamond-flow-item--vision">
+              <div className="diamond-tile diamond-tile--vision">
+                <div className="diamond-tile__number">1</div>
+                <div className="diamond-tile__title">Vision</div>
+              </div>
+              <div className="diamond-flow-description diamond-flow-description--center">
+                <p className="diamond-flow-description-text" dangerouslySetInnerHTML={{ __html: t('about.visionText') }} />
               </div>
             </div>
-            <div className="col-xl-4">
-              <div className="author-one__Vission-mission">
-                <h4 className="author-one__Vission-mission-title">{t('about.ourMission')}</h4>
-                <ul className="author-one__Vission-mission-point list-unstyled">
-                  <li>
-                    <p dangerouslySetInnerHTML={{ __html: t('about.missionText') }} />
-                  </li>
-                </ul>
+
+            {/* Connector 1-2 */}
+            <div className="diamond-flow-connector diamond-flow-connector--1-2"></div>
+
+            {/* Diamond 2 - Mission */}
+            <div className="diamond-flow-item diamond-flow-item--mission">
+              <div className="diamond-tile diamond-tile--mission">
+                <div className="diamond-tile__number">2</div>
+                <div className="diamond-tile__title">Mission</div>
+              </div>
+              <div className="diamond-flow-description diamond-flow-description--center">
+                <p className="diamond-flow-description-text" dangerouslySetInnerHTML={{ __html: t('about.missionText') }} />
               </div>
             </div>
-            <div className="col-xl-4">
-              <div className="author-one__Vission-mission">
-                <h4 className="author-one__Vission-mission-title">{t('home.values.title')}</h4>
-                <ul className="author-one__Vission-mission-point list-unstyled">
-                  <li>
-                    <p>{t('home.values.description')}</p>
-                  </li>
-                </ul>
+
+            {/* Connector 2-3 */}
+            <div className="diamond-flow-connector diamond-flow-connector--2-3"></div>
+
+            {/* Diamond 3 - Values */}
+            <div className="diamond-flow-item diamond-flow-item--values">
+              <div className="diamond-tile diamond-tile--values">
+                <div className="diamond-tile__number">3</div>
+                <div className="diamond-tile__title">Values</div>
+              </div>
+              <div className="diamond-flow-description diamond-flow-description--center">
+                <p className="diamond-flow-description-text">{t('home.values.description')}</p>
               </div>
             </div>
           </div>
