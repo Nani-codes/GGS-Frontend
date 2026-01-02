@@ -1,0 +1,1346 @@
+@import "tailwindcss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Social Posts Style */
+.social-posts-section {
+  padding: 120px 0 90px;
+}
+
+.social-posts-stacked-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 50px auto;
+  overflow: hidden;
+}
+
+.social-posts-stacked-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+  perspective: 1200px;
+}
+
+.social-posts-stacked-list {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+}
+
+.social-post-stacked-item {
+  position: absolute;
+  width: 300px;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.social-post-stacked-item[data-index="0"] {
+  transform: translateX(-600px) translateZ(-200px) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.social-post-stacked-item[data-index="1"] {
+  transform: translateX(-300px) translateZ(-100px) scale(0.9);
+  opacity: 0.7;
+  z-index: 2;
+}
+
+.social-post-stacked-item[data-index="2"] {
+  transform: translateX(0) translateZ(0) scale(1);
+  opacity: 1;
+  z-index: 5;
+}
+
+.social-post-stacked-item[data-index="3"] {
+  transform: translateX(300px) translateZ(-100px) scale(0.9);
+  opacity: 0.7;
+  z-index: 2;
+}
+
+.social-post-stacked-item[data-index="4"] {
+  transform: translateX(600px) translateZ(-200px) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.social-post-stacked-item .social-post {
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0);
+}
+
+.social-posts-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.social-posts-nav-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--farmology-base, #4a9b3a);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  pointer-events: all;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.social-posts-nav-btn:hover {
+  background-color: var(--farmology-primary, #2d7a1f);
+  transform: scale(1.1);
+}
+
+.social-posts-nav-btn:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 767px) {
+  .social-post-stacked-item {
+    width: 180px !important;
+  }
+  
+  .social-post-stacked-item[data-index="0"],
+  .social-post-stacked-item.slide-prev-2 {
+    transform: translateX(-360px) translateZ(-200px) scale(0.7) !important;
+  }
+  
+  .social-post-stacked-item[data-index="1"],
+  .social-post-stacked-item.slide-prev {
+    transform: translateX(-180px) translateZ(-100px) scale(0.85) !important;
+  }
+  
+  .social-post-stacked-item[data-index="2"],
+  .social-post-stacked-item.slide-active {
+    transform: translateX(0) translateZ(0) scale(1) !important;
+  }
+  
+  .social-post-stacked-item[data-index="3"],
+  .social-post-stacked-item.slide-next {
+    transform: translateX(180px) translateZ(-100px) scale(0.85) !important;
+  }
+  
+  .social-post-stacked-item[data-index="4"],
+  .social-post-stacked-item.slide-next-2 {
+    transform: translateX(360px) translateZ(-200px) scale(0.7) !important;
+  }
+  
+  .social-posts-nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .social-posts-stacked-wrapper {
+    min-height: 500px;
+  }
+}
+
+.social-post {
+  position: relative;
+  display: block;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.social-post:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.social-post__header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #efefef;
+  position: relative;
+}
+
+.social-post__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.social-post__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #f5f5f5;
+}
+
+.social-post__user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.social-post__username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.social-post__time {
+  font-size: 12px;
+  color: #8e8e8e;
+  margin-top: 2px;
+}
+
+.social-post__tag {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background-color: var(--farmology-base, #4a9b3a);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.social-post__image {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+  background-color: #f5f5f5;
+}
+
+.social-post__image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.social-post__actions {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 16px;
+  border-bottom: 1px solid #efefef;
+}
+
+.social-post__action-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 24px;
+  color: #262626;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-post__action-btn:hover {
+  color: var(--farmology-base, #4a9b3a);
+  transform: scale(1.1);
+}
+
+.social-post__action-btn i.fa-heart:hover {
+  color: #ed4956;
+}
+
+.social-post__content {
+  padding: 12px 16px 16px;
+}
+
+.social-post__likes {
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0 0 8px 0;
+}
+
+.social-post__caption {
+  font-size: 14px;
+  color: #262626;
+  line-height: 1.5;
+  margin: 0 0 8px 0;
+}
+
+.social-post__caption strong {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.social-post__view-comments {
+  font-size: 14px;
+  color: #8e8e8e;
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.social-post__view-comments:hover {
+  color: var(--farmology-base, #4a9b3a);
+}
+
+@media (max-width: 768px) {
+  .social-post__tag {
+    position: static;
+    margin-left: auto;
+    margin-top: 4px;
+  }
+  
+  .social-post__header {
+    flex-wrap: wrap;
+  }
+}
+
+/* ===== PRODUCT FILTER BAR ===== */
+/* Spacing tokens */
+:root {
+  --filter-spacing-xs: 8px;
+  --filter-spacing-sm: 12px;
+  --filter-spacing-md: 16px;
+  --filter-spacing-lg: 20px;
+}
+
+/* Unified filter bar container */
+.product-filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--filter-spacing-sm);
+  margin-top: var(--filter-spacing-sm);
+  margin-bottom: var(--filter-spacing-sm);
+}
+
+/* Search section */
+.product-filter-bar__search {
+  position: relative;
+  display: block;
+  background-color: var(--farmology-primary);
+  padding: var(--filter-spacing-md);
+  border-radius: var(--farmology-bdr-radius);
+}
+
+.product-filter-bar__search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.product-filter-bar__search-input {
+  width: 100%;
+  height: 45px;
+  background-color: var(--farmology-white);
+  padding-left: 15px;
+  padding-right: 50px;
+  font-size: 14px;
+  color: var(--farmology-gray);
+  font-family: var(--farmology-font);
+  border: none;
+  outline: none;
+  font-weight: 500;
+  border-radius: 3px;
+  transition: padding-right 0.2s ease;
+}
+
+.product-filter-bar__search-input-wrapper--has-clear .product-filter-bar__search-input {
+  padding-right: 75px;
+}
+
+.product-filter-bar__search-input::placeholder {
+  color: inherit;
+  opacity: 1;
+}
+
+.product-filter-bar__submit-button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background-color: var(--farmology-base);
+  color: var(--farmology-white);
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 500ms ease;
+}
+
+.product-filter-bar__submit-button:hover {
+  background-color: var(--farmology-extra);
+  color: var(--farmology-white);
+}
+
+.product-filter-bar__clear-button {
+  position: absolute;
+  right: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #999;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+.product-filter-bar__clear-button:hover {
+  color: #666;
+}
+
+/* Categories accordion section */
+.product-filter-bar__categories {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--farmology-primary);
+  padding: var(--filter-spacing-md);
+  border-radius: var(--farmology-bdr-radius);
+}
+
+.product-filter-bar__categories-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--farmology-extra);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--farmology-font);
+  box-sizing: border-box;
+}
+
+.product-filter-bar__categories-trigger i {
+  font-size: 14px;
+  transition: transform 300ms ease;
+  margin-left: var(--filter-spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.product-filter-bar__categories-trigger[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.product-filter-bar__categories-accordion {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease, padding 300ms ease;
+  padding: 0 var(--filter-spacing-md);
+  margin-top: var(--filter-spacing-sm);
+}
+
+.product-filter-bar__categories-accordion--open {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: var(--filter-spacing-sm) var(--filter-spacing-md);
+}
+
+.product-filter-bar__categories-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product-filter-bar__categories-list li {
+  margin: 0;
+  padding: 0;
+}
+
+.product-filter-bar__categories-list li a {
+  display: block;
+  padding: var(--filter-spacing-sm) 0;
+  font-size: 14px;
+  color: var(--farmology-gray);
+  text-decoration: none;
+  transition: all 200ms ease;
+  border-left: 3px solid transparent;
+  padding-left: var(--filter-spacing-sm);
+  margin-left: calc(-1 * var(--filter-spacing-md));
+}
+
+.product-filter-bar__categories-list li a:hover {
+  color: var(--farmology-base);
+}
+
+.product-filter-bar__category-item--active {
+  background-color: rgba(74, 155, 58, 0.1);
+  border-left: 3px solid var(--farmology-base) !important;
+  color: var(--farmology-base) !important;
+  font-weight: 600;
+}
+
+.product-filter-bar__loading-state,
+.product-filter-bar__empty-state {
+  display: block;
+  font-size: 12px;
+  padding: var(--filter-spacing-xs) 0;
+  color: #999;
+  text-align: left;
+  margin: 0;
+}
+
+/* Tighten vertical gaps */
+.product__showing-result {
+  margin-bottom: var(--filter-spacing-sm) !important;
+}
+
+.product__items {
+  margin-top: var(--filter-spacing-sm);
+}
+
+/* Mobile (≤767px) */
+@media (max-width: 767px) {
+  .product-filter-bar {
+    flex-direction: row;
+    gap: var(--filter-spacing-sm);
+  }
+
+  .product-filter-bar__search {
+    flex: 1;
+    padding: var(--filter-spacing-sm);
+  }
+
+  .product-filter-bar__categories {
+    flex: 1;
+    padding: var(--filter-spacing-sm);
+  }
+
+  .product-filter-bar__search-input {
+    height: 40px;
+    font-size: 14px;
+    padding-right: 45px;
+  }
+
+  .product-filter-bar__search-input-wrapper--has-clear .product-filter-bar__search-input {
+    padding-right: 70px;
+  }
+
+  .product-filter-bar__submit-button {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .product-filter-bar__clear-button {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    right: 40px;
+  }
+
+  .product-filter-bar__categories-trigger {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .product-filter-bar__categories-trigger i {
+    font-size: 12px;
+  }
+
+  .product-filter-bar__categories-accordion {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--farmology-white);
+    border-radius: var(--farmology-bdr-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-top: var(--filter-spacing-xs);
+  }
+
+  .product-filter-bar__categories-accordion--open {
+    padding: var(--filter-spacing-sm) var(--filter-spacing-md);
+  }
+
+  .page-header__inner {
+    margin-bottom: var(--filter-spacing-sm);
+  }
+
+  .thm-breadcrumb__inner {
+    margin-bottom: var(--filter-spacing-sm);
+  }
+}
+
+/* Tablet (768px-991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .product-filter-bar {
+    flex-direction: row;
+    gap: var(--filter-spacing-md);
+  }
+
+  .product-filter-bar__search {
+    flex: 1;
+    padding: var(--filter-spacing-md);
+  }
+
+  .product-filter-bar__categories {
+    flex: 1;
+    padding: var(--filter-spacing-md);
+  }
+
+  .product-filter-bar__search-input {
+    height: 50px;
+    font-size: 15px;
+  }
+
+  .product-filter-bar__submit-button {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .product-filter-bar__clear-button {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+
+  .product-filter-bar__categories-trigger {
+    height: 50px;
+    font-size: 17px;
+  }
+
+  .product-filter-bar__categories-trigger i {
+    font-size: 14px;
+  }
+}
+
+/* Desktop (≥992px) */
+@media (min-width: 992px) {
+  .product-filter-bar {
+    flex-direction: column;
+    gap: var(--filter-spacing-md);
+  }
+
+  .product-filter-bar__search {
+    padding: var(--filter-spacing-lg);
+  }
+
+  .product-filter-bar__categories {
+    padding: var(--filter-spacing-lg);
+  }
+
+  .product-filter-bar__search-input {
+    height: 55px;
+    font-size: 16px;
+    padding-right: 55px;
+  }
+
+  .product-filter-bar__search-input-wrapper--has-clear .product-filter-bar__search-input {
+    padding-right: 85px;
+  }
+
+  .product-filter-bar__submit-button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .product-filter-bar__clear-button {
+    width: 22px;
+    height: 22px;
+    font-size: 16px;
+    right: 50px;
+  }
+
+  .product-filter-bar__categories-trigger {
+    height: 55px;
+    font-size: 18px;
+  }
+
+  .product-filter-bar__categories-trigger i {
+    font-size: 16px;
+  }
+
+  .product-filter-bar__categories-accordion {
+    position: relative;
+  }
+}
+
+/* ===== FOOTER MOBILE OPTIMIZATIONS ===== */
+@media (max-width: 767px) {
+  .site-footer__top-inner {
+    padding: 40px 0 50px !important;
+  }
+
+  .footer-widget__about-text {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .footer-widget__links,
+  .footer-widget__services {
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .footer-widget__title {
+    font-size: 16px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .footer-widget__links-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .footer-widget__links-list li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .footer-widget__links-list li a {
+    font-size: 13px;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+
+  .footer-widget__links-list li span.fas {
+    font-size: 10px;
+    margin-right: 6px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* Unified wrapper for Quick Links and Our Products */
+  .footer-widget__links-services-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .footer-widget__links-services-wrapper .row {
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .footer-widget__links-services-wrapper .col-6 {
+    display: flex;
+    align-items: flex-start;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .footer-widget__links-services-wrapper .col-6:first-child {
+    padding-left: 0;
+    padding-right: 12px;
+  }
+
+  .footer-widget__links-services-wrapper .col-6:last-child {
+    padding-right: 0;
+    padding-left: 12px;
+  }
+
+  .footer-widget__links-services-wrapper .footer-widget__links,
+  .footer-widget__links-services-wrapper .footer-widget__services {
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+  }
+
+  .footer-widget__links-services-wrapper .footer-widget__title {
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .footer-widget__links-services-wrapper .footer-widget__links-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .site-footer__bottom-inner {
+    padding: 20px 0 !important;
+    gap: 12px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .site-footer__copyright-text {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .site-footer__bottom-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .site-footer__bottom-menu li {
+    margin: 0;
+  }
+
+  .site-footer__bottom-menu li + li {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .site-footer__bottom-menu li a {
+    font-size: 12px;
+  }
+
+  .site-footer__copyright {
+    margin-bottom: 12px;
+  }
+
+  /* Contact Us section mobile optimizations */
+  .footer-widget__contact {
+    margin-top: 20px;
+  }
+
+  .footer-widget__contact .footer-widget__title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .footer-widget__contact-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-widget__contact-list li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .footer-widget__contact-list li .icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .footer-widget__contact-list li p {
+    font-size: 11px;
+    line-height: 1.4;
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+  }
+
+  .footer-widget__contact-list li p a {
+    font-size: 11px;
+    line-height: 1.4;
+    display: block;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .footer-widget__contact-list li p br {
+    display: none;
+  }
+
+  /* Ensure contact info doesn't overflow */
+  .footer-widget__contact-list li {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Copyright section mobile optimizations */
+  .site-footer__bottom {
+    padding: 15px 0;
+  }
+
+  .site-footer__bottom-inner {
+    padding: 15px 0 !important;
+    gap: 10px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .site-footer__copyright-text {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    margin: 0;
+    word-wrap: break-word;
+  }
+
+  .site-footer__copyright-text a {
+    font-size: 11px;
+  }
+
+  .site-footer__bottom-menu-box {
+    width: 100%;
+  }
+
+  .site-footer__bottom-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .site-footer__bottom-menu li {
+    margin: 0;
+  }
+
+  .site-footer__bottom-menu li + li {
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .site-footer__bottom-menu li a {
+    font-size: 11px !important;
+    line-height: 1.4;
+    padding: 2px 0;
+  }
+}
+
+/* ===== SOCIAL MEDIA POSTS SECTION ===== */
+.social-media-posts {
+  position: relative;
+  display: block;
+  padding: 60px 0;
+  background-color: transparent;
+}
+
+.social-media-post {
+  position: relative;
+  display: block;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.social-media-post:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.social-media-post__header {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.social-media-post__header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--farmology-extra, #333);
+}
+
+.social-media-post__embed {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-media-post--instagram .social-media-post__embed {
+  display: block;
+  padding: 0;
+  background-color: transparent;
+}
+
+.social-media-post--instagram .social-media-post__embed iframe {
+  width: 100% !important;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Instagram embed blockquote styling */
+.social-media-post--instagram .social-media-post__embed blockquote.instagram-media {
+  margin: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  min-width: auto !important;
+}
+
+.social-media-post--facebook .social-media-post__embed {
+  display: block;
+  padding: 0;
+  background-color: transparent;
+}
+
+.social-media-post--facebook .social-media-post__embed iframe {
+  width: 100% !important;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  border-radius: 8px;
+}
+
+.social-media-post--youtube .social-media-post__embed {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  min-height: 0;
+  background-color: #000;
+}
+
+.social-media-post--youtube .social-media-post__embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Responsive styles for social media posts */
+@media (max-width: 991px) {
+  .social-media-post {
+    margin-bottom: 30px;
+  }
+  
+  .social-media-post__embed {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 767px) {
+  .social-media-posts {
+    padding: 40px 0;
+  }
+  
+  .social-media-post {
+    margin-bottom: 30px;
+  }
+  
+  .social-media-post__header {
+    font-size: 16px;
+  }
+  
+  .social-media-post__header h4 {
+    font-size: 16px;
+  }
+  
+  .social-media-post__embed {
+    min-height: 300px;
+  }
+}
+
+/* ===== FOOTER DESKTOP ALIGNMENT ===== */
+@media (min-width: 768px) {
+  /* Ensure desktop footer maintains proper three-column layout */
+  .site-footer__top-inner {
+    padding: 111px 0 100px;
+  }
+
+  /* Reset footer-widget__about to block layout for desktop (not flex) */
+  .footer-widget__about {
+    display: block !important;
+    margin-right: 50px;
+    margin-top: 9px;
+  }
+
+  /* Ensure logo and text stack vertically on desktop */
+  .footer-widget__about-logo {
+    display: inline-block;
+    flex-shrink: unset;
+    margin: 0;
+  }
+
+  .footer-widget__about-logo img {
+    width: 160px !important;
+    height: 50px !important;
+    max-height: unset !important;
+    object-fit: contain !important;
+  }
+
+  /* Ensure about text has proper desktop spacing */
+  .footer-widget__about-text {
+    margin: 0;
+    padding-top: 24px;
+    padding-bottom: 17px;
+    font-size: inherit;
+    line-height: inherit;
+    flex: unset;
+    min-width: unset;
+  }
+
+  /* Ensure footer widgets maintain proper column alignment */
+  .footer-widget__links,
+  .footer-widget__services {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* Reset links-services-wrapper for desktop - maintain Bootstrap grid */
+  .footer-widget__links-services-wrapper {
+    display: block;
+    width: auto;
+  }
+
+  .footer-widget__links-services-wrapper .row {
+    margin-left: -15px;
+    margin-right: -15px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .footer-widget__links-services-wrapper .col-6 {
+    display: block;
+    padding-left: 15px;
+    padding-right: 15px;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .footer-widget__links-services-wrapper .col-6:first-child {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .footer-widget__links-services-wrapper .col-6:last-child {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  /* Ensure contact section has proper desktop spacing */
+  .footer-widget__contact {
+    margin-top: 0;
+    margin-left: 0;
+  }
+}
+
+/* ===== PRODUCT CARD IMAGE ALIGNMENT FIX ===== */
+/* Fix product card image containers to have uniform height and proper image fitting */
+.single-product-style1__img {
+  /* Set fixed aspect ratio (4:3) to ensure all containers have the same height */
+  aspect-ratio: 4 / 3;
+  /* Add background color to handle any empty space gracefully */
+  background-color: #f5f5f5;
+  /* Ensure container maintains aspect ratio - height will be calculated automatically */
+  min-height: 0;
+  /* Ensure the container has a defined height for absolutely positioned children */
+  height: auto;
+}
+
+/* For browsers that don't support aspect-ratio, use padding-bottom technique */
+@supports not (aspect-ratio: 4 / 3) {
+  .single-product-style1__img {
+    height: 0;
+    padding-bottom: 75%; /* 4:3 aspect ratio (3/4 = 0.75) */
+  }
+}
+
+/* Position both images absolutely to fill the container - works with Next.js Image component */
+.single-product-style1__img img,
+.single-product-style1__img > span {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  /* Maintain transitions for hover effects */
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+
+/* Next.js Image component wrapper (span) */
+.single-product-style1__img > span {
+  display: block !important;
+  position: absolute !important;
+  inset: 0;
+}
+
+/* Next.js Image component itself (img inside span) */
+.single-product-style1__img img {
+  /* Apply object-fit: contain so the entire image is visible and fills the container */
+  object-fit: contain;
+  /* Center the image within the container */
+  object-position: center;
+  /* Ensure minimum size to prevent pixelation */
+  min-width: 200px;
+  min-height: 150px;
+}
+
+/* First image (hover effect) - ensure it's absolutely positioned and on top */
+.single-product-style1__img img:first-child,
+.single-product-style1__img .single-product-style1__img-hover {
+  position: absolute !important;
+  z-index: 2;
+}
+
+/* Second image (default visible) - ensure it's absolutely positioned */
+.single-product-style1__img img:nth-child(2),
+.single-product-style1__img .single-product-style1__img-default {
+  position: absolute !important;
+  z-index: 1;
+}
+
+/* Initial state for hover image (hidden) - apply to span wrapper */
+.single-product-style1__img .single-product-style1__img-hover {
+  -webkit-transform: translatex(50%) scalex(2);
+  transform: translatex(50%) scalex(2);
+  opacity: 0;
+}
+
+/* Blur effect for hover image - apply to img inside span */
+.single-product-style1__img .single-product-style1__img-hover img {
+  -webkit-filter: blur(10px);
+  filter: blur(10px);
+  transition: filter 500ms ease;
+}
+
+/* Initial state for default image (visible) - apply to span wrapper */
+.single-product-style1__img .single-product-style1__img-default {
+  -webkit-transform: translatex(0) scalex(1);
+  transform: translatex(0) scalex(1);
+  opacity: 1;
+}
+
+/* No blur for default image */
+.single-product-style1__img .single-product-style1__img-default img {
+  -webkit-filter: blur(0);
+  filter: blur(0);
+  transition: filter 500ms ease;
+}
+
+/* Hover effect for Next.js Image components */
+.single-product-style1:hover .single-product-style1__img .single-product-style1__img-hover {
+  -webkit-transform: translatex(0) scalex(1);
+  transform: translatex(0) scalex(1);
+  opacity: 1;
+}
+
+.single-product-style1:hover .single-product-style1__img .single-product-style1__img-hover img {
+  -webkit-filter: blur(0);
+  filter: blur(0);
+}
+
+.single-product-style1:hover .single-product-style1__img .single-product-style1__img-default {
+  -webkit-transform: translatex(-50%) scalex(2);
+  transform: translatex(-50%) scalex(2);
+  opacity: 0;
+}
+
+.single-product-style1:hover .single-product-style1__img .single-product-style1__img-default img {
+  -webkit-filter: blur(10px);
+  filter: blur(10px);
+}
+
+/* Ensure product cards have uniform height in grid layout */
+.product__all-tab-single .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product__all-tab-single .row > [class*="col-"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.product__all-tab-single .row > [class*="col-"] > .single-product-style1 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Ensure content section takes remaining space while preserving original layout */
+.single-product-style1__content {
+  flex: 1;
+  /* Preserve original flex layout: display: flex; align-items: flex-end; justify-content: space-between; */
+  /* Don't override flex-direction - keep horizontal (row) layout */
+}
+
+/* Ensure content-left maintains proper alignment and takes full width */
+.single-product-style1__content-left {
+  width: 100%;
+  flex: 1;
+}
+
+/* Ensure product name (h4) maintains original spacing - don't override margin-top */
+/* Original CSS already has: margin-top: 12px, so we preserve it */
+
+/* Ensure paragraph spacing is maintained - original has margin-top: 4px */
+

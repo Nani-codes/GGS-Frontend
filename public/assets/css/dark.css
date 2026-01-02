@@ -1,0 +1,284 @@
+body,
+body.boxed-wrapper .page-wrapper {
+    background-color: var(--farmology-black);
+}
+
+
+.main-menu__wrapper,
+.about-one__crop-harvest,
+.services-one__single,
+.products-one__content,
+.why-choose-one__single,
+.faq-one__contact-box,
+.faq-one__right .faq-one-accrodion .accrodion,
+.testimonial-one__text-box,
+.cta-one__content,
+.blog-one__single-inner {
+    background-color: #4a332e;
+}
+
+
+.banner-one {
+    background-color: #1c1106;
+}
+
+
+.feature-one__single,
+.banner-one__discount-box,
+.banner-one__client-review,
+.banner-one__happy-customer,
+.about-one__since-box,
+.why-choose-one,
+.faq-one__author-box,
+.faq-one__right .faq-one-accrodion .accrodion.active {
+    background-color: var(--farmology-extra);
+}
+
+
+
+
+
+
+
+.main-menu .main-menu__list>li>a,
+.stricky-header .main-menu__list>li>a,
+.main-menu .main-menu__list>li.dropdown>a:after,
+.main-menu__call-number a,
+.main-menu__search,
+.main-menu__cart,
+.banner-one__title,
+.section-title__title,
+.about-one__crop-harvest-title,
+.feature-one__title,
+.about-one__since-title,
+.author-one__ratting-title,
+.services-one__title a,
+.counter-one__title,
+.why-choose-one__title,
+.faq-one__contact-title,
+.faq-one__author-name a,
+.faq-one__contact-number a,
+.faq-one__right .faq-one-accrodion .accrodion-title h4,
+.cta-one__content h2,
+.cta-one__text-2,
+.cta-one__text-2 span,
+.blog-one__meta li a,
+.blog-one__title a,
+.main-menu .mobile-nav__toggler,
+.about-one__title-1 {
+    color: var(--farmology-white);
+}
+
+
+
+
+body,
+.about-one__text,
+.banner-one__text {
+    color: #aaaaaa;
+}
+
+
+
+
+.main-menu .main-menu__list>li.current>a,
+.main-menu .main-menu__list>li:hover>a,
+.stricky-header .main-menu__list>li.current>a,
+.stricky-header .main-menu__list>li:hover>a,
+.main-menu .main-menu__list>li.current>a::after,
+.main-menu .main-menu__list>li:hover>a::after,
+.stricky-header .main-menu__list>li.current>a::after,
+.stricky-header .main-menu__list>li:hover>a::after,
+.banner-one__sub-title p,
+.banner-one__title span,
+.banner-one__video-title,
+.main-menu__call-sub-title,
+.banner-one__discount-box h3,
+.banner-one__discount-box p,
+.banner-one__client-review-text h4,
+.banner-one__client-review-client-name,
+.banner-one__happy-customer-text,
+.feature-one__text,
+.section-title__tagline,
+.about-one__crop-harvest-icon span,
+.about-one__crop-harvest-count h3,
+.about-one__crop-harvest-count span,
+.about-one__since-year,
+.author-one__ratting span,
+.services-one__read-more a,
+.products-one__read-more a,
+.counter-one__count-box h3,
+.counter-one__count-box span,
+.faq-one__author-sub-title,
+.cta-one__content h2 span,
+.cta-one__app-list li .content p {
+    color: var(--farmology-base);
+}
+
+
+
+
+
+
+.main-menu .main-menu__list>li.current>a::before,
+.main-menu .main-menu__list>li:hover>a::before,
+.stricky-header .main-menu__list>li.current>a::before,
+.stricky-header .main-menu__list>li:hover>a::before {
+    transform: scale(1, 1);
+    transform-origin: right center;
+}
+
+
+
+.banner-one__shape-bg {
+    opacity: .03;
+}
+
+
+
+.feature-one__single:before {
+    border: 1px dashed rgba(var(--farmology-base-rgb), .20);
+}
+
+
+
+.author-one,
+.counter-one__bg-color {
+    background: linear-gradient(0deg, rgba(68, 44, 38, 1) 0%, rgba(68, 44, 38, 0) 100%);
+}
+
+.author-one__Vission-mission-point li p {
+    background-color: #4a332e;
+    border: 1px solid rgba(var(--farmology-base-rgb), .20);
+    color: var(--farmology-white);
+}
+
+.author-one__Vission-mission-point li p::before {
+    background-color: var(--farmology-base);
+}
+
+.author-one__Vission-mission-point li p::after {
+    border-top: 10px solid var(--farmology-base);
+}
+
+.author-one__ratting-box {
+    background-color: #4a332e;
+    border: 1px solid rgba(var(--farmology-base-rgb), .20);
+}
+
+.services-one__single-bg-shape {
+    opacity: 0.05;
+}
+
+.products-one__text-and-read-more-bg {
+    opacity: 0.05;
+}
+
+.products-one__read-more a:hover {
+    color: var(--farmology-white);
+}
+
+.products-one__read-more a:hover>span {
+    color: var(--farmology-white);
+}
+
+.counter-one__icon-shape-1 {
+    border: 1px dashed var(--farmology-base);
+    border-bottom: 0;
+}
+
+.counter-one__icon-shape-2::before {
+    border: 1px dashed rgba(var(--farmology-base-rgb), .50);
+    border-top: 0;
+}
+
+.counter-one__icon span {
+    background: none;
+    -webkit-background-clip: inherit;
+    -webkit-text-fill-color: inherit;
+    background-clip: none;
+    color: var(--farmology-base);
+}
+
+.counter-one__icon::before,
+.counter-one__single-shape-1 {
+    background-color: rgba(var(--farmology-base-rgb), .20);
+}
+
+.why-choose-one__single::before {
+    border: 1px dashed rgba(var(--farmology-base-rgb), .20);
+}
+
+.why-choose-one__single-bg-shape {
+    opacity: .04;
+}
+
+.why-choose-one__shape-2 img {
+    filter: invert(1);
+    opacity: .05;
+}
+
+.faq-one__contact-box::before {
+    border: 1px dashed rgba(var(--farmology-base-rgb), .20);
+}
+
+.faq-one__contact-social a {
+    background-color: var(--farmology-base);
+}
+
+.faq-one__contact-number a:hover {
+    color: var(--farmology-base);
+}
+
+.testimonial-one__text-box::before {
+    border: 1px dashed rgba(var(--farmology-white-rgb), .50);
+}
+
+.testimonial-one__nav .swiper-button-prev1,
+.testimonial-one__nav .swiper-button-next1 {
+    background-color: var(--farmology-base);
+}
+
+.testimonial-one__nav .swiper-button-prev1:hover,
+.testimonial-one__nav .swiper-button-next1:hover {
+    background-color: var(--farmology-white);
+}
+
+.cta-one__shape-bg {
+    opacity: 0.04;
+}
+
+.cta-one__shape-2 {
+    filter: invert(1);
+}
+
+.blog-one__tag a {
+    background-color: var(--farmology-extra);
+    color: var(--farmology-white);
+}
+
+.blog-one__date {
+    border: 1px solid rgba(var(--farmology-primary-rgb), .10);
+}
+
+.about-one__crop-harvest-icon::before {
+    background-color: var(--farmology-extra);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* End */
