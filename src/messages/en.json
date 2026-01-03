@@ -8,7 +8,9 @@
     "diagnosticsTest": "Diagnostic Test",
     "blog": "Blog",
     "faq": "FAQ",
-    "contact": "Contact"
+    "contact": "Contact",
+    "calendar": "Calendar",
+    "panchang": "Panchang"
   },
   "nav": {
     "home": "Home",
@@ -29,6 +31,8 @@
     "blogLeftSidebar": "Blog Left Sidebar",
     "blogRightSidebar": "Blog Right Sidebar",
     "blogDetails": "Blog Details",
+    "calendar": "Calendar",
+    "panchang": "Panchang",
     "productCategories": {
       "cottonSeeds": "Cotton Seeds",
       "wheatSeeds": "Wheat Seeds",

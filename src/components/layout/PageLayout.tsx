@@ -6,6 +6,7 @@ import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { Preloader } from './Preloader';
 import { ChatPopup } from './ChatPopup';
+import { WhatsAppPopup } from './WhatsAppPopup';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { MobileNav } from './MobileNav';
@@ -38,6 +39,7 @@ export function PageLayout({
         <div className="custom-cursor__cursor-two" />
         <Preloader />
         <ChatPopup />
+        <WhatsAppPopup />
         {showSidebar && (
           <div className="xs-sidebar-group info-group info-sidebar">
             <div className="xs-overlay xs-bg-black" />

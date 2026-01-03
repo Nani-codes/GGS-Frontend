@@ -3,9 +3,10 @@
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { PageLayout } from '@/components/layout/PageLayout';
-import { CONTACT_INFO, SOCIAL_LINKS } from '@/config/constants';
+import { CONTACT_INFO, SOCIAL_LINKS, INSTAGRAM_ACCOUNT } from '@/config/constants';
 import { IMAGE_PATHS } from '@/config/images';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { InstagramPost } from '@/types/instagram';
 
 const BANNER_IMAGE_STYLES = {
   width: '100%',
@@ -20,6 +21,70 @@ const BANNER_IMAGE_STYLES = {
 export function HomeContent() {
   const t = useTranslations();
   const swiperRef = useRef<any>(null);
+  const [instagramPosts, setInstagramPosts] = useState<InstagramPost[]>([]);
+  const [postsLoading, setPostsLoading] = useState(true);
+  const [postsError, setPostsError] = useState<string | null>(null);
+
+  // Fetch Instagram posts
+  useEffect(() => {
+    const fetchInstagramPosts = async () => {
+      try {
+        setPostsLoading(true);
+        setPostsError(null);
+        const response = await fetch('/api/instagram/posts');
+        const data = await response.json();
+
+        if (data.success && data.posts && data.posts.length > 0) {
+          setInstagramPosts(data.posts);
+        } else {
+          // If no posts available, keep empty array (will show fallback)
+          setInstagramPosts([]);
+          if (data.error) {
+            console.warn('Instagram posts API warning:', data.error);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching Instagram posts:', error);
+        setPostsError(error instanceof Error ? error.message : 'Failed to load posts');
+        setInstagramPosts([]);
+      } finally {
+        setPostsLoading(false);
+      }
+    };
+
+    fetchInstagramPosts();
+  }, []);
+
+  // Helper function to format date
+  const formatDate = (dateString: string): string => {
+    try {
+      const date = new Date(dateString);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return `${date.getDate()} ${months[date.getMonth()]}`;
+    } catch {
+      return '';
+    }
+  };
+
+  // Helper function to format number with commas
+  const formatNumber = (num: number): string => {
+    return num.toLocaleString();
+  };
+
+  // Helper function to extract hashtags/tags from caption
+  const extractTag = (caption: string): string => {
+    const hashtagMatch = caption.match(/#(\w+)/);
+    if (hashtagMatch) {
+      return hashtagMatch[1];
+    }
+    return 'Post';
+  };
+
+  // Helper function to truncate caption
+  const truncateCaption = (caption: string, maxLength: number = 100): string => {
+    if (caption.length <= maxLength) return caption;
+    return caption.substring(0, maxLength) + '...';
+  };
   
   useEffect(() => {
     // Initialize Swiper when component mounts
@@ -65,6 +130,105 @@ export function HomeContent() {
       }
     };
   }, []);
+
+  // Reinitialize carousel when Instagram posts are loaded
+  useEffect(() => {
+    if (!postsLoading && instagramPosts.length > 0) {
+      // Wait for DOM to update, then reinitialize carousel
+      const timer = setTimeout(() => {
+        const carousel = document.getElementById('social-posts-carousel');
+        if (!carousel) return;
+
+        const items = carousel.querySelectorAll('.social-post-stacked-item');
+        if (items.length === 0) return;
+
+        const prevBtn = document.getElementById('social-posts-prev');
+        const nextBtn = document.getElementById('social-posts-next');
+        
+        let currentIndex = Math.min(2, Math.floor(items.length / 2));
+        const totalItems = items.length;
+
+        function updateCarousel() {
+          const isMobile = window.innerWidth <= 767;
+          const translateX = isMobile ? 180 : 300;
+          const scaleSmall = isMobile ? 0.7 : 0.8;
+          const scaleMedium = isMobile ? 0.85 : 0.9;
+          
+          items.forEach((item, index) => {
+            let newIndex = index - currentIndex;
+            
+            // Handle wrapping
+            if (newIndex < -2) newIndex += totalItems;
+            if (newIndex > 2) newIndex -= totalItems;
+            
+            // Remove all position classes
+            item.classList.remove('slide-prev-2', 'slide-prev', 'slide-active', 'slide-next', 'slide-next-2');
+            
+            // Add appropriate class based on position
+            if (newIndex === -2) {
+              item.classList.add('slide-prev-2');
+              (item as HTMLElement).style.transform = `translateX(-${translateX * 2}px) translateZ(-200px) scale(${scaleSmall})`;
+              (item as HTMLElement).style.opacity = '0.5';
+              (item as HTMLElement).style.zIndex = '1';
+            } else if (newIndex === -1) {
+              item.classList.add('slide-prev');
+              (item as HTMLElement).style.transform = `translateX(-${translateX}px) translateZ(-100px) scale(${scaleMedium})`;
+              (item as HTMLElement).style.opacity = '0.7';
+              (item as HTMLElement).style.zIndex = '2';
+            } else if (newIndex === 0) {
+              item.classList.add('slide-active');
+              (item as HTMLElement).style.transform = 'translateX(0) translateZ(0) scale(1)';
+              (item as HTMLElement).style.opacity = '1';
+              (item as HTMLElement).style.zIndex = '5';
+            } else if (newIndex === 1) {
+              item.classList.add('slide-next');
+              (item as HTMLElement).style.transform = `translateX(${translateX}px) translateZ(-100px) scale(${scaleMedium})`;
+              (item as HTMLElement).style.opacity = '0.7';
+              (item as HTMLElement).style.zIndex = '2';
+            } else if (newIndex === 2) {
+              item.classList.add('slide-next-2');
+              (item as HTMLElement).style.transform = `translateX(${translateX * 2}px) translateZ(-200px) scale(${scaleSmall})`;
+              (item as HTMLElement).style.opacity = '0.5';
+              (item as HTMLElement).style.zIndex = '1';
+            }
+          });
+        }
+
+        // Initial carousel setup
+        updateCarousel();
+
+        // Navigation handlers
+        const handlePrev = () => {
+          currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+          updateCarousel();
+        };
+
+        const handleNext = () => {
+          currentIndex = (currentIndex + 1) % totalItems;
+          updateCarousel();
+        };
+
+        // Remove existing event listeners and add new ones
+        if (prevBtn) {
+          prevBtn.removeEventListener('click', handlePrev);
+          prevBtn.addEventListener('click', handlePrev);
+        }
+        if (nextBtn) {
+          nextBtn.removeEventListener('click', handleNext);
+          nextBtn.addEventListener('click', handleNext);
+        }
+
+        // Handle window resize
+        const handleResize = () => {
+          updateCarousel();
+        };
+        window.removeEventListener('resize', handleResize);
+        window.addEventListener('resize', handleResize);
+      }, 200);
+
+      return () => clearTimeout(timer);
+    }
+  }, [postsLoading, instagramPosts.length]);
   
   return (
     <PageLayout variant="default" currentPage="/" showSidebar={true}>
@@ -1613,198 +1777,80 @@ export function HomeContent() {
               </div>
               <div className="social-posts-stacked-carousel" id="social-posts-carousel" style={{ maxWidth: '100%', width: '100%' }}>
                 <div className="social-posts-stacked-wrapper">
-                  <div className="social-posts-stacked-list" id="social-posts-list">
-                    {/* Post 1 */}
-                    <div className="social-post-stacked-item" data-index="0">
-                      <div className="social-post">
-                        <div className="social-post__header">
-                          <div className="social-post__avatar">
-                            <img src="/assets/images/resources/logo-11.png" alt="Green Gold Seeds" />
-                          </div>
-                          <div className="social-post__user-info">
-                            <h4 className="social-post__username">Green Gold Seeds</h4>
-                            <span className="social-post__time">25 Mar</span>
-                          </div>
-                          <div className="social-post__tag">Organic</div>
-                        </div>
-                        <div className="social-post__image">
-                          <img src="/assets/images/blog/blog-1-1.jpg" alt="Why Fresh, Organic Vegetables Matter" />
-                        </div>
-                        <div className="social-post__actions">
-                          <button className="social-post__action-btn">
-                            <i className="far fa-heart" />
-                          </button>
-                          <button className="social-post__action-btn">
-                            <i className="far fa-comment" />
-                          </button>
-                          <button className="social-post__action-btn">
-                            <i className="far fa-share-square" />
-                          </button>
-                        </div>
-                        <div className="social-post__content">
-                          <p className="social-post__likes">1,234 likes</p>
-                          <p className="social-post__caption">
-                            <strong>Green Gold Seeds</strong> Why Fresh, Organic Vegetables Matter
-                            <br />
-                            Learn how organic vegetables benefit your health and the planet at the same time.
-                          </p>
-                          <a href="/blog" className="social-post__view-comments">View all 45 comments</a>
-                        </div>
-                      </div>
+                  {postsLoading ? (
+                    <div style={{ textAlign: 'center', padding: '60px 20px', color: '#666' }}>
+                      <p>Loading Instagram posts...</p>
                     </div>
-                    {/* Post 2 */}
-                    <div className="social-post-stacked-item" data-index="1">
-                      <div className="social-post">
-                        <div className="social-post__header">
-                          <div className="social-post__avatar">
-                            <img src="/assets/images/resources/logo-11.png" alt="Green Gold Seeds" />
-                          </div>
-                          <div className="social-post__user-info">
-                            <h4 className="social-post__username">Green Gold Seeds</h4>
-                            <span className="social-post__time">05 Jun</span>
-                          </div>
-                          <div className="social-post__tag">FreshProduce</div>
-                        </div>
-                        <div className="social-post__image">
-                          <img src="/assets/images/blog/blog-1-2.jpg" alt="Health Benefits of Organic Vegetables" />
-                        </div>
-                        <div className="social-post__actions">
-                          <button className="social-post__action-btn">
-                            <i className="far fa-heart" />
-                          </button>
-                          <button className="social-post__action-btn">
-                            <i className="far fa-comment" />
-                          </button>
-                          <button className="social-post__action-btn">
-                            <i className="far fa-share-square" />
-                          </button>
-                        </div>
-                        <div className="social-post__content">
-                          <p className="social-post__likes">892 likes</p>
-                          <p className="social-post__caption">
-                            <strong>Green Gold Seeds</strong> Health Benefits of Organic Vegetables
-                            <br />
-                            Learn how organic vegetables benefit your health and the planet at the same time.
-                          </p>
-                          <a href="/blog" className="social-post__view-comments">View all 32 comments</a>
-                        </div>
-                      </div>
+                  ) : postsError ? (
+                    <div style={{ textAlign: 'center', padding: '60px 20px', color: '#d32f2f' }}>
+                      <p>Error loading posts: {postsError}</p>
+                      <p style={{ marginTop: '10px', fontSize: '14px' }}>Please check the API configuration.</p>
                     </div>
-                    {/* Post 3 */}
-                    <div className="social-post-stacked-item" data-index="2">
-                      <div className="social-post">
-                        <div className="social-post__header">
-                          <div className="social-post__avatar">
-                            <img src="/assets/images/resources/logo-11.png" alt="Green Gold Seeds" />
-                          </div>
-                          <div className="social-post__user-info">
-                            <h4 className="social-post__username">Green Gold Seeds</h4>
-                            <span className="social-post__time">13 Aug</span>
-                          </div>
-                          <div className="social-post__tag">AgriTech</div>
-                        </div>
-                        <div className="social-post__image">
-                          <img src="/assets/images/blog/blog-1-3.jpg" alt="How Technology is Changing Farming" />
-                        </div>
-                        <div className="social-post__actions">
-                          <button className="social-post__action-btn">
-                            <i className="far fa-heart" />
-                          </button>
-                          <button className="social-post__action-btn">
-                            <i className="far fa-comment" />
-                          </button>
-                          <button className="social-post__action-btn">
-                            <i className="far fa-share-square" />
-                          </button>
-                        </div>
-                        <div className="social-post__content">
-                          <p className="social-post__likes">2,156 likes</p>
-                          <p className="social-post__caption">
-                            <strong>Green Gold Seeds</strong> How Technology is Changing Farming
-                            <br />
-                            Learn how organic vegetables benefit your health and the planet at the same time.
-                          </p>
-                          <a href="/blog" className="social-post__view-comments">View all 67 comments</a>
-                        </div>
-                      </div>
+                  ) : instagramPosts.length === 0 ? (
+                    <div style={{ textAlign: 'center', padding: '60px 20px', color: '#666' }}>
+                      <p>No Instagram posts available.</p>
+                      <p style={{ marginTop: '10px', fontSize: '14px' }}>Please add recent post URLs to the API route.</p>
                     </div>
-                    {/* Post 4 */}
-                    <div className="social-post-stacked-item" data-index="3">
-                      <div className="social-post">
-                        <div className="social-post__header">
-                          <div className="social-post__avatar">
-                            <img src="/assets/images/resources/logo-11.png" alt="Green Gold Seeds" />
+                  ) : (
+                    <div className="social-posts-stacked-list" id="social-posts-list">
+                      {instagramPosts.slice(0, 5).map((post, index) => (
+                        <div key={post.id} className="social-post-stacked-item" data-index={index}>
+                          <div className="social-post">
+                            <div className="social-post__header">
+                              <div className="social-post__avatar">
+                                <img src="/assets/images/resources/logo-11.png" alt={post.username} />
+                              </div>
+                              <div className="social-post__user-info">
+                                <h4 className="social-post__username">{post.username}</h4>
+                                <span className="social-post__time">{formatDate(post.timestamp)}</span>
+                              </div>
+                              <div className="social-post__tag">{extractTag(post.caption)}</div>
+                            </div>
+                            <div className="social-post__image">
+                              <a href={post.postUrl} target="_blank" rel="noopener noreferrer">
+                                <img 
+                                  src={post.imageUrl || '/assets/images/blog/blog-1-1.jpg'} 
+                                  alt={post.caption || 'Instagram post'} 
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).src = '/assets/images/blog/blog-1-1.jpg';
+                                  }}
+                                />
+                              </a>
+                            </div>
+                            <div className="social-post__actions">
+                              <button className="social-post__action-btn">
+                                <i className="far fa-heart" />
+                              </button>
+                              <button className="social-post__action-btn">
+                                <i className="far fa-comment" />
+                              </button>
+                              <button className="social-post__action-btn">
+                                <i className="far fa-share-square" />
+                              </button>
+                            </div>
+                            <div className="social-post__content">
+                              <p className="social-post__likes">
+                                {post.likes > 0 ? `${formatNumber(post.likes)} likes` : 'Loading likes...'}
+                              </p>
+                              <p className="social-post__caption">
+                                <strong>{post.username}</strong> {truncateCaption(post.caption)}
+                              </p>
+                              <a 
+                                href={post.postUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="social-post__view-comments"
+                              >
+                                {post.comments && post.comments > 0 
+                                  ? `View all ${formatNumber(post.comments)} comments` 
+                                  : 'View on Instagram'}
+                              </a>
+                            </div>
                           </div>
-                          <div className="social-post__user-info">
-                            <h4 className="social-post__username">Green Gold Seeds</h4>
-                            <span className="social-post__time">20 Sep</span>
-                          </div>
-                          <div className="social-post__tag">Sustainability</div>
                         </div>
-                        <div className="social-post__image">
-                          <img src="/assets/images/blog/blog-1-4.jpg" alt="Sustainable Farming Practices" />
-                        </div>
-                        <div className="social-post__actions">
-                          <button className="social-post__action-btn">
-                            <i className="far fa-heart" />
-                          </button>
-                          <button className="social-post__action-btn">
-                            <i className="far fa-comment" />
-                          </button>
-                          <button className="social-post__action-btn">
-                            <i className="far fa-share-square" />
-                          </button>
-                        </div>
-                        <div className="social-post__content">
-                          <p className="social-post__likes">1,567 likes</p>
-                          <p className="social-post__caption">
-                            <strong>Green Gold Seeds</strong> Sustainable Farming Practices
-                            <br />
-                            Discover how we're committed to eco-friendly farming methods that protect our environment.
-                          </p>
-                          <a href="/blog" className="social-post__view-comments">View all 52 comments</a>
-                        </div>
-                      </div>
+                      ))}
                     </div>
-                    {/* Post 5 */}
-                    <div className="social-post-stacked-item" data-index="4">
-                      <div className="social-post">
-                        <div className="social-post__header">
-                          <div className="social-post__avatar">
-                            <img src="/assets/images/resources/logo-11.png" alt="Green Gold Seeds" />
-                          </div>
-                          <div className="social-post__user-info">
-                            <h4 className="social-post__username">Green Gold Seeds</h4>
-                            <span className="social-post__time">15 Oct</span>
-                          </div>
-                          <div className="social-post__tag">Quality</div>
-                        </div>
-                        <div className="social-post__image">
-                          <img src="/assets/images/blog/blog-1-5.jpg" alt="Quality Seeds for Better Harvests" />
-                        </div>
-                        <div className="social-post__actions">
-                          <button className="social-post__action-btn">
-                            <i className="far fa-heart" />
-                          </button>
-                          <button className="social-post__action-btn">
-                            <i className="far fa-comment" />
-                          </button>
-                          <button className="social-post__action-btn">
-                            <i className="far fa-share-square" />
-                          </button>
-                        </div>
-                        <div className="social-post__content">
-                          <p className="social-post__likes">3,421 likes</p>
-                          <p className="social-post__caption">
-                            <strong>Green Gold Seeds</strong> Quality Seeds for Better Harvests
-                            <br />
-                            Our premium quality seeds ensure maximum yield and better crop performance for farmers.
-                          </p>
-                          <a href="/blog" className="social-post__view-comments">View all 89 comments</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  )}
                 </div>
                 <div className="social-posts-nav">
                   <button className="social-posts-nav-btn social-posts-nav-prev" id="social-posts-prev">

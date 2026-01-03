@@ -174,12 +174,20 @@ export function Footer({ variant = 'default' }: FooterProps) {
                         <a href={CONTACT_INFO.phoneHref}>{CONTACT_INFO.phoneDisplay}</a>
                       </p>
                     </li>
-                    <li>
+                    {/* <li>
                       <div className="icon">
                         <span className="icon-email"></span>
                       </div>
                       <p>
                         <a href={CONTACT_INFO.emailHref}>{CONTACT_INFO.email}</a>
+                      </p>
+                    </li> */}
+                    <li>
+                      <div className="icon">
+                        <span className="icon-email"></span>
+                      </div>
+                      <p>
+                        <a href="mailto:info@greengoldseeds.co.in">info@greengoldseeds.co.in</a>
                       </p>
                     </li>
                   </ul>
