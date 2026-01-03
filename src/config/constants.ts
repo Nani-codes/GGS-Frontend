@@ -14,6 +14,11 @@ export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/greegoldseeds/',
 } as const;
 
+export const INSTAGRAM_ACCOUNT = {
+  url: 'https://www.instagram.com/greengoldseedsaurangabad/',
+  username: 'greengoldseedsaurangabad',
+} as const;
+
 export const FORM_CONFIG = {
   chatFormAction: 'https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php',
 } as const;

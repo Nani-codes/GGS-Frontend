@@ -8,7 +8,9 @@
     "diagnosticsTest": "नैदानिक परीक्षण",
     "blog": "ब्लॉग",
     "faq": "सामान्य प्रश्न",
-    "contact": "संपर्क करें"
+    "contact": "संपर्क करें",
+    "calendar": "कैलेंडर",
+    "panchang": "पंचांग"
   },
   "nav": {
     "home": "होम",
@@ -29,6 +31,8 @@
     "blogLeftSidebar": "ब्लॉग लेफ्ट साइडबार",
     "blogRightSidebar": "ब्लॉग राइट साइडबार",
     "blogDetails": "ब्लॉग विवरण",
+    "calendar": "कैलेंडर",
+    "panchang": "पंचांग",
     "productCategories": {
       "cottonSeeds": "कपास के बीज",
       "wheatSeeds": "गेहूं के बीज",

@@ -8,7 +8,9 @@
     "diagnosticsTest": "निदान चाचणी",
     "blog": "ब्लॉग",
     "faq": "सामान्य प्रश्न",
-    "contact": "संपर्क करा"
+    "contact": "संपर्क करा",
+    "calendar": "कॅलेंडर",
+    "panchang": "पंचांग"
   },
   "nav": {
     "home": "मुख्यपृष्ठ",
@@ -29,6 +31,8 @@
     "blogLeftSidebar": "ब्लॉग डावी साइडबार",
     "blogRightSidebar": "ब्लॉग उजवी साइडबार",
     "blogDetails": "ब्लॉग तपशील",
+    "calendar": "कॅलेंडर",
+    "panchang": "पंचांग",
     "productCategories": {
       "cottonSeeds": "कापूस बियाणे",
       "wheatSeeds": "गहू बियाणे",

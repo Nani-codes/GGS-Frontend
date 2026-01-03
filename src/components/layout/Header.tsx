@@ -219,6 +219,12 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
                         {renderCategoryDropdown()}
                       </ul>
                     </li>
+                    <li className="dropdown">
+                      <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.calendar')}</a>
+                      <ul className="shadow-box">
+                        <li><Link href="/calendar/panchang">{t('nav.panchang')}</Link></li>
+                      </ul>
+                    </li>
                     <li>
                       <Link href="/blog">{t('nav.blog')}</Link>
                     </li>
@@ -315,6 +321,12 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
                       <a href={`${currentPage}#`} onClick={(e) => e.preventDefault()}>{t('nav.products')}</a>
                       <ul className="shadow-box">
                         {renderCategoryDropdown()}
+                      </ul>
+                    </li>
+                    <li className="dropdown">
+                      <a href={`${currentPage}#`} onClick={(e) => e.preventDefault()}>{t('nav.calendar')}</a>
+                      <ul className="shadow-box">
+                        <li><Link href="/calendar/panchang">{t('nav.panchang')}</Link></li>
                       </ul>
                     </li>
                     <li>
