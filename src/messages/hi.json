@@ -10,7 +10,8 @@
     "faq": "सामान्य प्रश्न",
     "contact": "संपर्क करें",
     "calendar": "कैलेंडर",
-    "panchang": "पंचांग"
+    "panchang": "पंचांग",
+    "marketRates": "बाजार भाव"
   },
   "nav": {
     "home": "होम",
@@ -33,6 +34,7 @@
     "blogDetails": "ब्लॉग विवरण",
     "calendar": "कैलेंडर",
     "panchang": "पंचांग",
+    "marketRates": "बाजार भाव",
     "productCategories": {
       "cottonSeeds": "कपास के बीज",
       "wheatSeeds": "गेहूं के बीज",
@@ -428,6 +430,37 @@
   "faq": {
     "pageTitle": "सामान्य प्रश्न",
     "breadcrumb": "होम / सामान्य प्रश्न"
+  },
+  "marketRates": {
+    "pageTitle": "बाजार भाव",
+    "breadcrumb": "बाजार भाव",
+    "tagline": "दैनिक अपडेट",
+    "title": "कृषि बाजार भाव",
+    "description": "अपने कृषि व्यवसाय के लिए सूचित निर्णय लेने के लिए नवीनतम कृषि कमोडिटी मूल्यों और बाजार रुझानों से अपडेट रहें।",
+    "allMarkets": "सभी बाजार",
+    "districtWise": "जिला अनुसार",
+    "allCommodities": "सभी",
+    "errorLoading": "बाजार भाव लोड करने में विफल। कृपया पुनः प्रयास करें।",
+    "retry": "पुनः प्रयास करें",
+    "noData": "इस समय कोई बाजार डेटा उपलब्ध नहीं है।",
+    "showingResults": "{total} में से {shown} परिणाम दिखाए जा रहे हैं",
+    "backToList": "सूची पर वापस जाएं",
+    "viewRates": "आज के भाव देखें",
+    "todayRates": "आज के बाजार भाव",
+    "table": {
+      "commodity": "कमोडिटी",
+      "market": "बाजार समिति",
+      "district": "जिला",
+      "variety": "जात/प्रत",
+      "unit": "परिमाण",
+      "arrival": "आवक",
+      "minPrice": "कमीत कमी दर",
+      "maxPrice": "जास्तीत जास्त दर",
+      "modalPrice": "सर्वसाधारण दर",
+      "date": "तारीख"
+    },
+    "ctaTitle": "बाजार जानकारी में सहायता चाहिए?",
+    "ctaDescription": "बाजार रुझानों और मूल्य निर्धारण जानकारी पर व्यक्तिगत मार्गदर्शन के लिए हमारी टीम से संपर्क करें।"
   },
   "productDetails": {
     "title": "उत्पाद विवरण",
