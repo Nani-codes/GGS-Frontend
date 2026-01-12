@@ -7,6 +7,7 @@ import { CONTACT_INFO, SOCIAL_LINKS, INSTAGRAM_ACCOUNT } from '@/config/constant
 import { IMAGE_PATHS } from '@/config/images';
 import { useEffect, useRef, useState } from 'react';
 import { InstagramPost } from '@/types/instagram';
+import { InstagramPostsSlider } from '@/components/InstagramPostsSlider';
 
 const BANNER_IMAGE_STYLES = {
   width: '100%',
@@ -55,37 +56,6 @@ export function HomeContent() {
     fetchInstagramPosts();
   }, []);
 
-  // Helper function to format date
-  const formatDate = (dateString: string): string => {
-    try {
-      const date = new Date(dateString);
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      return `${date.getDate()} ${months[date.getMonth()]}`;
-    } catch {
-      return '';
-    }
-  };
-
-  // Helper function to format number with commas
-  const formatNumber = (num: number): string => {
-    return num.toLocaleString();
-  };
-
-  // Helper function to extract hashtags/tags from caption
-  const extractTag = (caption: string): string => {
-    const hashtagMatch = caption.match(/#(\w+)/);
-    if (hashtagMatch) {
-      return hashtagMatch[1];
-    }
-    return 'Post';
-  };
-
-  // Helper function to truncate caption
-  const truncateCaption = (caption: string, maxLength: number = 100): string => {
-    if (caption.length <= maxLength) return caption;
-    return caption.substring(0, maxLength) + '...';
-  };
-  
   useEffect(() => {
     // Initialize Swiper when component mounts
     const initSwiper = () => {
@@ -131,105 +101,6 @@ export function HomeContent() {
     };
   }, []);
 
-  // Reinitialize carousel when Instagram posts are loaded
-  useEffect(() => {
-    if (!postsLoading && instagramPosts.length > 0) {
-      // Wait for DOM to update, then reinitialize carousel
-      const timer = setTimeout(() => {
-        const carousel = document.getElementById('social-posts-carousel');
-        if (!carousel) return;
-
-        const items = carousel.querySelectorAll('.social-post-stacked-item');
-        if (items.length === 0) return;
-
-        const prevBtn = document.getElementById('social-posts-prev');
-        const nextBtn = document.getElementById('social-posts-next');
-        
-        let currentIndex = Math.min(2, Math.floor(items.length / 2));
-        const totalItems = items.length;
-
-        function updateCarousel() {
-          const isMobile = window.innerWidth <= 767;
-          const translateX = isMobile ? 180 : 300;
-          const scaleSmall = isMobile ? 0.7 : 0.8;
-          const scaleMedium = isMobile ? 0.85 : 0.9;
-          
-          items.forEach((item, index) => {
-            let newIndex = index - currentIndex;
-            
-            // Handle wrapping
-            if (newIndex < -2) newIndex += totalItems;
-            if (newIndex > 2) newIndex -= totalItems;
-            
-            // Remove all position classes
-            item.classList.remove('slide-prev-2', 'slide-prev', 'slide-active', 'slide-next', 'slide-next-2');
-            
-            // Add appropriate class based on position
-            if (newIndex === -2) {
-              item.classList.add('slide-prev-2');
-              (item as HTMLElement).style.transform = `translateX(-${translateX * 2}px) translateZ(-200px) scale(${scaleSmall})`;
-              (item as HTMLElement).style.opacity = '0.5';
-              (item as HTMLElement).style.zIndex = '1';
-            } else if (newIndex === -1) {
-              item.classList.add('slide-prev');
-              (item as HTMLElement).style.transform = `translateX(-${translateX}px) translateZ(-100px) scale(${scaleMedium})`;
-              (item as HTMLElement).style.opacity = '0.7';
-              (item as HTMLElement).style.zIndex = '2';
-            } else if (newIndex === 0) {
-              item.classList.add('slide-active');
-              (item as HTMLElement).style.transform = 'translateX(0) translateZ(0) scale(1)';
-              (item as HTMLElement).style.opacity = '1';
-              (item as HTMLElement).style.zIndex = '5';
-            } else if (newIndex === 1) {
-              item.classList.add('slide-next');
-              (item as HTMLElement).style.transform = `translateX(${translateX}px) translateZ(-100px) scale(${scaleMedium})`;
-              (item as HTMLElement).style.opacity = '0.7';
-              (item as HTMLElement).style.zIndex = '2';
-            } else if (newIndex === 2) {
-              item.classList.add('slide-next-2');
-              (item as HTMLElement).style.transform = `translateX(${translateX * 2}px) translateZ(-200px) scale(${scaleSmall})`;
-              (item as HTMLElement).style.opacity = '0.5';
-              (item as HTMLElement).style.zIndex = '1';
-            }
-          });
-        }
-
-        // Initial carousel setup
-        updateCarousel();
-
-        // Navigation handlers
-        const handlePrev = () => {
-          currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-          updateCarousel();
-        };
-
-        const handleNext = () => {
-          currentIndex = (currentIndex + 1) % totalItems;
-          updateCarousel();
-        };
-
-        // Remove existing event listeners and add new ones
-        if (prevBtn) {
-          prevBtn.removeEventListener('click', handlePrev);
-          prevBtn.addEventListener('click', handlePrev);
-        }
-        if (nextBtn) {
-          nextBtn.removeEventListener('click', handleNext);
-          nextBtn.addEventListener('click', handleNext);
-        }
-
-        // Handle window resize
-        const handleResize = () => {
-          updateCarousel();
-        };
-        window.removeEventListener('resize', handleResize);
-        window.addEventListener('resize', handleResize);
-      }, 200);
-
-      return () => clearTimeout(timer);
-    }
-  }, [postsLoading, instagramPosts.length]);
-  
   return (
     <PageLayout variant="default" currentPage="/" showSidebar={true}>
       {/* ===== BANNER SLIDER SECTION ===== */}
@@ -243,15 +114,19 @@ export function HomeContent() {
               <div className="banner-one__shape-4 float-bob-x">
                 <img src="/assets/images/shapes/banner-one-shape-4.png" alt="" />
               </div>
+              {/* Commented out - not needed
               <div className="banner-one__shape-5 float-bob-y">
                 <img src="/assets/images/shapes/banner-one-shape-5.png" alt="" />
               </div>
+              */}
               <div className="banner-one__shape-6">
                 <img src="/assets/images/shapes/banner-one-shape-6.png" alt="" />
               </div>
+              {/* Commented out - not needed
               <div className="banner-one__shape-7 img-bounce">
                 <img src="/assets/images/shapes/banner-one-shape-7.png" alt="" />
               </div>
+              */}
               <div className="banner-one__shape-8 float-bob-y">
                 <img src="/assets/images/shapes/banner-one-shape-8.png" alt="" />
               </div>
@@ -317,29 +192,28 @@ export function HomeContent() {
           </div>
           {/* Slide 2 - Indian farmer with bullock */}
           <div className="swiper-slide">
-            <section className="banner-one" style={{ backgroundImage: 'url(/assets/images/backgrounds/indian-farmer-working-green-pigeon-peas-field-with-bullock.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundColor: 'transparent', minHeight: '800px' }}>
+            <section className="banner-one banner-one--bg-only" style={{ backgroundImage: 'url(/assets/images/backgrounds/indian-farmer-working-green-pigeon-peas-field-with-bullock.jpg)' }}>
             </section>
           </div>
           {/* Slide 3 - Smart agriculture IoT */}
           <div className="swiper-slide">
-            <section className="banner-one" style={{ backgroundImage: 'url(/assets/images/backgrounds/smart-agriculture-iot-with-hand-planting-tree-background.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundColor: 'transparent', minHeight: '800px' }}>
+            <section className="banner-one banner-one--bg-only" style={{ backgroundImage: 'url(/assets/images/backgrounds/smart-agriculture-iot-with-hand-planting-tree-background.jpg)' }}>
             </section>
           </div>
-          {/* Slide 4 - Empty */}
+          {/* Slides 4-6 - Hidden until content is ready
           <div className="swiper-slide">
-            <section className="banner-one" style={{ backgroundColor: 'transparent', minHeight: '800px' }}>
+            <section className="banner-one" style={{ backgroundColor: 'transparent' }}>
             </section>
           </div>
-          {/* Slide 5 - Empty */}
           <div className="swiper-slide">
-            <section className="banner-one" style={{ backgroundColor: 'transparent', minHeight: '800px' }}>
+            <section className="banner-one" style={{ backgroundColor: 'transparent' }}>
             </section>
           </div>
-          {/* Slide 6 - Empty */}
           <div className="swiper-slide">
-            <section className="banner-one" style={{ backgroundColor: 'transparent', minHeight: '800px' }}>
+            <section className="banner-one" style={{ backgroundColor: 'transparent' }}>
             </section>
           </div>
+          */}
         </div>
         {/* Pagination dots */}
         <div className="banner-slider__pagination swiper-pagination"></div>
@@ -717,7 +591,7 @@ export function HomeContent() {
               </div>
               <div className="row">
                 {/*Products One Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
+                <div className="col-6 col-md-6 col-lg-6 col-xl-3 wow fadeInLeft" data-wow-delay="100ms">
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
@@ -745,7 +619,7 @@ export function HomeContent() {
                 </div>
                 {/*Products One Single End*/}
                 {/*Products One Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="200ms">
+                <div className="col-6 col-md-6 col-lg-6 col-xl-3 wow fadeInLeft" data-wow-delay="200ms">
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
@@ -773,7 +647,7 @@ export function HomeContent() {
                 </div>
                 {/*Products One Single End*/}
                 {/*Products One Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="100ms">
+                <div className="col-6 col-md-6 col-lg-6 col-xl-3 wow fadeInRight" data-wow-delay="100ms">
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
@@ -801,7 +675,7 @@ export function HomeContent() {
                 </div>
                 {/*Products One Single End*/}
                 {/*Products One Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="200ms">
+                <div className="col-6 col-md-6 col-lg-6 col-xl-3 wow fadeInRight" data-wow-delay="200ms">
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
@@ -1758,7 +1632,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/* ===== BLOG SECTION (Social Posts Style - Stacked Carousel) ===== */}
+          {/* ===== INSTAGRAM POSTS SECTION ===== */}
           <section className="blog-one social-posts-section">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
@@ -1766,101 +1640,22 @@ export function HomeContent() {
                   <div className="section-title__shape-1">
                     <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
-                  <h6 className="section-title__tagline">Client Feedback</h6>
+                  <h6 className="section-title__tagline">Follow Us</h6>
                   <div className="section-title__shape-1">
                     <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
-                <h3 className="section-title__title title-animation">Real Stories Of Trust, Freshness<br /> And
-                  Satisfaction.
+                <h3 className="section-title__title title-animation">
+                  Stay Connected With Us<br />On Instagram
                 </h3>
               </div>
-              <div className="social-posts-stacked-carousel" id="social-posts-carousel" style={{ maxWidth: '100%', width: '100%' }}>
-                <div className="social-posts-stacked-wrapper">
-                  {postsLoading ? (
-                    <div style={{ textAlign: 'center', padding: '60px 20px', color: '#666' }}>
-                      <p>Loading Instagram posts...</p>
-                    </div>
-                  ) : postsError ? (
-                    <div style={{ textAlign: 'center', padding: '60px 20px', color: '#d32f2f' }}>
-                      <p>Error loading posts: {postsError}</p>
-                      <p style={{ marginTop: '10px', fontSize: '14px' }}>Please check the API configuration.</p>
-                    </div>
-                  ) : instagramPosts.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '60px 20px', color: '#666' }}>
-                      <p>No Instagram posts available.</p>
-                      <p style={{ marginTop: '10px', fontSize: '14px' }}>Please add recent post URLs to the API route.</p>
-                    </div>
-                  ) : (
-                    <div className="social-posts-stacked-list" id="social-posts-list">
-                      {instagramPosts.slice(0, 5).map((post, index) => (
-                        <div key={post.id} className="social-post-stacked-item" data-index={index}>
-                          <div className="social-post">
-                            <div className="social-post__header">
-                              <div className="social-post__avatar">
-                                <img src="/assets/images/resources/logo-11.png" alt={post.username} />
-                              </div>
-                              <div className="social-post__user-info">
-                                <h4 className="social-post__username">{post.username}</h4>
-                                <span className="social-post__time">{formatDate(post.timestamp)}</span>
-                              </div>
-                              <div className="social-post__tag">{extractTag(post.caption)}</div>
-                            </div>
-                            <div className="social-post__image">
-                              <a href={post.postUrl} target="_blank" rel="noopener noreferrer">
-                                <img 
-                                  src={post.imageUrl || '/assets/images/blog/blog-1-1.jpg'} 
-                                  alt={post.caption || 'Instagram post'} 
-                                  onError={(e) => {
-                                    (e.target as HTMLImageElement).src = '/assets/images/blog/blog-1-1.jpg';
-                                  }}
-                                />
-                              </a>
-                            </div>
-                            <div className="social-post__actions">
-                              <button className="social-post__action-btn">
-                                <i className="far fa-heart" />
-                              </button>
-                              <button className="social-post__action-btn">
-                                <i className="far fa-comment" />
-                              </button>
-                              <button className="social-post__action-btn">
-                                <i className="far fa-share-square" />
-                              </button>
-                            </div>
-                            <div className="social-post__content">
-                              <p className="social-post__likes">
-                                {post.likes > 0 ? `${formatNumber(post.likes)} likes` : 'Loading likes...'}
-                              </p>
-                              <p className="social-post__caption">
-                                <strong>{post.username}</strong> {truncateCaption(post.caption)}
-                              </p>
-                              <a 
-                                href={post.postUrl} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="social-post__view-comments"
-                              >
-                                {post.comments && post.comments > 0 
-                                  ? `View all ${formatNumber(post.comments)} comments` 
-                                  : 'View on Instagram'}
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <div className="social-posts-nav">
-                  <button className="social-posts-nav-btn social-posts-nav-prev" id="social-posts-prev">
-                    <i className="fas fa-chevron-left" />
-                  </button>
-                  <button className="social-posts-nav-btn social-posts-nav-next" id="social-posts-next">
-                    <i className="fas fa-chevron-right" />
-                  </button>
-                </div>
-              </div>
+              
+              {/* New Instagram Posts Slider Component */}
+              <InstagramPostsSlider 
+                posts={instagramPosts}
+                loading={postsLoading}
+                error={postsError}
+              />
             </div>
           </section>
 
@@ -2039,11 +1834,16 @@ export function HomeContent() {
                           <img src="/assets/images/shapes/faq-one-author-shape-1.png" alt="" />
                         </div>
                         <div className="faq-one__author-box">
-                          <div className="faq-one__author-img">
-                            <img src="/assets/images/resources/faq-one-author-img.png" alt="" />
-                          </div>
-                          <h4 className="faq-one__author-name"><a href="/about">Adam Smith</a></h4>
-                          <p className="faq-one__author-sub-title">Founder</p>
+                          <img 
+                            src="/assets/images/backgrounds/ggs-11.jpeg" 
+                            alt="" 
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              borderRadius: '50%'
+                            }}
+                          />
                         </div>
                       </div>
                       <h3 className="faq-one__contact-title">{t('homeExtra.faq.contactTitle')}</h3>
