@@ -1025,9 +1025,16 @@
     mobileNavContainer.innerHTML = navContent;
   }
   if ($(".sticky-header__content").length) {
-    let navContent = document.querySelector(".main-menu").innerHTML;
-    let mobileNavContainer = document.querySelector(".sticky-header__content");
-    mobileNavContainer.innerHTML = navContent;
+    // Select the correct main menu based on variant
+    // Check for main-menu-two first, then fall back to main-menu
+    let mainMenu = document.querySelector(".main-menu.main-menu-two") || document.querySelector(".main-menu");
+    if (mainMenu) {
+      let navContent = mainMenu.innerHTML;
+      let stickyHeaderContent = document.querySelector(".sticky-header__content");
+      if (stickyHeaderContent) {
+        stickyHeaderContent.innerHTML = navContent;
+      }
+    }
   }
 
   if ($(".mobile-nav__container .main-menu__list").length) {

@@ -100,14 +100,15 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locale]);
 
-  // Update mobile menu after categories finish loading
+  // Update mobile menu and sticky header after categories finish loading
   useEffect(() => {
     if (!categoriesLoading) {
       // Wait for React to finish rendering the updated menu
-      const updateMobileMenu = () => {
+      const updateMenus = () => {
         const mainMenuList = document.querySelector('.main-menu__list');
         const mobileNavContainer = document.querySelector('.mobile-nav__container');
         
+        // Update mobile menu
         if (mainMenuList && mobileNavContainer) {
           // Clone the updated menu HTML to mobile container
           mobileNavContainer.innerHTML = mainMenuList.outerHTML;
@@ -139,10 +140,20 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
             });
           }
         }
+
+        // Update sticky header
+        const stickyHeaderContent = document.querySelector('.sticky-header__content');
+        if (stickyHeaderContent) {
+          // Select the correct main menu based on variant
+          const mainMenu = document.querySelector('.main-menu.main-menu-two') || document.querySelector('.main-menu');
+          if (mainMenu) {
+            stickyHeaderContent.innerHTML = mainMenu.innerHTML;
+          }
+        }
       };
 
       // Use setTimeout to ensure DOM is updated after React render
-      const timeoutId = setTimeout(updateMobileMenu, 100);
+      const timeoutId = setTimeout(updateMenus, 100);
       
       return () => clearTimeout(timeoutId);
     }
