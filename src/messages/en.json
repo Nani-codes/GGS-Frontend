@@ -11,7 +11,8 @@
     "contact": "Contact",
     "calendar": "Calendar",
     "panchang": "Panchang",
-    "marketRates": "Market Rates"
+    "marketRates": "Market Rates",
+    "weather": "Weather"
   },
   "nav": {
     "home": "Home",
@@ -35,6 +36,7 @@
     "calendar": "Calendar",
     "panchang": "Panchang",
     "marketRates": "Market Rates",
+    "weather": "Weather",
     "productCategories": {
       "cottonSeeds": "Cotton Seeds",
       "wheatSeeds": "Wheat Seeds",
@@ -461,6 +463,42 @@
     },
     "ctaTitle": "Need Help with Market Information?",
     "ctaDescription": "Contact our team for personalized guidance on market trends and pricing information."
+  },
+  "weather": {
+    "pageTitle": "Weather",
+    "breadcrumb": "Weather",
+    "tagline": "Live Updates",
+    "title": "Agricultural Weather Forecast",
+    "description": "Stay informed with real-time weather updates for your farming region. Plan your agricultural activities based on accurate forecasts.",
+    "errorLoading": "Failed to load weather data. Please try again.",
+    "retry": "Retry",
+    "selectDistrict": "Select District",
+    "searchPlaceholder": "Search any city...",
+    "getWeather": "Get Weather",
+    "popularCities": "Popular Cities",
+    "searchHint": "Type any city name and press Enter or click Get Weather",
+    "feelsLike": "Feels like",
+    "humidity": "Humidity",
+    "windSpeed": "Wind Speed",
+    "pressure": "Pressure",
+    "visibility": "Visibility",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "forecast": "5-Day Forecast",
+    "farmingTips": "Farming Tips Based on Weather",
+    "tips": {
+      "irrigation": "Irrigation Advice",
+      "irrigationHigh": "High humidity detected. Consider reducing irrigation to prevent waterlogging and fungal diseases.",
+      "irrigationLow": "Low humidity levels. Ensure adequate irrigation, especially for young crops and seedlings.",
+      "fieldWork": "Field Work",
+      "fieldWorkRain": "Rain expected. Postpone field operations like spraying and harvesting. Focus on drainage management.",
+      "fieldWorkClear": "Clear weather is ideal for field operations. Good time for sowing, spraying, or harvesting.",
+      "pestControl": "Pest Management",
+      "pestControlHigh": "High humidity may increase pest and disease pressure. Monitor crops closely and apply preventive measures.",
+      "pestControlLow": "Dry conditions may reduce disease risk but watch for mite infestations in crops."
+    },
+    "ctaTitle": "Need Agricultural Advisory?",
+    "ctaDescription": "Contact our team for personalized guidance on crop management based on weather conditions."
   },
   "productDetails": {
     "title": "Product Details",
