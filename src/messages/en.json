@@ -10,7 +10,8 @@
     "faq": "FAQ",
     "contact": "Contact",
     "calendar": "Calendar",
-    "panchang": "Panchang"
+    "panchang": "Panchang",
+    "marketRates": "Market Rates"
   },
   "nav": {
     "home": "Home",
@@ -33,6 +34,7 @@
     "blogDetails": "Blog Details",
     "calendar": "Calendar",
     "panchang": "Panchang",
+    "marketRates": "Market Rates",
     "productCategories": {
       "cottonSeeds": "Cotton Seeds",
       "wheatSeeds": "Wheat Seeds",
@@ -428,6 +430,37 @@
   "faq": {
     "pageTitle": "FAQ",
     "breadcrumb": "Home / FAQ"
+  },
+  "marketRates": {
+    "pageTitle": "Market Rates",
+    "breadcrumb": "Market Rates",
+    "tagline": "Daily Updates",
+    "title": "Agricultural Market Rates",
+    "description": "Stay updated with the latest agricultural commodity prices and market trends to make informed decisions for your farming business.",
+    "allMarkets": "All Markets",
+    "districtWise": "District-wise",
+    "allCommodities": "All",
+    "errorLoading": "Failed to load market rates. Please try again.",
+    "retry": "Retry",
+    "noData": "No market data available at the moment.",
+    "showingResults": "Showing {shown} of {total} results",
+    "backToList": "Back to List",
+    "viewRates": "View Today's Rates",
+    "todayRates": "Today's Market Rates",
+    "table": {
+      "commodity": "Commodity",
+      "market": "Market Committee",
+      "district": "District",
+      "variety": "Variety/Grade",
+      "unit": "Unit",
+      "arrival": "Arrival",
+      "minPrice": "Min Price",
+      "maxPrice": "Max Price",
+      "modalPrice": "Modal Price",
+      "date": "Date"
+    },
+    "ctaTitle": "Need Help with Market Information?",
+    "ctaDescription": "Contact our team for personalized guidance on market trends and pricing information."
   },
   "productDetails": {
     "title": "Product Details",
