@@ -8,6 +8,11 @@ interface SocialMediaPostsProps {
   facebookUrl?: string;
 }
 
+// Default URLs
+const DEFAULT_INSTAGRAM_URL = "https://www.instagram.com/p/DRtqxEckueh/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==";
+const DEFAULT_YOUTUBE_URL = "https://www.youtube.com/embed/sVae9XfoQiI?si=7PSxhBaDA5K0Ok9h";
+const DEFAULT_FACEBOOK_URL = '<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FGreenGoldSeedsAurangabad%2Fposts%2Fpfbid022M1fRcWo1UsvEqJhEpKtb6LA9SFHtu13GTtGgzMNMbTne2XbsDL1qAwR7irygef5l&show_text=false&width=500" width="500" height="498" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>';
+
 // Helper function to check if string is HTML embed code
 const isHtmlEmbed = (str: string): boolean => {
   if (!str) return false;
@@ -94,7 +99,11 @@ const getFacebookPostId = (url: string): string | null => {
   return null;
 };
 
-export function SocialMediaPosts({ instagramUrl, youtubeUrl, facebookUrl }: SocialMediaPostsProps) {
+export function SocialMediaPosts({ 
+  instagramUrl = DEFAULT_INSTAGRAM_URL, 
+  youtubeUrl = DEFAULT_YOUTUBE_URL, 
+  facebookUrl = DEFAULT_FACEBOOK_URL 
+}: SocialMediaPostsProps) {
   const instagramRef = useRef<HTMLDivElement>(null);
   const facebookRef = useRef<HTMLDivElement>(null);
   const [instagramLoaded, setInstagramLoaded] = useState(false);

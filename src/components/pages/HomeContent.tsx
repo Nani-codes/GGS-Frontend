@@ -559,18 +559,14 @@ export function HomeContent() {
               <div className="section-title text-center">
                 <h2 style={{ fontSize: '36px', fontWeight: '700', color: '#190f06', marginBottom: '50px' }}>{t('home.distributorsNetwork.title')}</h2>
               </div>
-              <div className="row">
-                <div className="col-xl-12">
-                  <div style={{ width: '100%', height: '550px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                    <iframe 
-                      src="/map.html" 
-                      width="100%" 
-                      height="100%" 
-                      style={{ border: 'none' }}
-                      title={t('home.distributorsNetwork.title')}
-                    />
-                  </div>
-                </div>
+            </div>
+            <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '0 15px' }}>
+              <div style={{ width: '100%', height: 'auto', minHeight: '550px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                <img 
+                  src="/assets/images/backgrounds/Website_Map.jpg" 
+                  alt={t('home.distributorsNetwork.title')}
+                  style={{ width: '100%', height: 'auto', display: 'block' }}
+                />
               </div>
             </div>
           </section>
