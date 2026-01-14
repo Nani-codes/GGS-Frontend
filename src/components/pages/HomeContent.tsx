@@ -598,9 +598,6 @@ export function HomeContent() {
                       <div className="products-one__icon-and-title">
                         <h3 className="products-one__title"><Link href="/products">{t('home.products.freshVegetables')}</Link>
                         </h3>
-                        <div className="products-one__icon">
-                          <span className="icon-vegetable" />
-                        </div>
                       </div>
                       <div className="products-one__text-and-read-more">
                         <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(/assets/images/shapes/products-one-text-bg.png)' }}>
@@ -626,9 +623,6 @@ export function HomeContent() {
                       <div className="products-one__icon-and-title">
                         <h3 className="products-one__title"><Link href="/products">{t('home.products.dairyProduct')}</Link>
                         </h3>
-                        <div className="products-one__icon">
-                          <span className="icon-cow" />
-                        </div>
                       </div>
                       <div className="products-one__text-and-read-more">
                         <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(/assets/images/shapes/products-one-text-bg.png)' }}>
@@ -654,9 +648,6 @@ export function HomeContent() {
                       <div className="products-one__icon-and-title">
                         <h3 className="products-one__title"><Link href="/products">{t('home.products.livestockProduct')}</Link>
                         </h3>
-                        <div className="products-one__icon">
-                          <span className="icon-hen-1" />
-                        </div>
                       </div>
                       <div className="products-one__text-and-read-more">
                         <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(/assets/images/shapes/products-one-text-bg.png)' }}>
@@ -682,9 +673,6 @@ export function HomeContent() {
                       <div className="products-one__icon-and-title">
                         <h3 className="products-one__title"><Link href="/products">{t('home.products.organicFruits')}</Link>
                         </h3>
-                        <div className="products-one__icon">
-                          <span className="icon-healthy-food" />
-                        </div>
                       </div>
                       <div className="products-one__text-and-read-more">
                         <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(/assets/images/shapes/products-one-text-bg.png)' }}>
