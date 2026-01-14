@@ -812,12 +812,10 @@ export function ProductsDetailsContent() {
           )}
           {/* Social Media Posts Section */}
           {product && !loading && !error && (
-            product.Instagram_Post_URL || product.YouTube_Post_URL || product.Facebook_Post_URL
-          ) && (
             <SocialMediaPosts
-              instagramUrl={product.Instagram_Post_URL}
-              youtubeUrl={product.YouTube_Post_URL}
-              facebookUrl={product.Facebook_Post_URL}
+              instagramUrl={product.Instagram_Post_URL || undefined}
+              youtubeUrl={product.YouTube_Post_URL || undefined}
+              facebookUrl={product.Facebook_Post_URL || undefined}
             />
           )}
           {/* Same Name Products Section */}

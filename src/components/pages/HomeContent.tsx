@@ -559,18 +559,14 @@ export function HomeContent() {
               <div className="section-title text-center">
                 <h2 style={{ fontSize: '36px', fontWeight: '700', color: '#190f06', marginBottom: '50px' }}>{t('home.distributorsNetwork.title')}</h2>
               </div>
-              <div className="row">
-                <div className="col-xl-12">
-                  <div style={{ width: '100%', height: '550px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                    <iframe 
-                      src="/map.html" 
-                      width="100%" 
-                      height="100%" 
-                      style={{ border: 'none' }}
-                      title={t('home.distributorsNetwork.title')}
-                    />
-                  </div>
-                </div>
+            </div>
+            <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '0 15px' }}>
+              <div style={{ width: '100%', height: 'auto', minHeight: '550px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                <img 
+                  src="/assets/images/backgrounds/Website_Map.jpg" 
+                  alt={t('home.distributorsNetwork.title')}
+                  style={{ width: '100%', height: 'auto', display: 'block' }}
+                />
               </div>
             </div>
           </section>
@@ -1368,7 +1364,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-1.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -1402,7 +1398,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-2.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -1436,7 +1432,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-3.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -1470,7 +1466,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-4.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -1504,7 +1500,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-5.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -1538,7 +1534,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-6.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -1973,7 +1969,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-1.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -2007,7 +2003,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-2.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -2041,7 +2037,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-3.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -2075,7 +2071,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-4.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -2109,7 +2105,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-5.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
@@ -2143,7 +2139,7 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="/assets/images/testimonial/testimonial-1-6.jpg" alt="" />
+                            <img src="/assets/images/backgrounds/images.jpeg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
