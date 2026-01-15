@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface SocialMediaPostsProps {
   instagramUrl?: string;
@@ -9,7 +10,7 @@ interface SocialMediaPostsProps {
 }
 
 // Default URLs
-const DEFAULT_INSTAGRAM_URL = "https://www.instagram.com/p/DRtqxEckueh/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==";
+const DEFAULT_INSTAGRAM_URL = "https://www.instagram.com/p/DTU8377kjKI/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==";
 const DEFAULT_YOUTUBE_URL = "https://www.youtube.com/embed/sVae9XfoQiI?si=7PSxhBaDA5K0Ok9h";
 const DEFAULT_FACEBOOK_URL = '<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FGreenGoldSeedsAurangabad%2Fposts%2Fpfbid022M1fRcWo1UsvEqJhEpKtb6LA9SFHtu13GTtGgzMNMbTne2XbsDL1qAwR7irygef5l&show_text=false&width=500" width="500" height="498" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>';
 
@@ -104,6 +105,7 @@ export function SocialMediaPosts({
   youtubeUrl = DEFAULT_YOUTUBE_URL, 
   facebookUrl = DEFAULT_FACEBOOK_URL 
 }: SocialMediaPostsProps) {
+  const t = useTranslations();
   const instagramRef = useRef<HTMLDivElement>(null);
   const facebookRef = useRef<HTMLDivElement>(null);
   const [instagramLoaded, setInstagramLoaded] = useState(false);
@@ -290,7 +292,7 @@ export function SocialMediaPosts({
         <div className="row">
           <div className="col-12">
             <h3 className="text-center" style={{ marginBottom: '40px', fontSize: '28px', fontWeight: 'bold' }}>
-              Social Media Posts
+              {t('productDetails.socialMediaPosts')}
             </h3>
           </div>
         </div>
