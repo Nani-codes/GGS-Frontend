@@ -33,29 +33,13 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
         ? { Authorization: `Bearer ${apiKey}` }
         : {};
 
-      // Try custom endpoint first
-      try {
-        const response = await fetch(
-          `/strapi/api/products/categories?locale=${locale}`,
-          { headers }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.data && Array.isArray(data.data)) {
-            setCategories(data.data);
-            setCategoriesLoading(false);
-            return;
-          }
-        }
-      } catch (endpointError) {
-        console.warn('Custom categories endpoint failed, using fallback:', endpointError);
-      }
-
+      // Skip custom endpoint if it's locale-aware (it returns different results per locale)
+      // Always use fallback to ensure consistent categories across all locales
       // Fallback: fetch products and extract categories
+      // Fetch without locale filter since Group_Name is a shared field
       const query = qs.stringify(
         {
-          fields: ['Group_Name'],
+          fields: ['documentId', 'Group_Name'],
           pagination: {
             page: 1,
             pageSize: 1000, // Large page size to get all categories
@@ -65,7 +49,7 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
       );
 
       const response = await fetch(
-        `/strapi/api/products?locale=${locale}&${query}`,
+        `/strapi/api/products?${query}`,
         { headers }
       );
 
@@ -76,11 +60,19 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
       const data = await response.json();
       const products = data.data || [];
 
-      // Extract unique Group_Name values
+      // Deduplicate by documentId and extract unique Group_Name values
+      // Group_Name is a shared field, so we can use any variant
+      const seenDocumentIds = new Set<string>();
       const categoriesSet = new Set<string>();
+      
       products.forEach((product: any) => {
-        if (product.Group_Name && typeof product.Group_Name === 'string') {
-          categoriesSet.add(product.Group_Name.trim());
+        const docId = product.documentId || String(product.id);
+        // Only process each documentId once
+        if (!seenDocumentIds.has(docId)) {
+          seenDocumentIds.add(docId);
+          if (product.Group_Name && typeof product.Group_Name === 'string') {
+            categoriesSet.add(product.Group_Name.trim());
+          }
         }
       });
 

@@ -82,7 +82,7 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
         : {};
   
       const queryParams: any = {
-        fields: ['Name', 'Description', 'Variety_Name','Group_Name'],
+        fields: ['documentId', 'Name', 'Description', 'Variety_Name', 'Group_Name', 'locale'],
         populate: {
           Image: {
             fields: ['url'],
@@ -90,15 +90,16 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
         },
         pagination: {
           page,
-          pageSize: 25,
+          pageSize: 100, // Fetch more to account for locale variants, will deduplicate
         },
       };
 
       // Build filters object
+      // Note: Filters use shared fields (Name, Group_Name) which are consistent across locales
       const filters: any = {};
       const filterConditions: any[] = [];
       
-      // Add category filter if provided
+      // Add category filter if provided (Group_Name is a shared field)
       if (category && category.trim()) {
         filterConditions.push({
           Group_Name: {
@@ -107,7 +108,7 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
         });
       }
       
-      // Add subcategory filter if provided
+      // Add subcategory filter if provided (Name is a shared field)
       if (subcategory && subcategory.trim()) {
         filterConditions.push({
           Name: {
@@ -117,6 +118,7 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
       }
       
       // Add search filter if provided
+      // Search in shared fields (Name, Variety_Name, Group_Name) and localized Description
       if (searchQuery && searchQuery.trim()) {
         const searchTerm = searchQuery.trim();
         filterConditions.push({
@@ -142,8 +144,10 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
   
       const query = qs.stringify(queryParams, { encodeValuesOnly: true });
   
+      // Fetch without locale filter to get all locale variants
+      // We'll merge shared fields with locale-specific Description
       const response = await fetch(
-        `/strapi/api/products?locale=${locale}&${query}`,
+        `/strapi/api/products?${query}`,
         { headers }
       );
   
@@ -151,13 +155,63 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
         throw new Error('Failed to fetch products');
       }
       const data: ProductsResponse = await response.json();
-      console.log('Products data:', data);
-      // Log first product's Image structure for debugging
-      if (data.data && data.data.length > 0) {
-        console.log('First product Image:', data.data[0].Image);
-      }
-      setProducts(data.data);
-      setPagination(data.meta.pagination);
+      console.log('Products data (all locales):', data);
+      
+      // Group products by documentId and merge shared fields with locale-specific Description
+      const productsByDocumentId = new Map<string, Product[]>();
+      
+      // Group all products by documentId
+      data.data.forEach((product) => {
+        const key = product.documentId || String(product.id);
+        if (!productsByDocumentId.has(key)) {
+          productsByDocumentId.set(key, []);
+        }
+        productsByDocumentId.get(key)!.push(product);
+      });
+      
+      // Merge shared fields with locale-specific Description
+      const mergedProducts: Product[] = [];
+      productsByDocumentId.forEach((variants) => {
+        if (variants.length === 0) return;
+        
+        // Get shared fields from first variant (they should be identical across locales)
+        const sharedFields = variants[0];
+        
+        // Find locale-specific variant for Description
+        const localeSpecific = variants.find((p) => p.locale === locale) || variants[0];
+        
+        // Merge: shared fields + locale-specific Description
+        const mergedProduct: Product = {
+          ...sharedFields,
+          Description: localeSpecific.Description,
+          locale: locale, // Set to current locale for tracking
+        };
+        
+        mergedProducts.push(mergedProduct);
+      });
+      
+      console.log('Merged products:', {
+        totalVariants: data.data.length,
+        uniqueProducts: mergedProducts.length,
+        locale,
+      });
+      
+      // Apply pagination to merged products
+      const pageSize = 25;
+      const startIndex = (page - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
+      const paginatedProducts = mergedProducts.slice(startIndex, endIndex);
+      
+      // Calculate pagination metadata
+      const totalPages = Math.ceil(mergedProducts.length / pageSize);
+      
+      setProducts(paginatedProducts);
+      setPagination({
+        page,
+        pageSize,
+        pageCount: totalPages,
+        total: mergedProducts.length,
+      });
   
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -175,29 +229,13 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
         ? { Authorization: `Bearer ${apiKey}` }
         : {};
 
-      // Try custom endpoint first
-      try {
-        const response = await fetch(
-          `/strapi/api/products/categories?locale=${locale}`,
-          { headers }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.data && Array.isArray(data.data)) {
-            setCategories(data.data);
-            setCategoriesLoading(false);
-            return;
-          }
-        }
-      } catch (endpointError) {
-        console.warn('Custom categories endpoint failed, using fallback:', endpointError);
-      }
-
+      // Skip custom endpoint if it's locale-aware (it returns different results per locale)
+      // Always use fallback to ensure consistent categories across all locales
       // Fallback: fetch products and extract categories
+      // Fetch without locale filter since Group_Name is a shared field
       const query = qs.stringify(
         {
-          fields: ['Group_Name'],
+          fields: ['documentId', 'Group_Name'],
           pagination: {
             page: 1,
             pageSize: 1000, // Large page size to get all categories
@@ -207,7 +245,7 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
       );
 
       const response = await fetch(
-        `/strapi/api/products?locale=${locale}&${query}`,
+        `/strapi/api/products?${query}`,
         { headers }
       );
 
@@ -218,11 +256,19 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
       const data = await response.json();
       const products = data.data || [];
 
-      // Extract unique Group_Name values
+      // Deduplicate by documentId and extract unique Group_Name values
+      // Group_Name is a shared field, so we can use any variant
+      const seenDocumentIds = new Set<string>();
       const categoriesSet = new Set<string>();
+      
       products.forEach((product: any) => {
-        if (product.Group_Name && typeof product.Group_Name === 'string') {
-          categoriesSet.add(product.Group_Name.trim());
+        const docId = product.documentId || String(product.id);
+        // Only process each documentId once
+        if (!seenDocumentIds.has(docId)) {
+          seenDocumentIds.add(docId);
+          if (product.Group_Name && typeof product.Group_Name === 'string') {
+            categoriesSet.add(product.Group_Name.trim());
+          }
         }
       });
 
@@ -271,9 +317,10 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
       }
 
       // Fallback: fetch products and extract Name
+      // Fetch without locale filter since Name and Group_Name are shared fields
       const query = qs.stringify(
         {
-          fields: ['Name', 'Group_Name'],
+          fields: ['documentId', 'Name', 'Group_Name'],
           filters: {
             Group_Name: {
               $eq: category.trim(),
@@ -288,7 +335,7 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
       );
 
       const response = await fetch(
-        `/strapi/api/products?locale=${locale}&${query}`,
+        `/strapi/api/products?${query}`,
         { headers }
       );
 
@@ -299,11 +346,19 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
       const data = await response.json();
       const products = data.data || [];
 
-      // Extract unique Name values
+      // Deduplicate by documentId and extract unique Name values
+      // Name is a shared field, so we can use any variant
+      const seenDocumentIds = new Set<string>();
       const subCategoriesSet = new Set<string>();
+      
       products.forEach((product: any) => {
-        if (product.Name && typeof product.Name === 'string') {
-          subCategoriesSet.add(product.Name.trim());
+        const docId = product.documentId || String(product.id);
+        // Only process each documentId once
+        if (!seenDocumentIds.has(docId)) {
+          seenDocumentIds.add(docId);
+          if (product.Name && typeof product.Name === 'string') {
+            subCategoriesSet.add(product.Name.trim());
+          }
         }
       });
 

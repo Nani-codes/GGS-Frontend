@@ -200,7 +200,14 @@ export function HomeContent() {
             <section className="banner-one banner-one--bg-only" style={{ backgroundImage: 'url(/assets/images/backgrounds/smart-agriculture-iot-with-hand-planting-tree-background.jpg)' }}>
             </section>
           </div>
-          {/* Slides 4-6 - Hidden until content is ready
+          {/* Slide 4 - Website Map */}
+          <div className="swiper-slide">
+            <section className="banner-one banner-one--bg-only" style={{ backgroundImage: 'url(/assets/images/backgrounds/Website_Map.jpg)' }}>
+              <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/banner-one-shape-bg.png)' }}>
+              </div>
+            </section>
+          </div>
+          {/* Slides 5-7 - Hidden until content is ready
           <div className="swiper-slide">
             <section className="banner-one" style={{ backgroundColor: 'transparent' }}>
             </section>

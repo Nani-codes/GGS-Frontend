@@ -250,30 +250,125 @@ export function ProductsDetailsContent() {
           headers['Authorization'] = `Bearer ${apiKey}`;
         }
         
-        // Try to fetch by documentId first, then by id
-        // Include locale and fields like ProductsContent for consistency
-        // Add locale filter to ensure we only get products in the requested locale
-        const apiUrl = `/strapi/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&fields[6]=Instagram_Post_URL&fields[7]=YouTube_Post_URL&fields[8]=Facebook_Post_URL&filters[documentId][$eq]=${productId}&filters[locale][$eq]=${locale}&populate[Image][fields][1]=url`;
+        // Query by documentId - Strapi requires explicit locale parameter
+        // Fetch all locales in parallel to get all variants
+        const localesToFetch = ['en', 'hi', 'mr'];
+        const fetchPromises = localesToFetch.map(async (loc) => {
+          const apiUrl = `/strapi/api/products?locale=${loc}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&fields[6]=Instagram_Post_URL&fields[7]=YouTube_Post_URL&fields[8]=Facebook_Post_URL&filters[documentId][$eq]=${productId}&populate[Image][fields][1]=url`;
+          try {
+            const resp = await fetch(apiUrl, { headers });
+            if (resp.ok) {
+              const data = await resp.json();
+              return data.data || [];
+            }
+            return [];
+          } catch (err) {
+            console.warn(`[ProductDetails] Failed to fetch locale ${loc}:`, err);
+            return [];
+          }
+        });
         
-        console.log('[ProductDetails] Fetching product', {
+        console.log('[ProductDetails] Fetching product by documentId (all locales in parallel)', {
           productId,
-          locale,
-          apiUrl,
+          requestedLocale: locale,
+          localesToFetch,
         });
 
-        const response = await fetch(apiUrl, {
-          headers,
-        });
+        const localeResults = await Promise.all(fetchPromises);
+        const allVariants = localeResults.flat().filter(Boolean);
         
-        if (!response.ok) {
-          // If documentId doesn't work, try fetching by id
-          const apiUrlById = `/strapi/api/products/${productId}?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&fields[6]=Instagram_Post_URL&fields[7]=YouTube_Post_URL&fields[8]=Facebook_Post_URL&populate[Image][fields][1]=url`;
+        console.log('[ProductDetails] Fetched variants from all locales', {
+          totalVariants: allVariants.length,
+          variantsByLocale: allVariants.map((p: Product) => ({ locale: p.locale, id: p.id, hasDescription: !!p.Description })),
+        });
+
+        // If we got variants, process them
+        if (allVariants.length > 0) {
+          // Extract shared fields (Name, Variety_Name, Group_Name) from any variant
+          // These should be identical across all locales
+          const sharedFields = allVariants[0];
           
-          console.log('[ProductDetails] Fetching product by ID fallback', {
+          // Log all available locales for debugging
+          const availableLocales = allVariants.map((p: Product) => p.locale);
+          console.log('[ProductDetails] Available locales in response:', availableLocales);
+          console.log('[ProductDetails] Requested locale:', locale, 'Type:', typeof locale);
+          console.log('[ProductDetails] Locale type check:', typeof locale, locale === 'hi', locale === 'en', locale === 'mr');
+          
+          // Extract locale-specific Description from the current locale variant
+          // Use case-insensitive matching and trim whitespace
+          // Also check for locale variations (e.g., 'hi-IN', 'hi_IN', etc.)
+          const localeSpecific = allVariants.find((p: Product) => {
+            const productLocale = String(p.locale || '').toLowerCase().trim();
+            const requestedLocale = String(locale || '').toLowerCase().trim();
+            
+            // Direct match
+            if (productLocale === requestedLocale) {
+              console.log(`[ProductDetails] Direct locale match found: "${productLocale}" === "${requestedLocale}"`);
+              return true;
+            }
+            
+            // Check if locale starts with requested locale (e.g., 'hi-IN' matches 'hi')
+            if (productLocale.startsWith(requestedLocale + '-') || productLocale.startsWith(requestedLocale + '_')) {
+              console.log(`[ProductDetails] Locale prefix match found: "${productLocale}" starts with "${requestedLocale}"`);
+              return true;
+            }
+            
+            // Check if requested locale starts with product locale (e.g., 'hi' matches 'hi-IN')
+            if (requestedLocale.startsWith(productLocale + '-') || requestedLocale.startsWith(productLocale + '_')) {
+              console.log(`[ProductDetails] Reverse locale prefix match found: "${requestedLocale}" starts with "${productLocale}"`);
+              return true;
+            }
+            
+            return false;
+          });
+          
+          // Fallback strategy: prefer default locale (en) if current locale not found
+          const fallbackLocale = localeSpecific || allVariants.find((p: Product) => {
+            const productLocale = String(p.locale || '').toLowerCase().trim();
+            return productLocale === 'en';
+          }) || allVariants[0];
+          
+          if (!localeSpecific) {
+            // If current locale not found, log warning and use fallback
+            console.warn(`[ProductDetails] Locale "${locale}" not found in available locales: [${availableLocales.join(', ')}]. Using fallback locale (${fallbackLocale.locale}) for Description`);
+            console.warn('[ProductDetails] This means the product may not have a Description in the requested locale.');
+          } else {
+            console.log(`[ProductDetails] ✓ Found locale-specific variant for "${locale}", using Description from ${localeSpecific.locale} locale`);
+            console.log(`[ProductDetails] Description preview (first 100 chars): ${localeSpecific.Description?.substring(0, 100)}...`);
+          }
+          
+          // Merge shared fields with locale-specific Description
+          const mergedProduct: Product = {
+            ...sharedFields,
+            Description: localeSpecific?.Description || fallbackLocale.Description,
+            locale: locale, // Set to current locale for tracking
+          };
+          
+          console.log('[ProductDetails] Merged product summary', {
+            requestedLocale: locale,
+            foundLocale: localeSpecific?.locale || fallbackLocale.locale,
+            descriptionSource: localeSpecific ? 'locale-specific' : 'fallback',
+            descriptionLocale: localeSpecific?.locale || fallbackLocale.locale,
+            descriptionLength: mergedProduct.Description?.length || 0,
+            descriptionPreview: mergedProduct.Description?.substring(0, 150) || '(empty)',
+            availableLocales: availableLocales,
+          });
+          
+          console.log('[ProductDetails] Social Media URLs:', {
+            instagram: mergedProduct?.Instagram_Post_URL,
+            youtube: mergedProduct?.YouTube_Post_URL,
+            facebook: mergedProduct?.Facebook_Post_URL
+          });
+          
+          setProduct(mergedProduct);
+        } else {
+          // If parallel fetch didn't work, try fetching by ID as fallback
+          const apiUrlById = `/strapi/api/products/${productId}?fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&fields[6]=Instagram_Post_URL&fields[7]=YouTube_Post_URL&fields[8]=Facebook_Post_URL&populate[Image][fields][1]=url`;
+          
+          console.log('[ProductDetails] Parallel fetch returned no results, trying ID fallback', {
             productId,
             locale,
             apiUrlById,
-            status: response.status,
           });
 
           const responseById = await fetch(apiUrlById, {
@@ -286,42 +381,64 @@ export function ProductsDetailsContent() {
           
           const dataById = await responseById.json();
           console.log('[ProductDetails] Product by ID response', dataById);
-          console.log('[ProductDetails] Social Media URLs:', {
-            instagram: dataById.data?.Instagram_Post_URL,
-            youtube: dataById.data?.YouTube_Post_URL,
-            facebook: dataById.data?.Facebook_Post_URL
-          });
           
-          // Strictly verify the product locale matches the current locale
-          if (dataById.data && dataById.data.locale !== locale) {
-            // Don't set the product if locale doesn't match - show error instead
-            throw new Error(`Product not available in ${locale} locale. Available in ${dataById.data.locale}.`);
-          }
-          
-          setProduct(dataById.data);
-        } else {
-          const data = await response.json();
-          console.log('[ProductDetails] Product by documentId response', data);
-          if (data.data && data.data.length > 0) {
-            const productData = data.data.find((p: Product) => p.locale === locale) || data.data[0];
-            console.log('[ProductDetails] Social Media URLs:', {
-              instagram: productData?.Instagram_Post_URL,
-              youtube: productData?.YouTube_Post_URL,
-              facebook: productData?.Facebook_Post_URL
+          // For ID-based fetch, try to fetch all variants by documentId if we have it
+          if (dataById.data?.documentId) {
+            // Fetch all locales in parallel for the documentId
+            const idFetchPromises = localesToFetch.map(async (loc) => {
+              const apiUrl = `/strapi/api/products?locale=${loc}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&fields[6]=Instagram_Post_URL&fields[7]=YouTube_Post_URL&fields[8]=Facebook_Post_URL&filters[documentId][$eq]=${dataById.data.documentId}&populate[Image][fields][1]=url`;
+              try {
+                const resp = await fetch(apiUrl, { headers });
+                if (resp.ok) {
+                  const data = await resp.json();
+                  return data.data || [];
+                }
+                return [];
+              } catch (err) {
+                console.warn(`[ProductDetails] ID fallback - Failed to fetch locale ${loc}:`, err);
+                return [];
+              }
             });
-            // Filter to only get products that match the current locale
-            const product = data.data.find((p: Product) => p.locale === locale) || data.data[0];
             
-            // Strictly verify the product locale matches the current locale
-            if (product.locale !== locale) {
-              // Don't set the product if locale doesn't match - show error instead
-              throw new Error(`Product not available in ${locale} locale. Available in ${product.locale}.`);
+            const idLocaleResults = await Promise.all(idFetchPromises);
+            const idAllVariants = idLocaleResults.flat().filter(Boolean);
+            
+            if (idAllVariants.length > 0) {
+              // Extract shared fields and merge with locale-specific Description
+              const sharedFields = idAllVariants[0];
+              const availableLocales = idAllVariants.map((p: Product) => p.locale);
+              
+              const localeSpecific = idAllVariants.find((p: Product) => {
+                const productLocale = String(p.locale || '').toLowerCase().trim();
+                const requestedLocale = String(locale || '').toLowerCase().trim();
+                return productLocale === requestedLocale;
+              });
+              
+              const fallbackLocale = localeSpecific || idAllVariants.find((p: Product) => {
+                const productLocale = String(p.locale || '').toLowerCase().trim();
+                return productLocale === 'en';
+              }) || idAllVariants[0];
+              
+              const mergedProduct: Product = {
+                ...sharedFields,
+                Description: localeSpecific?.Description || fallbackLocale.Description,
+                locale: locale,
+              };
+              
+              console.log('[ProductDetails] Merged product from ID fallback variants', {
+                requestedLocale: locale,
+                foundLocale: localeSpecific?.locale || fallbackLocale.locale,
+                availableLocales: availableLocales,
+              });
+              
+              setProduct(mergedProduct);
+              return;
             }
-            
-            setProduct(product);
-          } else {
-            throw new Error('Product not found for the specified locale');
           }
+          
+          // Final fallback: use the single product from ID fetch
+          // Note: This may not have locale-specific Description if locale doesn't match
+          setProduct(dataById.data);
         }
       } catch (err) {
         console.error('[ProductDetails] Error fetching product', err);
@@ -570,10 +687,12 @@ export function ProductsDetailsContent() {
         headers['Authorization'] = `Bearer ${apiKey}`;
       }
 
-      // Fetch products with same Group_Name
+      // Fetch products with same Group_Name (shared field)
+      // Fetch without locale filter to get all locale variants
+      // Then merge shared fields with locale-specific Description
       const encodedGroupName = encodeURIComponent(groupName);
-      const relatedUrl = `/strapi/api/products?locale=${locale}&filters[Group_Name][$eq]=${encodedGroupName}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&populate[Image][fields][1]=url&pagination[page]=1&pagination[pageSize]=25`;
-      console.log('[RelatedProducts] Fetching related products by Group_Name', {
+      const relatedUrl = `/strapi/api/products?filters[Group_Name][$eq]=${encodedGroupName}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&populate[Image][fields][1]=url&pagination[page]=1&pagination[pageSize]=100`;
+      console.log('[RelatedProducts] Fetching related products by Group_Name (all locales)', {
         groupName,
         encodedGroupName,
         locale,
@@ -597,20 +716,63 @@ export function ProductsDetailsContent() {
       }
 
       const data = await response.json();
-      const items: Product[] = data?.data ?? [];
-      console.log('[RelatedProducts] Raw related items', {
-        count: items.length,
-        ids: items.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name, groupName: p.Group_Name })),
+      const allItems: Product[] = data?.data ?? [];
+      console.log('[RelatedProducts] Raw related items (all locales)', {
+        count: allItems.length,
+        ids: allItems.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name, groupName: p.Group_Name, locale: p.locale })),
       });
 
+      // Group by documentId and merge shared fields with locale-specific Description
+      const productsByDocumentId = new Map<string, Product[]>();
+      allItems.forEach((product) => {
+        const key = product.documentId || String(product.id);
+        if (!productsByDocumentId.has(key)) {
+          productsByDocumentId.set(key, []);
+        }
+        productsByDocumentId.get(key)!.push(product);
+      });
+
+      // Filter out current product and merge locale variants
       const currentKey = currentProduct.documentId || String(currentProduct.id);
-      const filtered = items
-        .filter((p) => (p.documentId || String(p.id)) !== currentKey)
-        .slice(0, 4);
-      console.log('[RelatedProducts] Filtered related items', {
+      const mergedProducts: Product[] = [];
+
+      productsByDocumentId.forEach((variants, docId) => {
+        if (docId === currentKey) return; // Skip current product
+
+        if (variants.length === 0) return;
+
+        // Get shared fields from first variant (they should be identical across locales)
+        const sharedFields = variants[0];
+
+        // Find locale-specific variant for Description
+        // Use case-insensitive matching and trim whitespace
+        const localeSpecific = variants.find((p) => {
+          const productLocale = String(p.locale || '').toLowerCase().trim();
+          const requestedLocale = String(locale || '').toLowerCase().trim();
+          return productLocale === requestedLocale;
+        }) || variants.find((p) => {
+          const productLocale = String(p.locale || '').toLowerCase().trim();
+          return productLocale === 'en';
+        }) || variants[0];
+
+        // Merge: shared fields + locale-specific Description
+        const mergedProduct: Product = {
+          ...sharedFields,
+          Description: localeSpecific.Description,
+          locale: locale, // Set to current locale for tracking
+        };
+
+        mergedProducts.push(mergedProduct);
+      });
+
+      // Limit to 4 products
+      const filtered = mergedProducts.slice(0, 4);
+      console.log('[RelatedProducts] Merged and filtered related items', {
         currentKey,
+        totalVariants: allItems.length,
+        uniqueProducts: mergedProducts.length,
         filteredCount: filtered.length,
-        filteredIds: filtered.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name })),
+        filteredIds: filtered.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name, locale: p.locale })),
       });
 
       setRelatedProducts(filtered);
@@ -641,10 +803,12 @@ export function ProductsDetailsContent() {
         headers['Authorization'] = `Bearer ${apiKey}`;
       }
 
-      // Fetch products with same Name
+      // Fetch products with same Name (shared field)
+      // Fetch without locale filter to get all locale variants
+      // Then merge shared fields with locale-specific Description
       const encodedName = encodeURIComponent(productName);
-      const sameNameUrl = `/strapi/api/products?locale=${locale}&filters[Name][$eq]=${encodedName}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&populate[Image][fields][1]=url&pagination[page]=1&pagination[pageSize]=10`;
-      console.log('[SameNameProducts] Fetching products with same Name', {
+      const sameNameUrl = `/strapi/api/products?filters[Name][$eq]=${encodedName}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&populate[Image][fields][1]=url&pagination[page]=1&pagination[pageSize]=100`;
+      console.log('[SameNameProducts] Fetching products with same Name (all locales)', {
         productName,
         encodedName,
         locale,
@@ -668,20 +832,63 @@ export function ProductsDetailsContent() {
       }
 
       const data = await response.json();
-      const items: Product[] = data?.data ?? [];
-      console.log('[SameNameProducts] Raw same name items', {
-        count: items.length,
-        ids: items.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name, varietyName: p.Variety_Name })),
+      const allItems: Product[] = data?.data ?? [];
+      console.log('[SameNameProducts] Raw same name items (all locales)', {
+        count: allItems.length,
+        ids: allItems.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name, varietyName: p.Variety_Name, locale: p.locale })),
       });
 
+      // Group by documentId and merge shared fields with locale-specific Description
+      const productsByDocumentId = new Map<string, Product[]>();
+      allItems.forEach((product) => {
+        const key = product.documentId || String(product.id);
+        if (!productsByDocumentId.has(key)) {
+          productsByDocumentId.set(key, []);
+        }
+        productsByDocumentId.get(key)!.push(product);
+      });
+
+      // Filter out current product and merge locale variants
       const currentKey = currentProduct.documentId || String(currentProduct.id);
-      const filtered = items
-        .filter((p) => (p.documentId || String(p.id)) !== currentKey)
-        .slice(0, 6); // Show up to 6 products with same name
-      console.log('[SameNameProducts] Filtered same name items', {
+      const mergedProducts: Product[] = [];
+
+      productsByDocumentId.forEach((variants, docId) => {
+        if (docId === currentKey) return; // Skip current product
+
+        if (variants.length === 0) return;
+
+        // Get shared fields from first variant (they should be identical across locales)
+        const sharedFields = variants[0];
+
+        // Find locale-specific variant for Description
+        // Use case-insensitive matching and trim whitespace
+        const localeSpecific = variants.find((p) => {
+          const productLocale = String(p.locale || '').toLowerCase().trim();
+          const requestedLocale = String(locale || '').toLowerCase().trim();
+          return productLocale === requestedLocale;
+        }) || variants.find((p) => {
+          const productLocale = String(p.locale || '').toLowerCase().trim();
+          return productLocale === 'en';
+        }) || variants[0];
+
+        // Merge: shared fields + locale-specific Description
+        const mergedProduct: Product = {
+          ...sharedFields,
+          Description: localeSpecific.Description,
+          locale: locale, // Set to current locale for tracking
+        };
+
+        mergedProducts.push(mergedProduct);
+      });
+
+      // Limit to 6 products
+      const filtered = mergedProducts.slice(0, 6);
+      console.log('[SameNameProducts] Merged and filtered same name items', {
         currentKey,
+        totalVariants: allItems.length,
+        uniqueProducts: mergedProducts.length,
         filteredCount: filtered.length,
-        filteredIds: filtered.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name })),
+        filteredIds: filtered.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name, locale: p.locale })),
       });
 
       setSameNameProducts(filtered);
@@ -824,7 +1031,7 @@ export function ProductsDetailsContent() {
               <div className="row">
                 <div className="col-12">
                   <h4 style={{ marginBottom: '20px', fontSize: '22px', fontWeight: 'bold' }}>
-                    More {product?.Name} Varieties
+                    {t('productDetails.moreVarieties', { name: product?.Name || '' })}
                   </h4>
                   <div className="row">
                     {sameNameProducts.map((item, index) => {
@@ -861,8 +1068,8 @@ export function ProductsDetailsContent() {
             <section className="related-products" style={{ marginTop: '60px' }}>
               <div className="container">
                 <div className="related-products__title text-center">
-                  <h3 style={{ marginBottom: '10px' }}>Related Products</h3>
-                  <p style={{ color: '#666' }}>You might also like these.</p>
+                  <h3 style={{ marginBottom: '10px' }}>{t('productDetails.relatedProducts')}</h3>
+                  <p style={{ color: '#666' }}>{t('productDetails.relatedProductsDesc')}</p>
                 </div>
                 <div className="row">
                   {relatedProducts.map((item, index) => {
