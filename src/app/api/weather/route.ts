@@ -82,7 +82,7 @@ function getMockWeatherData(location: string) {
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const location = searchParams.get('location') || 'Aurangabad,Maharashtra,India';
+  const location = searchParams.get('location') || 'Chh. Sambhajinagar (Aurangabad),Maharashtra,India';
 
   // If no API key, return mock data
   if (!WEATHER_API_KEY) {

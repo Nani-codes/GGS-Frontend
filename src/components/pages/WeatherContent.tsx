@@ -32,7 +32,7 @@ interface ForecastDay {
 
 // Popular cities for suggestions (India-focused)
 const POPULAR_CITIES = [
-  'Aurangabad, Maharashtra',
+  'Chh. Sambhajinagar (Aurangabad), Maharashtra',
   'Pune, Maharashtra',
   'Mumbai, Maharashtra',
   'Nashik, Maharashtra',
@@ -70,8 +70,8 @@ const POPULAR_CITIES = [
 
 export function WeatherContent() {
   const t = useTranslations();
-  const [searchQuery, setSearchQuery] = useState('Aurangabad, Maharashtra');
-  const [selectedCity, setSelectedCity] = useState('Aurangabad, Maharashtra');
+  const [searchQuery, setSearchQuery] = useState('Chh. Sambhajinagar (Aurangabad), Maharashtra');
+  const [selectedCity, setSelectedCity] = useState('Chh. Sambhajinagar (Aurangabad), Maharashtra');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
   const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -319,7 +319,7 @@ export function WeatherContent() {
                         letterSpacing: '0.5px',
                         borderBottom: '1px solid #f0f0f0'
                       }}>
-                        {t('weather.popularCities')}
+                        {t('weather.popularCities') || 'Popular Suggestions'}
                       </div>
                       {filteredSuggestions.map((city, index) => (
                         <div

@@ -12,7 +12,8 @@
     "calendar": "Calendar",
     "panchang": "Panchang",
     "marketRates": "Market Rates",
-    "weather": "Weather"
+    "weather": "Weather",
+    "career": "Career & Opportunities"
   },
   "nav": {
     "home": "Home",
@@ -37,6 +38,7 @@
     "panchang": "Panchang",
     "marketRates": "Market Rates",
     "weather": "Weather",
+    "career": "Career & Opportunities",
     "productCategories": {
       "cottonSeeds": "Cotton Seeds",
       "wheatSeeds": "Wheat Seeds",
@@ -71,7 +73,7 @@
     "banner": {
       "subtitle": "Established in 2001",
       "title": "Welcome to Green Gold Seeds Pvt. Ltd.",
-      "description": "Green Gold Seeds Pvt. Ltd. (GGSPL), an Aurangabad-based Mulay Group company, focuses on research and development with high qualitative standards. With state-of-the-art facilities, updated technology, and an efficient team, we have expanded across 13 states including Maharashtra, Madhya Pradesh, Gujarat, Rajasthan, West Bengal, and more. Today, GGSPL is emerging as one of the most trusted and fast-growing Indian seed companies, helping farmers improve yields and income."
+      "description": "Green Gold Seeds Pvt. Ltd. (GGSPL), a Chh. Sambhajinagar (Aurangabad)-based Mulay Group company, focuses on research and development with high qualitative standards. With state-of-the-art facilities, updated technology, and an efficient team, we have expanded across 13 states including Maharashtra, Madhya Pradesh, Gujarat, Rajasthan, West Bengal, and more. Today, GGSPL is emerging as one of the most trusted and fast-growing Indian seed companies, helping farmers improve yields and income."
     },
     "video": {
       "subtitle": "Watch Our Journey of Seed Innovation",
@@ -111,7 +113,7 @@
       "videoText": "Research in Action",
       "ourStory": "Our Story",
       "growingWithFarmers": "Growing with Indian farmers",
-      "storyText1": "Established in 2001, Green Gold Seeds Pvt. Ltd. (GGSPL) is an Aurangabad-based Mulay Group company focused on research and development with high qualitative standards. Over the last decade and a half, GGSPL has transformed the quality of seeds supplied to Indian farmers across the country.",
+      "storyText1": "Established in 2001, Green Gold Seeds Pvt. Ltd. (GGSPL) is a Chh. Sambhajinagar (Aurangabad)-based Mulay Group company focused on research and development with high qualitative standards. Over the last decade and a half, GGSPL has transformed the quality of seeds supplied to Indian farmers across the country.",
       "storyText2": "With state-of-the-art facilities, updated technology, and an efficient team, GGSPL has expanded across 10 states including Maharashtra, Madhya Pradesh, Gujarat, Rajasthan, West Bengal, Assam, Odisha, Chhattisgarh, Karnataka, and Andhra Pradesh. Today, Green Gold Seeds is emerging as one of the most trusted and fastest growing Indian seed companies, helping farmers improve yields and income.",
       "highlightsAtGlance": "Highlights at a glance",
       "highlight1": "Established in 2001 with focus on<br />research and development excellence.",
@@ -211,7 +213,27 @@
     "company": "Company",
     "sendAMessage": "Send a Message",
     "ourOfficeLocation": "Our Office Location",
-    "location": "Green Gold Seeds Pvt.Ltd. Gut No. 65, Narayanpur Shivar, Waluj, Category: Gangapur, Dist: Chh. Sambhajinagar-431001"
+    "location": "Green Gold Seeds Pvt.Ltd. Gut No. 65, Narayanpur Shivar, Waluj, Category: Gangapur, Dist: Chh. Sambhajinagar-431001",
+    "stateContacts": {
+      "tagline": "Regional Offices",
+      "title": "Find Your Regional Contact",
+      "description": "Select your state to get in touch with our regional office or distributor in your area",
+      "selectState": "Select State",
+      "phone": "Phone",
+      "email": "Email",
+      "location": "Location",
+      "clickToCall": "Click to call",
+      "call": "Call",
+      "whatsapp": "WhatsApp",
+      "callOrMessage": "Call or Message"
+    }
+  },
+  "career": {
+    "tagline": "Join Our Team",
+    "title": "Career & Opportunities",
+    "description": "We are always looking for talented individuals to join our team. Explore exciting career opportunities with Green Gold Seeds Pvt. Ltd. and be part of our mission to transform Indian agriculture.",
+    "ctaTitle": "Interested in Joining Our Team?",
+    "ctaDescription": "Send us your resume or contact us for more information about current openings."
   },
   "about": {
     "pageTitle": "About Us",
@@ -259,7 +281,7 @@
       "qcGrowOut": "Quality control wing also conducting grow-out test for all the crop irrespective of stages of seed to assess the genetic purity of every cultivar. Field staff working in quality control squad undertake periodical visits of seed processing plant and seed storage godown and suggest corrective steps if necessary to ensure the quality of seed.",
       "spOverview": "Seed from fields meeting prescribed standards is brought to a processing plant after harvesting. Seed processing is essential to: 1) Dry seeds to a safe moisture level. 2) Remove or reduce undesirable materials such as weed seed, damaged seed, and other crop seeds. 3) Ensure uniform size grading. 4) Perform seed treatment to upgrade overall seed quality.",
       "spDefinition": "Seed processing is defined as all steps necessary for the preparation of harvested seed for marketing, specifically: handling, drying, shelling, cleaning, size grading, treating, and packaging.",
-      "spLocations": "Processing Plant Locations: The main processing plant is located at Narayanpur shivar waluj, Dist. Aurangabad. Additional contract processing plants are located at Chikhali (Buldhana) and Shrirampur (A'Nagar) in Maharashtra. Ginning and delinting of cotton are done at Bodeli and Idar in Gujarat state."
+      "spLocations": "Processing Plant Locations: The main processing plant is located at Narayanpur shivar waluj, Dist. Chh. Sambhajinagar (Aurangabad). Additional contract processing plants are located at Chikhali (Buldhana) and Shrirampur (A'Nagar) in Maharashtra. Ginning and delinting of cotton are done at Bodeli and Idar in Gujarat state."
     },
     "rAndD": "R & D",
     "rAndDDesc": "Genetic research and hybrid development led by the Plant Biotechnology Research Center.",
@@ -475,8 +497,8 @@
     "selectDistrict": "Select District",
     "searchPlaceholder": "Search any city...",
     "getWeather": "Get Weather",
-    "popularCities": "Popular Cities",
-    "searchHint": "Type any city name and press Enter or click Get Weather",
+    "popularCities": "Popular Suggestions",
+    "searchHint": "You can search for any city worldwide. Type the city name and press Enter or click Get Weather",
     "feelsLike": "Feels like",
     "humidity": "Humidity",
     "windSpeed": "Wind Speed",
