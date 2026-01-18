@@ -238,6 +238,9 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
                       <Link href="/weather">{t('nav.weather')}</Link>
                     </li>
                     <li>
+                      <Link href="/career">{t('nav.career')}</Link>
+                    </li>
+                    <li>
                       <Link href="/contact">{t('nav.contact')}</Link>
                     </li>
                   </ul>
@@ -346,6 +349,9 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
                     </li>
                     <li>
                       <Link href="/weather">{t('nav.weather')}</Link>
+                    </li>
+                    <li>
+                      <Link href="/career">{t('nav.career')}</Link>
                     </li>
                     <li>
                       <Link href="/contact">{t('nav.contact')}</Link>
