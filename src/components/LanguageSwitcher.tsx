@@ -10,22 +10,28 @@ export function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [isMainMenuTwo, setIsMainMenuTwo] = useState(false);
+  const [useWhiteText, setUseWhiteText] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Detect if we're in main-menu-two (white navbar) or main-menu (black navbar)
-    const checkNavbarType = () => {
-      const parent = dropdownRef.current?.closest('.main-menu-two__right, .main-menu__right');
-      if (parent) {
-        const isTwo = parent.classList.contains('main-menu-two__right');
-        setIsMainMenuTwo(isTwo);
-      }
+    // Decide text color based on where the switcher is rendered.
+    // - `main-header--inner` uses a dark/glass header overlay -> needs white text
+    // - `main-menu-two` uses a darker background in this project -> needs white text
+    // - sticky header is white -> needs dark text
+    const detectContext = () => {
+      const el = dropdownRef.current;
+      if (!el) return;
+
+      const inMenuTwo = Boolean(el.closest('.main-menu-two, .main-menu-two__right'));
+      const inInnerHeader = Boolean(el.closest('.main-header--inner'));
+      const inStickyHeader = Boolean(el.closest('.stricky-header'));
+
+      setUseWhiteText((inMenuTwo || inInnerHeader) && !inStickyHeader);
     };
     
     // Check on mount and after a short delay to ensure DOM is ready
-    checkNavbarType();
-    const timeout = setTimeout(checkNavbarType, 100);
+    detectContext();
+    const timeout = setTimeout(detectContext, 100);
     
     return () => clearTimeout(timeout);
   }, [locale, pathname]);
@@ -96,7 +102,7 @@ export function LanguageSwitcher() {
           cursor: 'pointer',
           fontSize: '16px',
           fontWeight: '500',
-          color: isMainMenuTwo ? '#ffffff' : '#190f06',
+          color: useWhiteText ? '#ffffff' : '#190f06',
           outline: 'none',
           display: 'flex',
           alignItems: 'center',
@@ -108,7 +114,7 @@ export function LanguageSwitcher() {
           e.currentTarget.style.color = '#f5cb4b';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.color = isMainMenuTwo ? '#ffffff' : '#190f06';
+          e.currentTarget.style.color = useWhiteText ? '#ffffff' : '#190f06';
         }}
         aria-label="Select language"
         aria-expanded={isOpen}

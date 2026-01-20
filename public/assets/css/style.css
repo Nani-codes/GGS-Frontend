@@ -1997,16 +1997,20 @@ xs sidebar
   .main-menu .mobile-nav__toggler {
     display: none;
   }
+
   .responsive-language-switcher-desktop {
     display: block;
   }
+
   .responsive-language-switcher-mobile {
     display: none !important;
   }
+
   /* Legacy classes - can be removed after migration */
   .mobile-language-switcher-container {
     display: none !important;
   }
+
   .mobile-only-language-switcher {
     display: none !important;
   }
@@ -2016,9 +2020,11 @@ xs sidebar
   .responsive-language-switcher-desktop {
     display: none !important;
   }
+
   .responsive-language-switcher-mobile {
     display: block;
   }
+
   /* Legacy classes - can be removed after migration */
   .mobile-only-language-switcher {
     display: block;
@@ -2746,7 +2752,7 @@ xs sidebar
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 0 20px 0;
-  background-color: rgba(var(--farmology-white-rgb), 0.08);
+  background-color: rgba(var(--farmology-white-rgb), 0.9);
 }
 
 .main-menu-two__left {
@@ -2796,7 +2802,7 @@ xs sidebar
   display: flex;
   align-items: center;
   font-size: 24px;
-  color: var(--farmology-white);
+  color: var(--farmology-black);
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
   cursor: pointer;
@@ -2816,7 +2822,7 @@ xs sidebar
   display: flex;
   align-items: center;
   font-size: 24px;
-  color: var(--farmology-white);
+  color: var(--farmology-black);
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
@@ -2858,7 +2864,7 @@ xs sidebar
   display: flex;
   align-items: center;
   font-size: 24px;
-  color: var(--farmology-white);
+  color: var(--farmology-black);
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
@@ -2884,7 +2890,7 @@ xs sidebar
 
 .main-menu-two .main-menu__list>li>a,
 .stricky-header.main-menu-two .main-menu__list>li>a {
-  color: var(--farmology-white);
+  color: var(--farmology-black);
 }
 
 .main-menu-two .main-menu__list>li.current>a,
@@ -2895,7 +2901,7 @@ xs sidebar
 }
 
 .main-menu-two .main-menu__list>li.dropdown>a:after {
-  color: var(--farmology-white);
+  color: var(--farmology-black);
 }
 
 .main-menu-two .main-menu__list>li.current>a::after,
@@ -4602,7 +4608,7 @@ xs sidebar
   line-height: 16px;
   font-weight: 600;
   counter-increment: count;
-  content: ""counter(count);
+  content: "" counter(count);
   transition: all 200ms linear;
   transition-delay: 0.1s;
   top: -20px;
@@ -4967,7 +4973,7 @@ xs sidebar
   line-height: 16px;
   font-weight: 600;
   counter-increment: count;
-  content: ""counter(count);
+  content: "" counter(count);
   transition: all 200ms linear;
   transition-delay: 0.1s;
 }
@@ -6222,13 +6228,11 @@ About One
   height: 2px;
   width: 100%;
   max-width: 100px;
-  background: repeating-linear-gradient(
-    to right,
-    #D0D0D0 0px,
-    #D0D0D0 6px,
-    transparent 6px,
-    transparent 12px
-  );
+  background: repeating-linear-gradient(to right,
+      #D0D0D0 0px,
+      #D0D0D0 6px,
+      transparent 6px,
+      transparent 12px);
   margin: 0 15px;
 }
 
@@ -12802,7 +12806,7 @@ Cta One
   font-weight: 600;
   color: var(--farmology-extra);
   counter-increment: count;
-  content: "0"counter(count);
+  content: "0" counter(count);
   transition: all 200ms linear;
   transition-delay: 0.1s;
 }
@@ -20024,7 +20028,7 @@ Product
   transform: perspective(500px) rotatex(0);
 }
 
-.product__category-dropdown-menu > li {
+.product__category-dropdown-menu>li {
   position: relative;
   width: 100%;
   -webkit-box-flex: 1;
@@ -20033,12 +20037,12 @@ Product
   margin-bottom: 0;
 }
 
-.product__category-dropdown-menu > li + li {
+.product__category-dropdown-menu>li+li {
   border-top: 1px solid rgba(var(--farmology-black-rgb), 0.10);
   margin-top: 0px;
 }
 
-.product__category-dropdown-menu > li > a {
+.product__category-dropdown-menu>li>a {
   position: relative;
   display: flex;
   align-items: center;
@@ -20061,12 +20065,12 @@ Product
   overflow: visible;
 }
 
-.product__category-dropdown-menu > li:hover > a,
-.product__category-dropdown-menu > li.current > a {
+.product__category-dropdown-menu>li:hover>a,
+.product__category-dropdown-menu>li.current>a {
   color: var(--farmology-base);
 }
 
-.product__category-dropdown-menu > li > span {
+.product__category-dropdown-menu>li>span {
   display: block;
   padding: 10px 0;
   color: #999;
@@ -23310,3 +23314,46 @@ Product Description
 /*--------------------------------------------------------------
 # End All Css
 --------------------------------------------------------------*/
+/* Inner Page Header Overlay */
+.main-header--inner {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent !important;
+  z-index: 999;
+}
+
+.main-header--inner .main-menu__top-inner {
+  background-color: rgba(26, 107, 63, 0.8);
+  /* farmology-extra with opacity */
+}
+
+.main-header--inner .main-menu__wrapper {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  /* Much more transparent */
+  backdrop-filter: blur(5px);
+  /* Optional: adds a nice glass effect */
+}
+
+.main-header--inner .main-menu__list>li>a {
+  color: var(--farmology-white) !important;
+  /* White text for contrast on dark bg images */
+}
+
+.main-header--inner .main-menu__list>li.dropdown>a:after {
+  color: var(--farmology-white) !important;
+}
+
+.main-header--inner .main-menu__list>li:hover>a {
+  color: var(--farmology-base) !important;
+}
+
+/* Ensure sticky header still works */
+.stricky-header.main-menu {
+  background-color: #ffffff !important;
+}
+
+.stricky-header.main-menu .main-menu__list>li>a {
+  color: var(--farmology-black) !important;
+}

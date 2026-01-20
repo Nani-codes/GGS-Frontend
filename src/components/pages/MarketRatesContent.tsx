@@ -50,18 +50,18 @@ export function MarketRatesContent() {
       setError(null);
       setSelectedCommodity(null);
       setRatesResponse(null);
-      
+
       try {
-        const url = viewType === 'district' 
-          ? '/api/market-rates?district=yes' 
+        const url = viewType === 'district'
+          ? '/api/market-rates?district=yes'
           : '/api/market-rates';
-        
+
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Failed to fetch commodities');
         }
         const result = await response.json();
-        
+
         // Handle response - expecting array of { id, title, slug, tags }
         const items = Array.isArray(result) ? result : [];
         setCommodities(items);
@@ -81,7 +81,7 @@ export function MarketRatesContent() {
     setSelectedCommodity(commodity);
     setLoadingRates(true);
     setError(null);
-    
+
     try {
       const response = await fetch(`/api/market-rates?slug=${encodeURIComponent(commodity.slug)}`);
       if (!response.ok) {
@@ -117,7 +117,7 @@ export function MarketRatesContent() {
   };
 
   return (
-    <PageLayout variant="two" currentPage="/market-rates">
+    <PageLayout currentPage="/market-rates">
       {/* ===== PAGE HEADER ===== */}
       <section className="page-header">
         <div className="page-header__bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>
@@ -153,7 +153,7 @@ export function MarketRatesContent() {
           </div>
 
           <div className="market-rates-content" style={{ marginTop: '40px' }}>
-            
+
             {/* Back Button - Show when viewing rates */}
             {selectedCommodity && (
               <div style={{ marginBottom: '20px' }}>
@@ -202,8 +202,8 @@ export function MarketRatesContent() {
                     transition: 'all 0.3s ease',
                     backgroundColor: viewType === 'all' ? '#f5cb4b' : '#ffffff',
                     color: viewType === 'all' ? '#190f06' : '#666',
-                    boxShadow: viewType === 'all' 
-                      ? '0 4px 15px rgba(245, 203, 75, 0.4)' 
+                    boxShadow: viewType === 'all'
+                      ? '0 4px 15px rgba(245, 203, 75, 0.4)'
                       : '0 2px 8px rgba(0,0,0,0.1)',
                   }}
                 >
@@ -222,8 +222,8 @@ export function MarketRatesContent() {
                     transition: 'all 0.3s ease',
                     backgroundColor: viewType === 'district' ? '#f5cb4b' : '#ffffff',
                     color: viewType === 'district' ? '#190f06' : '#666',
-                    boxShadow: viewType === 'district' 
-                      ? '0 4px 15px rgba(245, 203, 75, 0.4)' 
+                    boxShadow: viewType === 'district'
+                      ? '0 4px 15px rgba(245, 203, 75, 0.4)'
                       : '0 2px 8px rgba(0,0,0,0.1)',
                   }}
                 >
@@ -336,8 +336,8 @@ export function MarketRatesContent() {
                 boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                 textAlign: 'center'
               }}>
-                <span className="fas fa-inbox" style={{ 
-                  fontSize: '48px', 
+                <span className="fas fa-inbox" style={{
+                  fontSize: '48px',
                   color: '#ccc',
                   marginBottom: '20px',
                   display: 'block'
@@ -417,14 +417,14 @@ export function MarketRatesContent() {
                 textAlign: 'center',
                 border: '1px solid #ffcdd2'
               }}>
-                <span className="fas fa-exclamation-triangle" style={{ 
-                  fontSize: '48px', 
+                <span className="fas fa-exclamation-triangle" style={{
+                  fontSize: '48px',
                   color: '#e57373',
                   marginBottom: '20px',
                   display: 'block'
                 }} />
                 <p style={{ color: '#c62828', fontSize: '16px' }}>{error}</p>
-                <button 
+                <button
                   onClick={() => selectedCommodity ? handleCommodityClick(selectedCommodity) : setViewType(viewType)}
                   style={{
                     marginTop: '20px',
@@ -468,9 +468,9 @@ export function MarketRatesContent() {
                     </thead>
                     <tbody>
                       {ratesResponse.rates.map((item, index) => (
-                        <tr 
-                          key={index} 
-                          style={{ 
+                        <tr
+                          key={index}
+                          style={{
                             backgroundColor: index % 2 === 0 ? '#ffffff' : '#fafafa',
                             borderBottom: '1px solid #eee'
                           }}
@@ -498,9 +498,9 @@ export function MarketRatesContent() {
                   </table>
                 </div>
                 {ratesResponse.rates.length > 100 && (
-                  <div style={{ 
-                    padding: '15px', 
-                    textAlign: 'center', 
+                  <div style={{
+                    padding: '15px',
+                    textAlign: 'center',
                     backgroundColor: '#f5f5f5',
                     borderTop: '1px solid #eee'
                   }}>
@@ -521,8 +521,8 @@ export function MarketRatesContent() {
                 boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                 textAlign: 'center'
               }}>
-                <span className="fas fa-inbox" style={{ 
-                  fontSize: '48px', 
+                <span className="fas fa-inbox" style={{
+                  fontSize: '48px',
                   color: '#ccc',
                   marginBottom: '20px',
                   display: 'block'

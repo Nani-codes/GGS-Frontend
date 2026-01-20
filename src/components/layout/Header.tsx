@@ -64,7 +64,7 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
       // Group_Name is a shared field, so we can use any variant
       const seenDocumentIds = new Set<string>();
       const categoriesSet = new Set<string>();
-      
+
       products.forEach((product: any) => {
         const docId = product.documentId || String(product.id);
         // Only process each documentId once
@@ -99,30 +99,30 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
       const updateMenus = () => {
         const mainMenuList = document.querySelector('.main-menu__list');
         const mobileNavContainer = document.querySelector('.mobile-nav__container');
-        
+
         // Update mobile menu
         if (mainMenuList && mobileNavContainer) {
           // Clone the updated menu HTML to mobile container
           mobileNavContainer.innerHTML = mainMenuList.outerHTML;
-          
+
           // Re-initialize dropdown functionality using jQuery (if available)
           // This matches the behavior from script.js lines 1031-1051
           if (typeof window !== 'undefined' && (window as any).jQuery) {
             const $ = (window as any).jQuery;
             const dropdownAnchor = $('.mobile-nav__container .main-menu__list .dropdown > a');
-            
+
             // Remove existing buttons and handlers
             dropdownAnchor.find('button').off('click').remove();
-            
+
             // Re-add toggle buttons and handlers
-            dropdownAnchor.each(function(this: HTMLElement) {
+            dropdownAnchor.each(function (this: HTMLElement) {
               const self = $(this);
               const toggleBtn = document.createElement('BUTTON');
               toggleBtn.setAttribute('aria-label', 'dropdown toggler');
               toggleBtn.innerHTML = "<i class='fa fa-angle-down'></i>";
               self.append(toggleBtn);
-              
-              self.find('button').on('click', function(this: HTMLElement, e: Event) {
+
+              self.find('button').on('click', function (this: HTMLElement, e: Event) {
                 e.preventDefault();
                 const btn = $(this);
                 btn.toggleClass('expanded');
@@ -146,7 +146,7 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
 
       // Use setTimeout to ensure DOM is updated after React render
       const timeoutId = setTimeout(updateMenus, 100);
-      
+
       return () => clearTimeout(timeoutId);
     }
   }, [categoriesLoading]);
@@ -169,11 +169,11 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
       </>
     );
   };
-  
+
   if (variant === 'default') {
     return (
       <>
-        <header className="main-header">
+        <header className={`main-header ${currentPage !== '/' ? 'main-header--inner' : ''}`}>
           <div className="main-menu__top">
             <div className="main-menu__top-inner">
               <ul className="list-unstyled main-menu__contact-list">
@@ -267,7 +267,7 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
       </>
     );
   }
-  
+
   return (
     <>
       <header className="main-header-two">

@@ -1,0 +1,32 @@
+/* Inner Page Header Overlay */
+.main-header--inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+}
+
+.main-header--inner .main-menu__top-inner {
+    background-color: rgba(26, 107, 63, 0.9);
+    /* farmology-extra with opacity */
+}
+
+.main-header--inner .main-menu__wrapper {
+    background-color: rgba(255, 255, 255, 0.9);
+    /* White with opacity */
+}
+
+.main-header--inner .main-menu__list>li>a {
+    color: var(--farmology-black);
+    /* Ensure text is dark on white bg */
+}
+
+.main-header--inner .main-menu__list>li.dropdown>a:after {
+    color: var(--farmology-black);
+}
+
+/* Ensure sticky header still works */
+.stricky-header.main-menu {
+    background-color: #ffffff;
+}

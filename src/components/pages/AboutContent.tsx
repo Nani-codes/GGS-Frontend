@@ -9,9 +9,9 @@ import { IMAGE_PATHS } from '@/config/images';
 export function AboutContent() {
   const t = useTranslations();
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
-  
+
   return (
-    <PageLayout variant="two" currentPage="/about">
+    <PageLayout currentPage="/about">
       {/* ===== PAGE HEADER ===== */}
       <section className="page-header">
         <div className="page-header__bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>
@@ -229,7 +229,7 @@ export function AboutContent() {
                         >
                           <div style={{ fontSize: '16px', lineHeight: '1.8', color: '#190f06' }}>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.rdOverview')}</p>
-                            
+
                             <h5 style={{ fontSize: '18px', fontWeight: '600', marginTop: '20px', marginBottom: '10px', color: '#190f06' }}>
                               {t('about.infrastructure.rdCottonHybrids')}
                             </h5>
@@ -240,12 +240,12 @@ export function AboutContent() {
                               <li style={{ marginBottom: '8px' }}>{t('about.infrastructure.rdNamaskar')}</li>
                             </ul>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.rdPipeline')}</p>
-                            
+
                             <h5 style={{ fontSize: '18px', fontWeight: '600', marginTop: '20px', marginBottom: '10px', color: '#190f06' }}>
                               {t('about.infrastructure.rdBollgard')}
                             </h5>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.rdBollgardDesc')}</p>
-                            
+
                             <h5 style={{ fontSize: '18px', fontWeight: '600', marginTop: '20px', marginBottom: '10px', color: '#190f06' }}>
                               {t('about.infrastructure.rdWheat')}
                             </h5>

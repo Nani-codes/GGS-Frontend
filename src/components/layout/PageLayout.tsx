@@ -10,7 +10,6 @@ import { WhatsAppPopup } from './WhatsAppPopup';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { MobileNav } from './MobileNav';
-import { ScrollToTop } from './ScrollToTop';
 import { CONTACT_INFO, SOCIAL_LINKS } from '@/config/constants';
 import { IMAGE_PATHS } from '@/config/images';
 
@@ -23,14 +22,14 @@ interface PageLayoutProps {
   showSidebar?: boolean;
 }
 
-export function PageLayout({ 
-  children, 
-  variant = 'two', 
+export function PageLayout({
+  children,
+  variant = 'default',
   currentPage = '#',
-  showSidebar = false 
+  showSidebar = false
 }: PageLayoutProps) {
   const t = useTranslations();
-  
+
   return (
     <>
       <NavHighlighter />
@@ -102,7 +101,7 @@ export function PageLayout({
           <Footer variant={variant} />
         </div>
         <MobileNav />
-        <ScrollToTop currentPage={currentPage} />
+        {/* <ScrollToTop currentPage={currentPage} /> */}
       </div>
     </>
   );
