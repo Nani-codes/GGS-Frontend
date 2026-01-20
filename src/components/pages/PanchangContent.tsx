@@ -7,14 +7,14 @@ import { IMAGE_PATHS } from '@/config/images';
 
 export function PanchangContent() {
   const t = useTranslations();
-  
+
   // Array of panchang image paths
-  const panchangImages = Array.from({ length: 12 }, (_, i) => 
+  const panchangImages = Array.from({ length: 12 }, (_, i) =>
     `/assets/images/panchang/panchang-${String(i + 1).padStart(2, '0')}.jpg`
   );
-  
+
   return (
-    <PageLayout variant="two" currentPage="/calendar/panchang">
+    <PageLayout currentPage="/calendar/panchang">
       {/* ===== PAGE HEADER ===== */}
       <section className="page-header">
         <div className="page-header__bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>
@@ -34,7 +34,7 @@ export function PanchangContent() {
           </div>
         </div>
       </section>
-      
+
       {/* ===== PANCHANG IMAGES SECTION ===== */}
       <section className="panchang-page" style={{ padding: '120px 0', minHeight: '100vh' }}>
         <div className="container">
@@ -47,12 +47,12 @@ export function PanchangContent() {
           </div>
           <div className="row" style={{ marginTop: '50px' }}>
             {panchangImages.map((imagePath, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="col-xl-4 col-lg-4 col-md-6 col-sm-12"
                 style={{ marginBottom: '30px' }}
               >
-                <div 
+                <div
                   className="panchang-image-wrapper"
                   style={{
                     width: '100%',
@@ -69,8 +69,8 @@ export function PanchangContent() {
                     e.currentTarget.style.transform = 'scale(1)';
                   }}
                 >
-                  <img 
-                    src={imagePath} 
+                  <img
+                    src={imagePath}
                     alt={`Panchang ${index + 1}`}
                     style={{
                       width: '100%',

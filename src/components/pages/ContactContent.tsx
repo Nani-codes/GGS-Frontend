@@ -21,7 +21,7 @@ export function ContactContent() {
       const target = event.target as Node;
       const isClickInDropdown = dropdownRef.current?.contains(target);
       const isClickInContactDetails = contactDetailsRef.current?.contains(target);
-      
+
       // Only close dropdown menu if it's open and clicking outside
       // Don't close if contact details are showing (selectedState is a state name)
       if (selectedState === 'open' && !isClickInDropdown && !isClickInContactDetails) {
@@ -38,9 +38,9 @@ export function ContactContent() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [selectedState]);
-  
+
   return (
-    <PageLayout variant="two" currentPage="/contact">
+    <PageLayout currentPage="/contact">
       {/* ===== PAGE HEADER ===== */}
       <section className="page-header">
         <div className="page-header__bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>
@@ -94,52 +94,6 @@ export function ContactContent() {
         </div>
       </section>
 
-      {/* ===== GOOGLE MAPS SECTION ===== */}
-      <section className="map-section" style={{ padding: '80px 0', backgroundColor: '#ffffff' }}>
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="section-title text-center" style={{ marginBottom: '50px' }}>
-                <div className="section-title__tagline-box">
-                  <div className="section-title__shape-1">
-                    <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
-                  </div>
-                  <h6 className="section-title__tagline">{t('contact.ourOfficeLocation') || 'Our Office Location'}</h6>
-                  <div className="section-title__shape-1">
-                    <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
-                  </div>
-                </div>
-                <h2 className="section-title__title" style={{ marginBottom: '20px' }}>{t('contact.location')}</h2>
-              </div>
-              <div 
-                className="map-container" 
-                style={{
-                  maxWidth: '100%',
-                  margin: '0 auto',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                  height: '450px',
-                  minHeight: '300px'
-                }}
-              >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1232.1010381010683!2d75.21006631056184!3d19.785209794267075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdb9d9734c4d705%3A0xb5c013d011fcf81f!2sGreen%20Gold%20Seeds!5e0!3m2!1sen!2sin!4v1768751321112!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Green Gold Seeds Office Location"
-                  aria-label="Google Maps showing Green Gold Seeds office location"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ===== STATE-WISE CONTACTS DROPDOWN SECTION ===== */}
       <section className="state-contacts" style={{ padding: '80px 0', backgroundColor: '#faf8f0' }}>
         <div className="container">
@@ -161,7 +115,7 @@ export function ContactContent() {
 
           <div className="row" style={{ marginTop: '50px' }}>
             <div className="col-xl-12">
-              <div 
+              <div
                 ref={dropdownRef}
                 style={{
                   maxWidth: '600px',
@@ -211,7 +165,7 @@ export function ContactContent() {
                   }}
                 >
                   <span>
-                    {displayedState 
+                    {displayedState
                       ? STATE_CONTACTS.find(c => c.state === displayedState)?.state || t('contact.stateContacts.selectState') || 'Select State'
                       : t('contact.stateContacts.selectState') || 'Select State'}
                   </span>
@@ -269,7 +223,7 @@ export function ContactContent() {
 
               {/* Selected State Contact Details */}
               {displayedState && (
-                <div 
+                <div
                   ref={contactDetailsRef}
                   style={{
                     maxWidth: '800px',
@@ -406,7 +360,7 @@ export function ContactContent() {
                                 margin: 0,
                                 wordBreak: 'break-word'
                               }}>
-                                <a 
+                                <a
                                   href={`mailto:${contact.email}`}
                                   style={{
                                     color: '#190f06',
@@ -470,6 +424,52 @@ export function ContactContent() {
                   })()}
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== GOOGLE MAPS SECTION ===== */}
+      <section className="map-section" style={{ padding: '80px 0', backgroundColor: '#ffffff' }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="section-title text-center" style={{ marginBottom: '50px' }}>
+                <div className="section-title__tagline-box">
+                  <div className="section-title__shape-1">
+                    <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
+                  </div>
+                  <h6 className="section-title__tagline">{t('contact.ourOfficeLocation') || 'Our Office Location'}</h6>
+                  <div className="section-title__shape-1">
+                    <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
+                  </div>
+                </div>
+                <h2 className="section-title__title" style={{ marginBottom: '20px' }}>{t('contact.location')}</h2>
+              </div>
+              <div
+                className="map-container"
+                style={{
+                  maxWidth: '100%',
+                  margin: '0 auto',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                  height: '450px',
+                  minHeight: '300px'
+                }}
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1232.1010381010683!2d75.21006631056184!3d19.785209794267075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdb9d9734c4d705%3A0xb5c013d011fcf81f!2sGreen%20Gold%20Seeds!5e0!3m2!1sen!2sin!4v1768751321112!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Green Gold Seeds Office Location"
+                  aria-label="Google Maps showing Green Gold Seeds office location"
+                />
+              </div>
             </div>
           </div>
         </div>

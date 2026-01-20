@@ -2531,3 +2531,127 @@ section.banner-one.banner-one--bg-only {
   }
 }
 
+
+/* Inner Page Header Overlay */
+.main-header--inner {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent !important;
+  z-index: 999;
+}
+
+.main-header--inner .main-menu__top-inner {
+  /* Softer, more transparent top strip on inner pages */
+  background-color: rgba(26, 107, 63, 0.6) !important;
+}
+
+.main-header--inner .main-menu__wrapper {
+  /* Dark glass overlay similar to the provided screenshot */
+  background-color: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(10px);
+}
+
+.main-header--inner .main-menu__wrapper-inner {
+    background: transparent !important;
+}
+
+.main-header--inner .main-menu__list > li > a {
+  color: #ffffff !important; /* White text for contrast on dark bg images */
+}
+
+.main-header--inner .main-menu__list > li.dropdown > a:after {
+  color: #ffffff !important;
+}
+
+.main-header--inner .main-menu__list > li:hover > a {
+    color: var(--farmology-base) !important;
+}
+
+/* Make the call widget readable on dark/glass headers */
+.main-header--inner .main-menu__call-sub-title,
+.main-header--inner .main-menu__call-number a {
+  color: #ffffff !important;
+}
+.main-header--inner .main-menu__call-icon {
+  background-color: rgba(245, 203, 75, 0.9) !important;
+  color: #12462b !important; /* keep contrast inside the icon */
+}
+
+/* Ensure sticky header still works */
+.stricky-header.main-menu {
+  background-color: #ffffff !important;
+}
+.stricky-header.main-menu .main-menu__list > li > a {
+    color: #000000 !important;
+}
+
+/* ========== Products Header Category Pills ========== */
+.product-header-filter {
+    padding: 20px 0 12px;
+}
+
+.product-header-filter__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.product-header-filter__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #f5f7fb;
+    color: #4b5563;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.product-header-filter__pill:hover {
+    background: #e7ecf5;
+    color: #111827;
+}
+
+.product-header-filter__pill--active {
+    background: #13632f;
+    color: #ffffff;
+    border-color: #0f5327;
+    box-shadow: 0 8px 24px rgba(19, 99, 47, 0.25);
+}
+
+.product-header-filter__pill--active:hover {
+    background: #115a2a;
+}
+
+.product-header-filter__state {
+    color: #6b7280;
+    font-size: 14px;
+    text-align: center;
+}
+
+@media (max-width: 575px) {
+    .product-header-filter {
+        padding: 12px 0 6px;
+    }
+    .product-header-filter__inner {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
+        padding-bottom: 2px;
+    }
+    .product-header-filter__pill {
+        flex: 0 1 auto;
+        justify-content: center;
+        padding: 9px 14px;
+        font-size: 13px;
+    }
+}

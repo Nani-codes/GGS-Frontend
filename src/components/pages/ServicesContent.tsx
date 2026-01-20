@@ -7,9 +7,9 @@ import { IMAGE_PATHS } from '@/config/images';
 
 export function ServicesContent() {
   const t = useTranslations();
-  
+
   return (
-    <PageLayout variant="two" currentPage="/services">
+    <PageLayout currentPage="/services">
       {/* ===== PAGE HEADER ===== */}
       <section className="page-header">
         <div className="page-header__bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>

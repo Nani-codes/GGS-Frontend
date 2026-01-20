@@ -15,38 +15,38 @@ const formatKeyValuePair = (text: string): React.JSX.Element => {
   const parts: React.JSX.Element[] = [];
   let remainingText = text;
   let hasMatches = false;
-  
+
   // Find all key-value pairs: look for pattern like "Crop Period:", "Boll Shape:", etc.
   // Key pattern: starts with capital, contains letters/spaces, ends with colon
   const keyPattern = /\b([A-Z][A-Za-z\s]{2,}?):\s*/g;
   const matches: Array<{ key: string; keyEnd: number; valueStart: number }> = [];
-  
+
   let match;
   keyPattern.lastIndex = 0;
-  
+
   while ((match = keyPattern.exec(text)) !== null) {
     const key = match[1].trim();
     const keyEnd = match.index + match[0].length;
-    
+
     // Find where the value ends (next key pattern or end of string)
     const afterMatch = text.substring(keyEnd);
     const nextKeyMatch = afterMatch.match(/\b[A-Z][A-Za-z\s]{2,}?:\s*/);
     const valueEnd = nextKeyMatch && typeof nextKeyMatch.index === 'number'
-      ? keyEnd + nextKeyMatch.index 
+      ? keyEnd + nextKeyMatch.index
       : text.length;
-    
+
     matches.push({
       key,
       keyEnd: match.index,
       valueStart: keyEnd
     });
   }
-  
+
   // If we found matches, format them
   if (matches.length > 0) {
     hasMatches = true;
     let lastIndex = 0;
-    
+
     matches.forEach((matchInfo, index) => {
       // Add text before this key-value pair
       if (matchInfo.keyEnd > lastIndex) {
@@ -55,28 +55,28 @@ const formatKeyValuePair = (text: string): React.JSX.Element => {
           parts.push(<>{beforeText} </>);
         }
       }
-      
+
       // Find value end (start of next key or end of text)
-      const valueEnd = index < matches.length - 1 
-        ? matches[index + 1].keyEnd 
+      const valueEnd = index < matches.length - 1
+        ? matches[index + 1].keyEnd
         : text.length;
       const value = text.substring(matchInfo.valueStart, valueEnd).trim();
-      
+
       // Add formatted key-value pair
       parts.push(
         <React.Fragment key={`kv-${matchInfo.keyEnd}`}>
           <strong style={{ fontWeight: 'bold' }}>{matchInfo.key}</strong>: {value}
         </React.Fragment>
       );
-      
+
       // Add space if not last
       if (index < matches.length - 1) {
         parts.push(<>{' '}</>);
       }
-      
+
       lastIndex = valueEnd;
     });
-    
+
     // Add any remaining text after last match
     if (lastIndex < text.length) {
       const remaining = text.substring(lastIndex).trim();
@@ -84,10 +84,10 @@ const formatKeyValuePair = (text: string): React.JSX.Element => {
         parts.push(<>{remaining}</>);
       }
     }
-    
+
     return <>{parts}</>;
   }
-  
+
   // Fallback: try simple single key-value pattern
   const simpleMatch = text.match(/^([^:]+):\s*(.+)$/);
   if (simpleMatch) {
@@ -99,7 +99,7 @@ const formatKeyValuePair = (text: string): React.JSX.Element => {
       </>
     );
   }
-  
+
   // If no match, return original text
   return <>{text}</>;
 };
@@ -107,35 +107,35 @@ const formatKeyValuePair = (text: string): React.JSX.Element => {
 // Function to format description with bullet points
 const formatDescription = (description: string | null | undefined): React.JSX.Element | null => {
   if (!description) return null;
-  
+
   // Handle escape characters and normalize line breaks
   let normalizedDesc = description
     .replace(/\\n/g, '\n')      // Convert \n to actual newline
     .replace(/\\r/g, '\r')      // Convert \r to carriage return
     .replace(/\\t/g, '\t');     // Convert \t to tab
-  
+
   // Split by lines and process
   const lines = normalizedDesc.split(/\r?\n/).filter(line => line.trim());
   const formattedContent: React.JSX.Element[] = [];
   let currentList: string[] = [];
-  
+
   const flushList = () => {
     if (currentList.length > 0) {
       formattedContent.push(
-        <ul key={`list-${formattedContent.length}`} className="product-details__features-list" style={{ 
-          listStyle: 'none', 
+        <ul key={`list-${formattedContent.length}`} className="product-details__features-list" style={{
+          listStyle: 'none',
           paddingLeft: '0',
           marginTop: '15px',
           marginBottom: '15px'
         }}>
           {currentList.map((item, index) => (
-            <li key={index} style={{ 
+            <li key={index} style={{
               marginBottom: '10px',
               paddingLeft: '25px',
               position: 'relative',
               lineHeight: '1.6'
             }}>
-              <span style={{ 
+              <span style={{
                 position: 'absolute',
                 left: '0',
                 color: '#f5cb4b',
@@ -150,10 +150,10 @@ const formatDescription = (description: string | null | undefined): React.JSX.El
       currentList = [];
     }
   };
-  
+
   lines.forEach((line, index) => {
     const trimmedLine = line.trim();
-    
+
     // Check if line starts with bullet point (• or -)
     if (trimmedLine.startsWith('•') || trimmedLine.startsWith('-')) {
       // Remove the bullet and add to current list
@@ -166,7 +166,7 @@ const formatDescription = (description: string | null | undefined): React.JSX.El
       flushList();
       if (trimmedLine.endsWith(':')) {
         formattedContent.push(
-          <p key={`heading-${index}`} style={{ 
+          <p key={`heading-${index}`} style={{
             marginTop: '20px',
             marginBottom: '10px',
             fontSize: '18px',
@@ -199,10 +199,10 @@ const formatDescription = (description: string | null | undefined): React.JSX.El
       );
     }
   });
-  
+
   // Flush any remaining list items
   flushList();
-  
+
   return formattedContent.length > 0 ? <div>{formattedContent}</div> : null;
 };
 
@@ -239,17 +239,17 @@ export function ProductsDetailsContent() {
   useEffect(() => {
     const fetchProduct = async () => {
       if (!productId) return;
-      
+
       try {
         setLoading(true);
         setError(null);
         const apiKey = process.env.NEXT_STRAPI_API_KEY;
         const headers: HeadersInit = {};
-        
+
         if (apiKey) {
           headers['Authorization'] = `Bearer ${apiKey}`;
         }
-        
+
         // Query by documentId - Strapi requires explicit locale parameter
         // Fetch all locales in parallel to get all variants
         const localesToFetch = ['en', 'hi', 'mr'];
@@ -267,7 +267,7 @@ export function ProductsDetailsContent() {
             return [];
           }
         });
-        
+
         console.log('[ProductDetails] Fetching product by documentId (all locales in parallel)', {
           productId,
           requestedLocale: locale,
@@ -276,7 +276,7 @@ export function ProductsDetailsContent() {
 
         const localeResults = await Promise.all(fetchPromises);
         const allVariants = localeResults.flat().filter(Boolean);
-        
+
         console.log('[ProductDetails] Fetched variants from all locales', {
           totalVariants: allVariants.length,
           variantsByLocale: allVariants.map((p: Product) => ({ locale: p.locale, id: p.id, hasDescription: !!p.Description })),
@@ -287,47 +287,47 @@ export function ProductsDetailsContent() {
           // Extract shared fields (Name, Variety_Name, Group_Name) from any variant
           // These should be identical across all locales
           const sharedFields = allVariants[0];
-          
+
           // Log all available locales for debugging
           const availableLocales = allVariants.map((p: Product) => p.locale);
           console.log('[ProductDetails] Available locales in response:', availableLocales);
           console.log('[ProductDetails] Requested locale:', locale, 'Type:', typeof locale);
           console.log('[ProductDetails] Locale type check:', typeof locale, locale === 'hi', locale === 'en', locale === 'mr');
-          
+
           // Extract locale-specific Description from the current locale variant
           // Use case-insensitive matching and trim whitespace
           // Also check for locale variations (e.g., 'hi-IN', 'hi_IN', etc.)
           const localeSpecific = allVariants.find((p: Product) => {
             const productLocale = String(p.locale || '').toLowerCase().trim();
             const requestedLocale = String(locale || '').toLowerCase().trim();
-            
+
             // Direct match
             if (productLocale === requestedLocale) {
               console.log(`[ProductDetails] Direct locale match found: "${productLocale}" === "${requestedLocale}"`);
               return true;
             }
-            
+
             // Check if locale starts with requested locale (e.g., 'hi-IN' matches 'hi')
             if (productLocale.startsWith(requestedLocale + '-') || productLocale.startsWith(requestedLocale + '_')) {
               console.log(`[ProductDetails] Locale prefix match found: "${productLocale}" starts with "${requestedLocale}"`);
               return true;
             }
-            
+
             // Check if requested locale starts with product locale (e.g., 'hi' matches 'hi-IN')
             if (requestedLocale.startsWith(productLocale + '-') || requestedLocale.startsWith(productLocale + '_')) {
               console.log(`[ProductDetails] Reverse locale prefix match found: "${requestedLocale}" starts with "${productLocale}"`);
               return true;
             }
-            
+
             return false;
           });
-          
+
           // Fallback strategy: prefer default locale (en) if current locale not found
           const fallbackLocale = localeSpecific || allVariants.find((p: Product) => {
             const productLocale = String(p.locale || '').toLowerCase().trim();
             return productLocale === 'en';
           }) || allVariants[0];
-          
+
           if (!localeSpecific) {
             // If current locale not found, log warning and use fallback
             console.warn(`[ProductDetails] Locale "${locale}" not found in available locales: [${availableLocales.join(', ')}]. Using fallback locale (${fallbackLocale.locale}) for Description`);
@@ -336,14 +336,14 @@ export function ProductsDetailsContent() {
             console.log(`[ProductDetails] ✓ Found locale-specific variant for "${locale}", using Description from ${localeSpecific.locale} locale`);
             console.log(`[ProductDetails] Description preview (first 100 chars): ${localeSpecific.Description?.substring(0, 100)}...`);
           }
-          
+
           // Merge shared fields with locale-specific Description
           const mergedProduct: Product = {
             ...sharedFields,
             Description: localeSpecific?.Description || fallbackLocale.Description,
             locale: locale, // Set to current locale for tracking
           };
-          
+
           console.log('[ProductDetails] Merged product summary', {
             requestedLocale: locale,
             foundLocale: localeSpecific?.locale || fallbackLocale.locale,
@@ -353,18 +353,18 @@ export function ProductsDetailsContent() {
             descriptionPreview: mergedProduct.Description?.substring(0, 150) || '(empty)',
             availableLocales: availableLocales,
           });
-          
+
           console.log('[ProductDetails] Social Media URLs:', {
             instagram: mergedProduct?.Instagram_Post_URL,
             youtube: mergedProduct?.YouTube_Post_URL,
             facebook: mergedProduct?.Facebook_Post_URL
           });
-          
+
           setProduct(mergedProduct);
         } else {
           // If parallel fetch didn't work, try fetching by ID as fallback
           const apiUrlById = `/strapi/api/products/${productId}?fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&fields[6]=Instagram_Post_URL&fields[7]=YouTube_Post_URL&fields[8]=Facebook_Post_URL&populate[Image][fields][1]=url`;
-          
+
           console.log('[ProductDetails] Parallel fetch returned no results, trying ID fallback', {
             productId,
             locale,
@@ -374,14 +374,14 @@ export function ProductsDetailsContent() {
           const responseById = await fetch(apiUrlById, {
             headers,
           });
-          
+
           if (!responseById.ok) {
             throw new Error(`Failed to fetch product. Status: ${responseById.status}`);
           }
-          
+
           const dataById = await responseById.json();
           console.log('[ProductDetails] Product by ID response', dataById);
-          
+
           // For ID-based fetch, try to fetch all variants by documentId if we have it
           if (dataById.data?.documentId) {
             // Fetch all locales in parallel for the documentId
@@ -399,43 +399,43 @@ export function ProductsDetailsContent() {
                 return [];
               }
             });
-            
+
             const idLocaleResults = await Promise.all(idFetchPromises);
             const idAllVariants = idLocaleResults.flat().filter(Boolean);
-            
+
             if (idAllVariants.length > 0) {
               // Extract shared fields and merge with locale-specific Description
               const sharedFields = idAllVariants[0];
               const availableLocales = idAllVariants.map((p: Product) => p.locale);
-              
+
               const localeSpecific = idAllVariants.find((p: Product) => {
                 const productLocale = String(p.locale || '').toLowerCase().trim();
                 const requestedLocale = String(locale || '').toLowerCase().trim();
                 return productLocale === requestedLocale;
               });
-              
+
               const fallbackLocale = localeSpecific || idAllVariants.find((p: Product) => {
                 const productLocale = String(p.locale || '').toLowerCase().trim();
                 return productLocale === 'en';
               }) || idAllVariants[0];
-              
+
               const mergedProduct: Product = {
                 ...sharedFields,
                 Description: localeSpecific?.Description || fallbackLocale.Description,
                 locale: locale,
               };
-              
+
               console.log('[ProductDetails] Merged product from ID fallback variants', {
                 requestedLocale: locale,
                 foundLocale: localeSpecific?.locale || fallbackLocale.locale,
                 availableLocales: availableLocales,
               });
-              
+
               setProduct(mergedProduct);
               return;
             }
           }
-          
+
           // Final fallback: use the single product from ID fetch
           // Note: This may not have locale-specific Description if locale doesn't match
           setProduct(dataById.data);
@@ -489,7 +489,7 @@ export function ProductsDetailsContent() {
       try {
         const carouselEl = document.getElementById('shop-details-one__carousel');
         const thumbEl = document.getElementById('shop-details-one__thumb');
-        
+
         if (!carouselEl || !thumbEl) return;
 
         // Check if Swiper is available globally
@@ -907,7 +907,7 @@ export function ProductsDetailsContent() {
 
 
   return (
-    <PageLayout variant="two" currentPage="/products">
+    <PageLayout currentPage="/products">
       {/*Page Header Start*/}
       <section className="page-header">
         <div className="page-header__bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>
@@ -920,100 +920,100 @@ export function ProductsDetailsContent() {
                 <li><Link href="/">{t('nav.home')}</Link></li>
                 <li><span className="fas fa-angle-right" /></li>
                 <li><Link href="/products">{t('nav.products')}</Link></li>
-                    <li><span className="fas fa-angle-right" /></li>
-                    <li>{product ? (product.Variety_Name || product.Name) : t('productDetails.title')}</li>
-                  </ul>
-                </div>
-              </div>
+                <li><span className="fas fa-angle-right" /></li>
+                <li>{product ? (product.Variety_Name || product.Name) : t('productDetails.title')}</li>
+              </ul>
             </div>
-          </section>
-          {/*Page Header End*/}
+          </div>
+        </div>
+      </section>
+      {/*Page Header End*/}
 
-          {/*Start Product Details*/}
-          <section className="product-details">
-            <div className="container">
-              {loading && (
-                <div className="text-center" style={{ padding: '50px' }}>
-                  <p>{t('common.loading')}</p>
-                </div>
-              )}
-              {error && !loading && (
-                <div className="text-center" style={{ padding: '50px' }}>
-                  <p>{error}</p>
-                  <Link href="/products" className="thm-btn">{t('nav.products')}</Link>
-                </div>
-              )}
-              {product && !loading && !error && (
-                <div className="row">
-                  <div className="col-lg-6 col-xl-6">
-                    <div className="product-details__left">
-                      <div className="product-details__left-inner">
-                        <div className="product-details__content-box">
-                          <div 
-                            key={`carousel-${product.id}-${getAllProductImages(product).length}`}
-                            className="swiper-container" 
-                            id="shop-details-one__carousel"
-                          >
-                            <div className="swiper-wrapper">
-                              {getAllProductImages(product).map((imageUrl, index) => (
-                                <div key={`${product.id}-img-${index}`} className="swiper-slide">
-                                  <div className="product-details__img">
-                                    <img src={imageUrl} alt={`${product.Name} - Image ${index + 1}`} />
-                                  </div>
-                                </div>
-                              ))}
+      {/*Start Product Details*/}
+      <section className="product-details">
+        <div className="container">
+          {loading && (
+            <div className="text-center" style={{ padding: '50px' }}>
+              <p>{t('common.loading')}</p>
+            </div>
+          )}
+          {error && !loading && (
+            <div className="text-center" style={{ padding: '50px' }}>
+              <p>{error}</p>
+              <Link href="/products" className="thm-btn">{t('nav.products')}</Link>
+            </div>
+          )}
+          {product && !loading && !error && (
+            <div className="row">
+              <div className="col-lg-6 col-xl-6">
+                <div className="product-details__left">
+                  <div className="product-details__left-inner">
+                    <div className="product-details__content-box">
+                      <div
+                        key={`carousel-${product.id}-${getAllProductImages(product).length}`}
+                        className="swiper-container"
+                        id="shop-details-one__carousel"
+                      >
+                        <div className="swiper-wrapper">
+                          {getAllProductImages(product).map((imageUrl, index) => (
+                            <div key={`${product.id}-img-${index}`} className="swiper-slide">
+                              <div className="product-details__img">
+                                <img src={imageUrl} alt={`${product.Name} - Image ${index + 1}`} />
+                              </div>
                             </div>
-                          </div>
-                          <div className="product-details__nav">
-                            <div className="swiper-button-next" id="product-details__swiper-button-prev">
-                              <i className="fal fa-long-arrow-left" />
-                            </div>
-                            <div className="swiper-button-prev" id="product-details__swiper-button-next">
-                              <i className="fal fa-long-arrow-right" />
-                            </div>
-                          </div>
+                          ))}
                         </div>
-                        <div className="product-details__thumb-box">
-                          <div 
-                            key={`thumb-${product.id}-${getAllProductImages(product).length}`}
-                            className="swiper-container" 
-                            id="shop-details-one__thumb"
-                          >
-                            <div className="swiper-wrapper">
-                              {getAllProductImages(product).map((imageUrl, index) => (
-                                <div key={`${product.id}-thumb-${index}`} className="swiper-slide">
-                                  <div className="product-details__thumb-img">
-                                    <img src={imageUrl} alt={`${product.Name} - Thumbnail ${index + 1}`} />
-                                  </div>
-                                </div>
-                              ))}
+                      </div>
+                      <div className="product-details__nav">
+                        <div className="swiper-button-next" id="product-details__swiper-button-prev">
+                          <i className="fal fa-long-arrow-left" />
+                        </div>
+                        <div className="swiper-button-prev" id="product-details__swiper-button-next">
+                          <i className="fal fa-long-arrow-right" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="product-details__thumb-box">
+                      <div
+                        key={`thumb-${product.id}-${getAllProductImages(product).length}`}
+                        className="swiper-container"
+                        id="shop-details-one__thumb"
+                      >
+                        <div className="swiper-wrapper">
+                          {getAllProductImages(product).map((imageUrl, index) => (
+                            <div key={`${product.id}-thumb-${index}`} className="swiper-slide">
+                              <div className="product-details__thumb-img">
+                                <img src={imageUrl} alt={`${product.Name} - Thumbnail ${index + 1}`} />
+                              </div>
                             </div>
-                          </div>
+                          ))}
                         </div>
                       </div>
                     </div>
                   </div>
-
-                  <div className="col-lg-6 col-xl-6">
-                    <div className="product-details__right">
-                      <div className="product-details__top">
-                        <h3 className="product-details__title">
-                          {product.Variety_Name || product.Name}
-                        </h3>
-                        {product.Variety_Name && product.Name && product.Variety_Name !== product.Name && (
-                          <p className="product-details__subtitle" style={{ marginTop: '10px', fontSize: '18px', color: '#666', fontWeight: 'bold' }}>
-                            {product.Name}
-                          </p>
-                        )}
-                      </div>
-                      <div className="product-details__content">
-                        <div className="product-details__content-text1">
-                          {formatDescription(product.Description) || (
-                            <p>{t('productDetails.description')}</p>
-                          )}
-                        </div>
-                      </div>
+                </div>
               </div>
+
+              <div className="col-lg-6 col-xl-6">
+                <div className="product-details__right">
+                  <div className="product-details__top">
+                    <h3 className="product-details__title">
+                      {product.Variety_Name || product.Name}
+                    </h3>
+                    {product.Variety_Name && product.Name && product.Variety_Name !== product.Name && (
+                      <p className="product-details__subtitle" style={{ marginTop: '10px', fontSize: '18px', color: '#666', fontWeight: 'bold' }}>
+                        {product.Name}
+                      </p>
+                    )}
+                  </div>
+                  <div className="product-details__content">
+                    <div className="product-details__content-text1">
+                      {formatDescription(product.Description) || (
+                        <p>{t('productDetails.description')}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -1095,9 +1095,9 @@ export function ProductsDetailsContent() {
                             )}
                             <ul className="single-product-style1__info" onClick={(e) => e.stopPropagation()}>
                               <li>
-                                <button 
+                                <button
                                   type="button"
-                                  title="Add to Wishlist" 
+                                  title="Add to Wishlist"
                                   onClick={(e) => e.preventDefault()}
                                   style={{
                                     position: 'relative',
@@ -1131,9 +1131,9 @@ export function ProductsDetailsContent() {
                                 </button>
                               </li>
                               <li>
-                                <button 
+                                <button
                                   type="button"
-                                  title="Add to cart" 
+                                  title="Add to cart"
                                   onClick={(e) => e.preventDefault()}
                                   style={{
                                     position: 'relative',
@@ -1167,9 +1167,9 @@ export function ProductsDetailsContent() {
                                 </button>
                               </li>
                               <li>
-                                <button 
+                                <button
                                   type="button"
-                                  title="Quick View" 
+                                  title="Quick View"
                                   onClick={(e) => e.preventDefault()}
                                   style={{
                                     position: 'relative',
@@ -1203,9 +1203,9 @@ export function ProductsDetailsContent() {
                                 </button>
                               </li>
                               <li>
-                                <button 
+                                <button
                                   type="button"
-                                  title="Compare" 
+                                  title="Compare"
                                   onClick={(e) => e.preventDefault()}
                                   style={{
                                     position: 'relative',

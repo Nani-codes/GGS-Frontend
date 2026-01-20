@@ -116,7 +116,7 @@ export function WeatherContent() {
 
   const fetchWeather = async (city: string) => {
     if (!city.trim()) return;
-    
+
     setLoading(true);
     setError(null);
 
@@ -191,7 +191,7 @@ export function WeatherContent() {
   };
 
   return (
-    <PageLayout variant="two" currentPage="/weather">
+    <PageLayout currentPage="/weather">
       {/* ===== PAGE HEADER ===== */}
       <section className="page-header">
         <div className="page-header__bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>
@@ -292,7 +292,7 @@ export function WeatherContent() {
                       e.currentTarget.style.borderColor = 'transparent';
                     }}
                   />
-                  
+
                   {/* Suggestions Dropdown */}
                   {showSuggestions && filteredSuggestions.length > 0 && (
                     <div
@@ -350,7 +350,7 @@ export function WeatherContent() {
                     </div>
                   )}
                 </div>
-                
+
                 <button
                   onClick={handleSearch}
                   style={{
@@ -384,7 +384,7 @@ export function WeatherContent() {
                   {t('weather.getWeather')}
                 </button>
               </div>
-              
+
               {/* Help text */}
               <p style={{
                 textAlign: 'center',
@@ -436,14 +436,14 @@ export function WeatherContent() {
               maxWidth: '600px',
               margin: '0 auto'
             }}>
-              <span className="fas fa-exclamation-triangle" style={{ 
-                fontSize: '48px', 
+              <span className="fas fa-exclamation-triangle" style={{
+                fontSize: '48px',
                 color: '#e57373',
                 marginBottom: '20px',
                 display: 'block'
               }} />
               <p style={{ color: '#c62828', fontSize: '16px' }}>{error}</p>
-              <button 
+              <button
                 onClick={() => fetchWeather(selectedCity)}
                 style={{
                   marginTop: '20px',
@@ -480,9 +480,9 @@ export function WeatherContent() {
                 }}>
                   {/* Left - Main Weather */}
                   <div style={{ textAlign: 'center' }}>
-                    <h4 style={{ 
-                      fontSize: '24px', 
-                      fontWeight: '600', 
+                    <h4 style={{
+                      fontSize: '24px',
+                      fontWeight: '600',
                       marginBottom: '10px',
                       opacity: 0.9
                     }}>
@@ -496,20 +496,20 @@ export function WeatherContent() {
                       gap: '20px',
                       marginBottom: '15px'
                     }}>
-                      <span 
-                        className={getWeatherIcon(weather.condition, weather.icon)} 
+                      <span
+                        className={getWeatherIcon(weather.condition, weather.icon)}
                         style={{ fontSize: '72px' }}
                       />
-                      <span style={{ 
-                        fontSize: '72px', 
+                      <span style={{
+                        fontSize: '72px',
                         fontWeight: '300',
                         lineHeight: 1
                       }}>
                         {Math.round(weather.temperature)}°C
                       </span>
                     </div>
-                    <p style={{ 
-                      fontSize: '20px', 
+                    <p style={{
+                      fontSize: '20px',
                       textTransform: 'capitalize',
                       marginBottom: '10px'
                     }}>
@@ -646,14 +646,14 @@ export function WeatherContent() {
                         }}>
                           {day.date}
                         </p>
-                        <span 
+                        <span
                           className={getWeatherIcon(day.condition, day.icon)}
-                          style={{ 
-                            fontSize: '36px', 
+                          style={{
+                            fontSize: '36px',
                             color: '#f5cb4b',
                             display: 'block',
                             marginBottom: '12px'
-                          }} 
+                          }}
                         />
                         <p style={{
                           fontSize: '12px',
@@ -731,8 +731,8 @@ export function WeatherContent() {
                     backgroundColor: '#f8f9fa',
                     borderRadius: '12px'
                   }}>
-                    <span className="fas fa-tint" style={{ 
-                      fontSize: '24px', 
+                    <span className="fas fa-tint" style={{
+                      fontSize: '24px',
                       color: '#2196f3',
                       marginTop: '3px'
                     }} />
@@ -741,7 +741,7 @@ export function WeatherContent() {
                         {t('weather.tips.irrigation')}
                       </h5>
                       <p style={{ fontSize: '13px', color: '#666', margin: 0 }}>
-                        {weather.humidity > 70 
+                        {weather.humidity > 70
                           ? t('weather.tips.irrigationHigh')
                           : t('weather.tips.irrigationLow')}
                       </p>
@@ -755,8 +755,8 @@ export function WeatherContent() {
                     backgroundColor: '#f8f9fa',
                     borderRadius: '12px'
                   }}>
-                    <span className="fas fa-cloud-sun" style={{ 
-                      fontSize: '24px', 
+                    <span className="fas fa-cloud-sun" style={{
+                      fontSize: '24px',
                       color: '#ff9800',
                       marginTop: '3px'
                     }} />
@@ -779,8 +779,8 @@ export function WeatherContent() {
                     backgroundColor: '#f8f9fa',
                     borderRadius: '12px'
                   }}>
-                    <span className="fas fa-bug" style={{ 
-                      fontSize: '24px', 
+                    <span className="fas fa-bug" style={{
+                      fontSize: '24px',
                       color: '#e91e63',
                       marginTop: '3px'
                     }} />
@@ -789,7 +789,7 @@ export function WeatherContent() {
                         {t('weather.tips.pestControl')}
                       </h5>
                       <p style={{ fontSize: '13px', color: '#666', margin: 0 }}>
-                        {weather.humidity > 60 
+                        {weather.humidity > 60
                           ? t('weather.tips.pestControlHigh')
                           : t('weather.tips.pestControlLow')}
                       </p>

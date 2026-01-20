@@ -7,9 +7,9 @@ import { IMAGE_PATHS } from '@/config/images';
 
 export function FaqContent() {
   const t = useTranslations();
-  
+
   return (
-    <PageLayout variant="two" currentPage="/faq">
+    <PageLayout currentPage="/faq">
       {/* ===== PAGE HEADER ===== */}
       <section className="page-header">
         <div className="page-header__bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>
