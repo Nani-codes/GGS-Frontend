@@ -62,7 +62,7 @@ export function ContactContent() {
       <section className="contact-info">
         <div className="container">
           <div className="row" style={{ justifyContent: 'center' }}>
-            <div className="col-xl-5 col-lg-5 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
+            <div className="col-xl-5 col-lg-5 col-md-6 col-6 wow fadeInLeft" data-wow-delay="100ms">
               <div className="contact-info__single">
                 <div className="contact-info__icon">
                   <span className="icon-call" />
@@ -71,7 +71,7 @@ export function ContactContent() {
                 <h3><a href={CONTACT_INFO.phoneHref}>{CONTACT_INFO.phoneDisplay}</a></h3>
               </div>
             </div>
-            <div className="col-xl-5 col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+            <div className="col-xl-5 col-lg-5 col-md-6 col-6 wow fadeInUp" data-wow-delay="200ms">
               <div className="contact-info__single">
                 <div className="contact-info__icon">
                   <span className="icon-email" />
@@ -231,7 +231,11 @@ export function ContactContent() {
                     backgroundColor: '#ffffff',
                     borderRadius: '16px',
                     padding: '40px',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
+                    paddingBottom: '60px',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                    overflow: 'visible',
+                    position: 'relative',
+                    zIndex: 1
                   }}
                 >
                   {(() => {
@@ -419,6 +423,120 @@ export function ContactContent() {
                             </div>
                           )}
                         </div>
+
+                        {/* Employees List */}
+                        {contact.employees && contact.employees.length > 0 && (
+                          <div style={{
+                            marginTop: '30px',
+                            padding: '25px',
+                            paddingBottom: '50px',
+                            backgroundColor: '#faf8f0',
+                            borderRadius: '12px',
+                            overflow: 'visible',
+                            position: 'relative'
+                          }}>
+                            <p style={{
+                              fontSize: '14px',
+                              color: '#666',
+                              marginBottom: '15px',
+                              fontWeight: '600',
+                              textAlign: 'center'
+                            }}>
+                              Contact Persons
+                            </p>
+                            <div style={{
+                              display: 'flex',
+                              flexWrap: 'wrap',
+                              gap: '10px',
+                              justifyContent: 'center',
+                              paddingBottom: '40px',
+                              overflow: 'visible',
+                              position: 'relative'
+                            }}>
+                              {contact.employees.map((employee, index) => {
+                                // Use employee's phone if available, otherwise use state default
+                                const employeePhone = employee.phone || contact.phone;
+                                const employeePhoneDisplay = employee.phoneDisplay || contact.phoneDisplay;
+                                const whatsappHref = `https://wa.me/${employeePhone.replace(/[^0-9]/g, '')}?text=Hello%20from%20GGS%20website`;
+                                
+                                return (
+                                  <a
+                                    key={index}
+                                    href={whatsappHref}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                      padding: '8px 16px',
+                                      backgroundColor: '#ffffff',
+                                      borderRadius: '8px',
+                                      fontSize: '14px',
+                                      color: '#190f06',
+                                      fontWeight: '500',
+                                      border: '1px solid #e5e5e5',
+                                      textDecoration: 'none',
+                                      cursor: 'pointer',
+                                      transition: 'all 0.3s ease',
+                                      position: 'relative',
+                                      display: 'inline-block',
+                                      zIndex: 1
+                                    }}
+                                    onMouseEnter={(e) => {
+                                      e.currentTarget.style.backgroundColor = '#f5cb4b';
+                                      e.currentTarget.style.borderColor = '#f5cb4b';
+                                      e.currentTarget.style.transform = 'translateY(-2px)';
+                                      e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                                      e.currentTarget.style.zIndex = '1000';
+                                      const tooltip = e.currentTarget.querySelector('.phone-tooltip') as HTMLElement;
+                                      if (tooltip) {
+                                        tooltip.style.opacity = '1';
+                                        tooltip.style.zIndex = '1001';
+                                      }
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      e.currentTarget.style.backgroundColor = '#ffffff';
+                                      e.currentTarget.style.borderColor = '#e5e5e5';
+                                      e.currentTarget.style.transform = 'translateY(0)';
+                                      e.currentTarget.style.boxShadow = 'none';
+                                      e.currentTarget.style.zIndex = '1';
+                                      const tooltip = e.currentTarget.querySelector('.phone-tooltip') as HTMLElement;
+                                      if (tooltip) {
+                                        tooltip.style.opacity = '0';
+                                      }
+                                    }}
+                                    title={`${employee.name} - ${employeePhoneDisplay}`}
+                                  >
+                                    {employee.name}
+                                    <span
+                                      className="phone-tooltip"
+                                      style={{
+                                        display: 'block',
+                                        fontSize: '12px',
+                                        fontWeight: '400',
+                                        opacity: 0,
+                                        transition: 'opacity 0.3s ease',
+                                        position: 'absolute',
+                                        bottom: '-35px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        whiteSpace: 'nowrap',
+                                        backgroundColor: '#190f06',
+                                        color: '#ffffff',
+                                        padding: '6px 10px',
+                                        borderRadius: '6px',
+                                        pointerEvents: 'none',
+                                        zIndex: 1001,
+                                        boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                                        marginTop: '4px'
+                                      }}
+                                    >
+                                      {employeePhoneDisplay}
+                                    </span>
+                                  </a>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
                       </>
                     );
                   })()}
