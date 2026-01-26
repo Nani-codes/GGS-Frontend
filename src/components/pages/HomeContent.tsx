@@ -9,6 +9,23 @@ import { useEffect, useRef, useState } from 'react';
 import { InstagramPost } from '@/types/instagram';
 import { InstagramPostsSlider } from '@/components/InstagramPostsSlider';
 
+// Hook to detect mobile screen size
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+};
+
 const BANNER_IMAGE_STYLES = {
   width: '100%',
   height: 'auto',
@@ -26,6 +43,7 @@ export function HomeContent() {
   const [instagramPosts, setInstagramPosts] = useState<InstagramPost[]>([]);
   const [postsLoading, setPostsLoading] = useState(true);
   const [postsError, setPostsError] = useState<string | null>(null);
+  const isMobile = useIsMobile();
   
   // Get raw values description to avoid next-intl parsing HTML tags
   const valuesDescription = messages?.home?.values?.description || t('home.values.description');
@@ -206,7 +224,16 @@ export function HomeContent() {
           </div>
           {/* Slide 4 - Website Map */}
           <div className="swiper-slide">
-            <section className="banner-one banner-one--bg-only" style={{ backgroundImage: 'url(/assets/images/backgrounds/Website_Map.jpg)' }}>
+            <section 
+              className="banner-one banner-one--bg-only" 
+              style={{ 
+                backgroundImage: `url(/assets/images/backgrounds/${isMobile ? 'Mobile_Map_newmoible.jpg.jpeg' : 'Website_Map _new.jpg.jpeg'})`,
+                backgroundSize: isMobile ? 'contain' : 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundColor: '#faf8f0'
+              }}
+            >
               <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/banner-one-shape-bg.png)' }}>
               </div>
             </section>
@@ -565,18 +592,26 @@ export function HomeContent() {
             </div>
           </section>}
           {/* ===== DISTRIBUTORS NETWORK SECTION ===== */}
-          <section id="distributors" style={{ padding: '80px 0', backgroundColor: '#faf8f0' }}>
+          <section id="distributors" style={{ padding: '50px 0', backgroundColor: '#faf8f0' }}>
             <div className="container">
               <div className="section-title text-center">
-                <h2 style={{ fontSize: '36px', fontWeight: '700', color: '#190f06', marginBottom: '50px' }}>{t('home.distributorsNetwork.title')}</h2>
+                <h2 style={{ fontSize: '36px', fontWeight: '700', color: '#190f06', marginBottom: '15px' }}>{t('home.distributorsNetwork.title')}</h2>
+                <p className="distributors-network-subtext" style={{ fontSize: '16px', color: '#666', lineHeight: '1.6', maxWidth: '600px', margin: '0 auto 30px' }}>
+                  {t('home.distributorsNetwork.subtext')}
+                </p>
               </div>
             </div>
             <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '0 15px' }}>
-              <div style={{ width: '100%', height: 'auto', minHeight: '550px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+              <div style={{ width: '100%', height: 'auto', minHeight: '450px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
                 <img 
-                  src="/assets/images/backgrounds/Website_Map.jpg" 
+                  src="/assets/images/backgrounds/Website_Map _new.jpg.jpeg" 
                   alt={t('home.distributorsNetwork.title')}
-                  style={{ width: '100%', height: 'auto', display: 'block' }}
+                  style={{ 
+                    width: '100%', 
+                    height: 'auto', 
+                    display: 'block',
+                    objectFit: 'contain'
+                  }}
                 />
               </div>
             </div>

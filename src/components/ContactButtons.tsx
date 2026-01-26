@@ -12,7 +12,7 @@ export function ContactButtons({ phoneDisplay, phoneHref, whatsappHref }: Contac
   const t = useTranslations();
 
   return (
-    <div style={{
+    <div className="contact-buttons" style={{
       display: 'flex',
       flexDirection: 'column',
       gap: '12px',
