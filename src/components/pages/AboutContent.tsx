@@ -2,13 +2,17 @@
 
 import { useState } from 'react';
 import { Link } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useMessages } from 'next-intl';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { IMAGE_PATHS } from '@/config/images';
 
 export function AboutContent() {
   const t = useTranslations();
+  const messages = useMessages() as any;
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  
+  // Get raw values description to avoid next-intl parsing HTML tags
+  const valuesDescription = messages?.home?.values?.description || t('home.values.description');
 
   return (
     <PageLayout currentPage="/about">
@@ -145,7 +149,7 @@ export function AboutContent() {
                 <div className="diamond-tile__title">Values</div>
               </div>
               <div className="diamond-flow-description diamond-flow-description--center">
-                <p className="diamond-flow-description-text">{t('home.values.description')}</p>
+                <p className="diamond-flow-description-text" dangerouslySetInnerHTML={{ __html: valuesDescription }} />
               </div>
             </div>
           </div>
@@ -300,6 +304,7 @@ export function AboutContent() {
         </div>
       </section>
       {/* ===== TEAM SECTION ===== */}
+      {/* Commented out - Team members section
       <section id="team" className="team-one about-page-team">
         <div className="container">
           <div className="section-title text-center sec-title-animation animation-style1">
@@ -307,7 +312,7 @@ export function AboutContent() {
               <div className="section-title__shape-1">
                 <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
               </div>
-              <h6 className="section-title__tagline">{t('about.professionalPeople')}</h6>
+              <h6 className="section-title__tagline">{t('about.ourLeaders')}</h6>
               <div className="section-title__shape-1">
                 <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
               </div>
@@ -348,7 +353,200 @@ export function AboutContent() {
           </div>
         </div>
       </section>
+      */}
+      {/* ===== FOUNDER SECTION ===== */}
+      <section id="founder" className="founder-section" style={{ padding: '100px 0', backgroundColor: '#ffffff' }}>
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-xl-5 col-lg-5 col-md-12">
+              <div className="founder-section__img" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '40px' }}>
+                <img 
+                  src="/assets/images/board_member/IMG_6190.PNG" 
+                  alt={t('about.founder.name')} 
+                  style={{ 
+                    width: '100%', 
+                    maxWidth: '450px', 
+                    height: 'auto', 
+                    objectFit: 'cover', 
+                    borderRadius: '8px',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+                  }} 
+                />
+              </div>
+            </div>
+            <div className="col-xl-7 col-lg-7 col-md-12">
+              <div className="founder-section__content" style={{ paddingLeft: '40px', paddingTop: '20px', maxWidth: '600px' }}>
+                <h2 style={{ 
+                  fontSize: '14px', 
+                  fontWeight: '700', 
+                  color: '#666', 
+                  marginBottom: '12px',
+                  letterSpacing: '1.5px',
+                  textTransform: 'uppercase'
+                }}>
+                  {t('about.founder.title')}
+                </h2>
+                <h3 style={{ 
+                  fontSize: '24px', 
+                  fontWeight: '600', 
+                  color: '#190f06', 
+                  marginBottom: '30px',
+                  lineHeight: '1.3'
+                }}>
+                  {t('about.founder.name')}
+                </h3>
+                <div style={{ marginBottom: '30px' }}>
+                  <p style={{ 
+                    fontSize: '17px', 
+                    fontStyle: 'italic', 
+                    color: '#f5cb4b', 
+                    marginBottom: '25px',
+                    lineHeight: '1.6',
+                    paddingLeft: '15px',
+                    borderLeft: '3px solid #f5cb4b'
+                  }}>
+                    "{t('about.founder.sanskritQuote')}"
+                  </p>
+                  <p style={{ 
+                    fontSize: '16px', 
+                    color: '#555', 
+                    lineHeight: '1.7',
+                    marginTop: '10px'
+                  }}>
+                    {t('about.founder.description')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* ===== MD'S DESK SECTION ===== */}
+      <section className="md-desk-section" style={{ padding: '100px 0', backgroundColor: '#faf8f0' }}>
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-xl-5 col-lg-5 col-md-12">
+              <div className="md-desk-section__img" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '40px' }}>
+                <img 
+                  src="/assets/images/board_member/Shri_Ajeet_Mulay.jpeg" 
+                  alt={t('about.mdDesk.name')} 
+                  style={{ 
+                    width: '100%', 
+                    maxWidth: '450px', 
+                    height: 'auto', 
+                    objectFit: 'cover', 
+                    borderRadius: '8px',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+                  }} 
+                />
+              </div>
+            </div>
+            <div className="col-xl-7 col-lg-7 col-md-12">
+              <div className="md-desk-section__content" style={{ paddingLeft: '40px', paddingTop: '20px', maxWidth: '600px' }}>
+                <h2 style={{ 
+                  fontSize: '36px', 
+                  fontWeight: '700', 
+                  color: '#190f06', 
+                  marginBottom: '14px',
+                  lineHeight: '1.2'
+                }}>
+                  {t('about.mdDesk.title')}
+                </h2>
+                <h3 style={{ 
+                  fontSize: '24px', 
+                  fontWeight: '600', 
+                  color: '#190f06', 
+                  marginBottom: '8px',
+                  lineHeight: '1.3'
+                }}>
+                  {t('about.mdDesk.name')}
+                </h3>
+                <p style={{ 
+                  fontSize: '14px', 
+                  color: '#666', 
+                  fontWeight: '400',
+                  letterSpacing: '1.5px',
+                  textTransform: 'uppercase',
+                  marginBottom: '30px',
+                  lineHeight: '1.5'
+                }}>
+                  {t('about.mdDesk.designation')}
+                </p>
+                <div style={{ 
+                  fontSize: '16px', 
+                  lineHeight: '1.7', 
+                  color: '#555',
+                  fontFamily: 'system-ui, -apple-system, sans-serif'
+                }}>
+                  <p style={{ 
+                    marginBottom: '25px',
+                    fontWeight: '400'
+                  }}>
+                    {t('about.mdDesk.paragraph1')}
+                  </p>
+                  <p style={{ 
+                    marginBottom: '25px',
+                    fontWeight: '400'
+                  }}>
+                    {t('about.mdDesk.paragraph2')}
+                  </p>
+                  <p style={{ 
+                    marginBottom: '25px',
+                    fontWeight: '400'
+                  }}>
+                    {t('about.mdDesk.paragraph3')}
+                  </p>
+                  <p style={{ 
+                    marginBottom: '40px',
+                    fontWeight: '400'
+                  }}>
+                    {t('about.mdDesk.paragraph4')}
+                  </p>
+                  <div style={{ 
+                    marginTop: '40px', 
+                    paddingTop: '30px', 
+                    borderTop: '2px solid #f5cb4b',
+                    paddingBottom: '20px'
+                  }}>
+                    <p style={{ 
+                      fontSize: '17px', 
+                      fontStyle: 'italic', 
+                      color: '#f5cb4b', 
+                      marginBottom: '25px',
+                      lineHeight: '1.6',
+                      paddingLeft: '15px',
+                      borderLeft: '3px solid #f5cb4b'
+                    }}>
+                      "{t('about.mdDesk.quote')}"
+                    </p>
+                    <div style={{ 
+                      marginTop: '15px'
+                    }}>
+                      <p style={{ 
+                        fontSize: '18px', 
+                        color: '#190f06', 
+                        fontWeight: '600',
+                        marginBottom: '5px'
+                      }}>
+                        {t('about.mdDesk.signatureName')}
+                      </p>
+                      <p style={{ 
+                        fontSize: '16px', 
+                        color: '#666', 
+                        fontWeight: '400'
+                      }}>
+                        {t('about.mdDesk.signatureDesignation')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* ===== CLOSING STATEMENT ===== */}
+      {/* Commented out - Closing message section
       <section className="cta-two closing-message">
         <div className="container">
           <div className="cta-two__inner text-center">
@@ -357,6 +555,7 @@ export function AboutContent() {
           </div>
         </div>
       </section>
+      */}
     </PageLayout>
   );
 }

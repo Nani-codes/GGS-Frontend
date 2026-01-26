@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useMessages } from 'next-intl';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { CONTACT_INFO, SOCIAL_LINKS, INSTAGRAM_ACCOUNT } from '@/config/constants';
 import { IMAGE_PATHS } from '@/config/images';
@@ -21,10 +21,14 @@ const BANNER_IMAGE_STYLES = {
 
 export function HomeContent() {
   const t = useTranslations();
+  const messages = useMessages() as any;
   const swiperRef = useRef<any>(null);
   const [instagramPosts, setInstagramPosts] = useState<InstagramPost[]>([]);
   const [postsLoading, setPostsLoading] = useState(true);
   const [postsError, setPostsError] = useState<string | null>(null);
+  
+  // Get raw values description to avoid next-intl parsing HTML tags
+  const valuesDescription = messages?.home?.values?.description || t('home.values.description');
 
   // Fetch Instagram posts
   useEffect(() => {
@@ -406,7 +410,7 @@ export function HomeContent() {
                     <div className="diamond-tile__title">Values</div>
                   </div>
                   <div className="diamond-flow-description diamond-flow-description--center">
-                    <p className="diamond-flow-description-text">{t('home.values.description')}</p>
+                    <p className="diamond-flow-description-text" dangerouslySetInnerHTML={{ __html: valuesDescription }} />
                   </div>
                 </div>
               </div>
