@@ -227,7 +227,7 @@ export function HomeContent() {
             <section 
               className="banner-one banner-one--bg-only" 
               style={{ 
-                backgroundImage: `url(/assets/images/backgrounds/${isMobile ? 'Mobile_Map_newmoible.jpg.jpeg' : 'Website_Map _new.jpg.jpeg'})`,
+                backgroundImage: `url(/assets/images/backgrounds/Website_Map_new.jpeg)`,
                 backgroundSize: isMobile ? 'contain' : 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
@@ -301,7 +301,7 @@ export function HomeContent() {
                       <span className="icon-trophy" />
                     </div>
                     <span className="feature-one__award-year">2025</span>
-                    <h3 className="feature-one__title-two">Quality in Organic<br /> Harvests</h3>
+                    <h3 className="feature-one__title-two">Quality in Organic<br />Harvests</h3>
                   </div>
                 </div>
                 {/*Feature One Single End*/}
@@ -456,7 +456,7 @@ export function HomeContent() {
                     <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
-                <h3 className="section-title__title title-animation">Delivering Smart Sustainable And<br /> Innovative
+                <h3 className="section-title__title title-animation">Delivering Smart, Sustainable, and<br />Innovative
                   <span>Farming Solutions</span></h3>
               </div>
               <div className="row">

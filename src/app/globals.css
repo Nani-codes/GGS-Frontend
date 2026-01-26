@@ -1408,6 +1408,15 @@ body {
 
 /* ===== PRODUCTS-ONE MOBILE 2x2 GRID FIXES ===== */
 @media (max-width: 767px) {
+  .products-one {
+    padding: 50px 0 40px !important;
+  }
+  
+  .products-one .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  
   .products-one .row {
     margin-left: -6px;
     margin-right: -6px;
@@ -1492,29 +1501,69 @@ body {
   }
 }
 
+/* ===== PRODUCTS-ONE EXTRA SMALL DEVICE OPTIMIZATIONS ===== */
+@media (max-width: 575px) {
+  .products-one {
+    padding: 40px 0 30px !important;
+  }
+  
+  .products-one .container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  
+  .products-one .row {
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+  
+  .products-one .row > [class*="col-"] {
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .products-one__icon-and-title {
+    padding: 6px 4px 8px !important;
+  }
+  
+  .products-one__text-and-read-more {
+    padding: 6px 4px !important;
+  }
+}
+
 /* ===== COUNTER-ONE MOBILE 2x2 GRID FIXES ===== */
 @media (max-width: 767px) {
   .counter-one {
-    padding: 40px 0 !important;
+    padding: 40px 0 30px !important;
+  }
+  
+  .counter-one .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  
+  .counter-one__inner {
+    padding: 0 !important;
   }
   
   .counter-one__inner .row {
     display: flex !important;
     flex-wrap: wrap !important;
-    margin-left: -10px;
-    margin-right: -10px;
+    margin-left: -8px;
+    margin-right: -8px;
   }
   
   .counter-one__inner .row > [class*="col-"] {
     flex: 0 0 50% !important;
     max-width: 50% !important;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 25px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 20px;
   }
   
   .counter-one__single {
-    padding: 20px 15px !important;
+    padding: 18px 12px !important;
   }
   
   .counter-one__icon {
@@ -1539,6 +1588,54 @@ body {
   .counter-one__count-box .count-text {
     font-size: 24px !important;
     line-height: 1.2 !important;
+  }
+}
+
+/* ===== COUNTER-ONE EXTRA SMALL DEVICE OPTIMIZATIONS ===== */
+@media (max-width: 575px) {
+  .counter-one {
+    padding: 30px 0 25px !important;
+  }
+  
+  .counter-one .container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  
+  .counter-one__inner .row {
+    margin-left: -6px;
+    margin-right: -6px;
+  }
+  
+  .counter-one__inner .row > [class*="col-"] {
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-bottom: 15px;
+  }
+  
+  .counter-one__single {
+    padding: 15px 10px !important;
+  }
+  
+  .counter-one__icon {
+    width: 60px !important;
+    height: 60px !important;
+    margin: 0 auto 10px !important;
+  }
+  
+  .counter-one__icon span {
+    font-size: 28px !important;
+    line-height: 60px !important;
+  }
+  
+  .counter-one__title {
+    font-size: 13px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .counter-one__count-box h3,
+  .counter-one__count-box .count-text {
+    font-size: 20px !important;
   }
 }
 
@@ -2329,7 +2426,7 @@ body {
   }
 }
 
-/* ===== MOBILE TYPOGRAPHY FIXES ===== */
+/* ===== HOME PAGE MOBILE TYPOGRAPHY FIXES ===== */
 @media (max-width: 767px) {
   /* Banner/Hero Section */
   .banner-one__sub-title {
@@ -2337,8 +2434,12 @@ body {
     margin-bottom: 10px !important;
   }
   
+  .banner-one__sub-title p {
+    font-size: 12px !important;
+  }
+  
   .banner-one__title {
-    font-size: 28px !important;
+    font-size: 26px !important;
     line-height: 1.2 !important;
     margin-bottom: 15px !important;
   }
@@ -2354,7 +2455,7 @@ body {
   }
   
   .about-one__title {
-    font-size: 26px !important;
+    font-size: 24px !important;
     line-height: 1.25 !important;
   }
   
@@ -2362,6 +2463,19 @@ body {
   .about-one__text-two {
     font-size: 14px !important;
     line-height: 1.6 !important;
+  }
+  
+  .about-one__title-1 {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+  }
+  
+  .about-one__since-title {
+    font-size: 16px !important;
+  }
+  
+  .about-one__since-year {
+    font-size: 32px !important;
   }
   
   .about-one__our-story-title {
@@ -2384,14 +2498,69 @@ body {
     margin-bottom: 12px !important;
   }
   
+  /* Vision/Mission/Values Section */
+  .diamond-tile__title {
+    font-size: 18px !important;
+  }
+  
+  .diamond-tile__number {
+    font-size: 24px !important;
+  }
+  
+  .diamond-flow-description-text {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* Distributors Network Section */
+  #distributors h2 {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .distributors-network-subtext {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin: 0 auto 25px !important;
+    padding: 0 15px !important;
+  }
+  
+  /* Products Section */
+  .products-one__title {
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+  }
+  
+  .products-one__title a {
+    font-size: 18px !important;
+  }
+  
+  .products-one__text {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .products-one__read-more {
+    font-size: 13px !important;
+  }
+  
+  .products-one__read-more a {
+    font-size: 13px !important;
+  }
+  
   /* Section Titles */
   .section-title__tagline {
     font-size: 12px !important;
   }
   
   .section-title__title {
-    font-size: 24px !important;
+    font-size: 22px !important;
     line-height: 1.3 !important;
+  }
+  
+  .section-title__title h3 {
+    font-size: 22px !important;
   }
   
   /* General text */
@@ -2406,11 +2575,51 @@ body {
     padding: 12px 24px !important;
   }
   
+  /* Testimonials Section */
+  .testimonial-one__text-box p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  .testimonial-one__client-name {
+    font-size: 16px !important;
+  }
+  
+  .testimonial-one__client-name a {
+    font-size: 16px !important;
+  }
+  
+  .testimonial-one__client-sub-title {
+    font-size: 13px !important;
+  }
+  
   /* About Section Layout Fixes */
   .about-one__since-box {
     margin: 20px auto !important;
     float: none !important;
     display: block !important;
+    width: 160px !important;
+    height: 160px !important;
+  }
+  
+  .about-one__since-icon {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  
+  .about-one__since-icon span {
+    font-size: 20px !important;
+  }
+  
+  .about-one__points-box-and-since {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 30px !important;
+  }
+  
+  .about-one__points {
+    width: 100% !important;
+    min-width: 100% !important;
   }
   
   .about-one__btn-and-video {
@@ -2428,6 +2637,75 @@ body {
     max-width: 250px !important;
     text-align: center !important;
     justify-content: center !important;
+  }
+  
+  /* Vision/Mission/Values Section */
+  .diamond-tile__title {
+    font-size: 18px !important;
+  }
+  
+  .diamond-tile__number {
+    font-size: 24px !important;
+  }
+  
+  .diamond-flow-description-text {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* Distributors Network Section */
+  #distributors h2 {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .distributors-network-subtext {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin: 0 auto 25px !important;
+    padding: 0 15px !important;
+  }
+  
+  /* Products Section */
+  .products-one__title {
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+  }
+  
+  .products-one__title a {
+    font-size: 18px !important;
+  }
+  
+  .products-one__text {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .products-one__read-more {
+    font-size: 13px !important;
+  }
+  
+  .products-one__read-more a {
+    font-size: 13px !important;
+  }
+  
+  /* Testimonials Section */
+  .testimonial-one__text-box p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  .testimonial-one__client-name {
+    font-size: 16px !important;
+  }
+  
+  .testimonial-one__client-name a {
+    font-size: 16px !important;
+  }
+  
+  .testimonial-one__client-sub-title {
+    font-size: 13px !important;
   }
   
   .about-one__video-box {
@@ -2537,6 +2815,175 @@ body {
   .md-desk-section__img {
     min-height: 400px !important;
     margin-bottom: 40px !important;
+  }
+}
+
+/* ===== ABOUT PAGE MOBILE FONT ADJUSTMENTS ===== */
+@media (max-width: 767px) {
+  /* Infrastructure Highlights Section */
+  .infrastructure-highlights-title {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .infrastructure-item-label {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+  }
+  
+  .infrastructure-item > div:last-child {
+    font-size: 12px !important;
+  }
+  
+  /* Infrastructure Content */
+  .infrastructure-content-text {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  .infrastructure-subheading {
+    font-size: 16px !important;
+    margin-top: 15px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .infrastructure-accordion ul li {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 6px !important;
+  }
+  
+  /* Founder Section */
+  .founder-title {
+    font-size: 12px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .founder-name {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .founder-quote {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 20px !important;
+    padding-left: 12px !important;
+  }
+  
+  .founder-description {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin-top: 8px !important;
+  }
+  
+  /* MD Desk Section */
+  .md-desk-title {
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .md-desk-name {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .md-desk-designation {
+    font-size: 12px !important;
+    margin-bottom: 25px !important;
+  }
+  
+  .md-desk-text-container {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  .md-desk-paragraph {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .md-desk-paragraph-last {
+    margin-bottom: 30px !important;
+  }
+  
+  .md-desk-quote {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 20px !important;
+    padding-left: 12px !important;
+  }
+  
+  .md-desk-signature-name {
+    font-size: 16px !important;
+    margin-bottom: 4px !important;
+  }
+  
+  .md-desk-signature-designation {
+    font-size: 14px !important;
+  }
+  
+  /* Vision/Mission/Values Diamond Flow Section */
+  .diamond-flow-description-text {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* General padding adjustments for mobile */
+  .infrastructure-highlights-section {
+    padding: 50px 0 !important;
+  }
+  
+  .founder-section,
+  .md-desk-section {
+    padding: 60px 0 !important;
+  }
+  
+  .infrastructure-accordion > div > div[style*="padding: '30px'"] {
+    padding: 20px !important;
+  }
+  
+  .infrastructure-item[style*="padding: '20px'"] {
+    padding: 15px !important;
+  }
+  
+  .founder-section__content[style*="paddingLeft: '40px'"],
+  .md-desk-section__content[style*="paddingLeft: '40px'"] {
+    padding-left: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* Additional adjustments for very small screens */
+@media (max-width: 575px) {
+  .infrastructure-highlights-title {
+    font-size: 22px !important;
+  }
+  
+  .founder-name,
+  .md-desk-name {
+    font-size: 18px !important;
+  }
+  
+  .md-desk-title {
+    font-size: 24px !important;
+  }
+  
+  .infrastructure-item-label {
+    font-size: 15px !important;
+  }
+  
+  .infrastructure-content-text {
+    font-size: 13px !important;
+  }
+  
+  .infrastructure-subheading {
+    font-size: 15px !important;
   }
 }
 
@@ -2855,5 +3302,666 @@ section.banner-one.banner-one--bg-only {
   
   .contact-info__single h3 a {
     font-size: 11px !important;
+  }
+}
+
+/* ===== CONTACT PAGE MOBILE FONT OPTIMIZATIONS ===== */
+@media (max-width: 767px) {
+  /* Page Header Section */
+  .page-header__inner h3 {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .thm-breadcrumb {
+    font-size: 13px !important;
+  }
+  
+  .thm-breadcrumb li {
+    font-size: 13px !important;
+  }
+  
+  .thm-breadcrumb li a {
+    font-size: 13px !important;
+  }
+  
+  /* State Contacts Section */
+  .state-contacts {
+    padding: 50px 0 !important;
+  }
+  
+  .state-contacts .section-title__tagline {
+    font-size: 12px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .state-contacts .section-title__title {
+    font-size: 22px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .state-contacts-description {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin: 15px auto 0 !important;
+    padding: 0 15px !important;
+  }
+  
+  /* State Dropdown */
+  .state-dropdown-button {
+    padding: 14px 18px !important;
+    font-size: 14px !important;
+  }
+  
+  .state-dropdown-item {
+    padding: 12px 18px !important;
+    font-size: 14px !important;
+  }
+  
+  /* State Contact Details */
+  .state-contact-details {
+    padding: 25px 20px 40px !important;
+    margin: 30px auto 0 !important;
+  }
+  
+  .state-contact-state-name {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+  }
+  
+  .state-contact-close {
+    font-size: 20px !important;
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  .state-contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .state-contact-card {
+    padding: 18px 15px !important;
+  }
+  
+  .state-contact-icon {
+    width: 50px !important;
+    height: 50px !important;
+    margin: 0 auto 12px !important;
+  }
+  
+  .state-contact-icon span {
+    font-size: 20px !important;
+  }
+  
+  .state-contact-label {
+    font-size: 12px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .state-contact-value {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+  }
+  
+  .state-contact-email {
+    font-size: 14px !important;
+  }
+  
+  /* Contact Persons Section */
+  .state-contact-persons {
+    padding: 20px 15px !important;
+    margin-top: 25px !important;
+  }
+  
+  .state-contact-persons-title {
+    font-size: 13px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .state-employee-buttons-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    gap: 8px !important;
+  }
+  
+  .state-employee-button {
+    padding: 10px 14px !important;
+    font-size: 13px !important;
+  }
+  
+  .phone-tooltip {
+    font-size: 11px !important;
+    padding: 5px 10px !important;
+  }
+  
+  /* Map Section */
+  .map-section {
+    padding: 50px 0 !important;
+  }
+  
+  .map-section-title {
+    margin-bottom: 30px !important;
+  }
+  
+  .map-section-tagline {
+    font-size: 12px !important;
+  }
+  
+  .map-section-heading {
+    font-size: 22px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .map-container {
+    height: 350px !important;
+    min-height: 300px !important;
+  }
+  
+  /* Contact Buttons */
+  .contact-buttons {
+    gap: 10px !important;
+  }
+  
+  .contact-buttons > div {
+    gap: 10px !important;
+  }
+  
+  .contact-buttons a {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    min-width: 120px !important;
+    min-height: 40px !important;
+  }
+  
+  .contact-buttons a .icon-call,
+  .contact-buttons a .fab {
+    font-size: 16px !important;
+  }
+  
+  .contact-buttons p {
+    font-size: 11px !important;
+    margin-top: 2px !important;
+  }
+  
+  /* ===== FAQ PAGE MOBILE OPTIMIZATIONS ===== */
+  .faq-page {
+    padding: 40px 0 !important;
+  }
+  
+  .faq-page .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  
+  .faq-page .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .faq-page .row > [class*="col-"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .faq-page__right {
+    margin-bottom: 20px !important;
+  }
+  
+  .accrodion-title {
+    padding: 14px 50px 14px 18px !important;
+  }
+  
+  .accrodion-title h4 {
+    font-size: 15px !important;
+    line-height: 1.4 !important;
+    padding-right: 10px !important;
+  }
+  
+  .accrodion-title h4::before {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 14px !important;
+    right: 12px !important;
+    left: auto !important;
+    position: absolute !important;
+  }
+  
+  .faq-one__right .faq-one-accrodion .accrodion-title h4::before,
+  .accrodion-title h4::before {
+    right: 12px !important;
+    left: auto !important;
+  }
+  
+  .accrodion-content {
+    padding: 0 18px 18px !important;
+  }
+  
+  .accrodion-content .inner {
+    padding: 0 !important;
+  }
+  
+  .accrodion-content .inner p {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+  }
+  
+  .accrodion + .accrodion {
+    margin-top: 12px !important;
+  }
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575px) {
+  /* Page Header Section */
+  .page-header__inner h3 {
+    font-size: 20px !important;
+  }
+  
+  .thm-breadcrumb {
+    font-size: 12px !important;
+  }
+  
+  .thm-breadcrumb li {
+    font-size: 12px !important;
+  }
+  
+  .thm-breadcrumb li a {
+    font-size: 12px !important;
+  }
+  
+  /* State Contacts Section */
+  .state-contacts {
+    padding: 40px 0 !important;
+  }
+  
+  .state-contacts .section-title__tagline {
+    font-size: 11px !important;
+  }
+  
+  .state-contacts .section-title__title {
+    font-size: 20px !important;
+  }
+  
+  .state-contacts-description {
+    font-size: 13px !important;
+    padding: 0 10px !important;
+  }
+  
+  /* State Dropdown */
+  .state-dropdown-button {
+    padding: 12px 15px !important;
+    font-size: 13px !important;
+  }
+  
+  .state-dropdown-item {
+    padding: 11px 15px !important;
+    font-size: 13px !important;
+  }
+  
+  /* State Contact Details */
+  .state-contact-details {
+    padding: 20px 15px 35px !important;
+    margin: 25px auto 0 !important;
+  }
+  
+  .state-contact-state-name {
+    font-size: 18px !important;
+  }
+  
+  .state-contact-close {
+    font-size: 18px !important;
+    width: 26px !important;
+    height: 26px !important;
+  }
+  
+  .state-contact-grid {
+    gap: 15px !important;
+  }
+  
+  .state-contact-card {
+    padding: 15px 12px !important;
+  }
+  
+  .state-contact-icon {
+    width: 45px !important;
+    height: 45px !important;
+    margin: 0 auto 10px !important;
+  }
+  
+  .state-contact-icon span {
+    font-size: 18px !important;
+  }
+  
+  .state-contact-label {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .state-contact-value {
+    font-size: 15px !important;
+  }
+  
+  .state-contact-email {
+    font-size: 13px !important;
+  }
+  
+  /* Contact Buttons */
+  .contact-buttons {
+    gap: 8px !important;
+  }
+  
+  .contact-buttons > div {
+    gap: 8px !important;
+  }
+  
+  .contact-buttons a {
+    padding: 10px 18px !important;
+    font-size: 13px !important;
+    min-width: 110px !important;
+    min-height: 38px !important;
+  }
+  
+  .contact-buttons a .icon-call,
+  .contact-buttons a .fab {
+    font-size: 15px !important;
+  }
+  
+  .contact-buttons p {
+    font-size: 10px !important;
+  }
+  
+  /* ===== HOME PAGE EXTRA SMALL DEVICE OPTIMIZATIONS ===== */
+  /* Banner/Hero Section */
+  .banner-one__sub-title {
+    font-size: 11px !important;
+  }
+  
+  .banner-one__sub-title p {
+    font-size: 11px !important;
+  }
+  
+  .banner-one__title {
+    font-size: 24px !important;
+    line-height: 1.2 !important;
+  }
+  
+  .banner-one__text {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* About Section */
+  .about-one__title {
+    font-size: 22px !important;
+  }
+  
+  .about-one__title-1 {
+    font-size: 18px !important;
+  }
+  
+  .about-one__text,
+  .about-one__text-two {
+    font-size: 13px !important;
+  }
+  
+  .about-one__since-title {
+    font-size: 14px !important;
+  }
+  
+  .about-one__since-year {
+    font-size: 28px !important;
+  }
+  
+  .about-one__since-box {
+    width: 140px !important;
+    height: 140px !important;
+  }
+  
+  .about-one__since-icon {
+    width: 45px !important;
+    height: 45px !important;
+  }
+  
+  .about-one__since-icon span {
+    font-size: 18px !important;
+  }
+  
+  .about-one__points-box-and-since {
+    gap: 25px !important;
+  }
+  
+  .about-one__our-story-title {
+    font-size: 16px !important;
+  }
+  
+  .about-one__our-story-text {
+    font-size: 12px !important;
+  }
+  
+  .about-one__highlights-title {
+    font-size: 16px !important;
+  }
+  
+  .about-one__highlights-list li {
+    font-size: 12px !important;
+  }
+  
+  /* Vision/Mission/Values Section */
+  .diamond-tile__title {
+    font-size: 16px !important;
+  }
+  
+  .diamond-tile__number {
+    font-size: 20px !important;
+  }
+  
+  .diamond-flow-description-text {
+    font-size: 13px !important;
+  }
+  
+  /* Distributors Network Section */
+  #distributors h2 {
+    font-size: 22px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .distributors-network-subtext {
+    font-size: 13px !important;
+    margin: 0 auto 20px !important;
+    padding: 0 10px !important;
+  }
+  
+  /* Products Section */
+  .products-one__title {
+    font-size: 16px !important;
+  }
+  
+  .products-one__title a {
+    font-size: 16px !important;
+  }
+  
+  .products-one__text {
+    font-size: 12px !important;
+  }
+  
+  .products-one__read-more {
+    font-size: 12px !important;
+  }
+  
+  .products-one__read-more a {
+    font-size: 12px !important;
+  }
+  
+  /* Section Titles */
+  .section-title__tagline {
+    font-size: 11px !important;
+  }
+  
+  .section-title__title {
+    font-size: 20px !important;
+  }
+  
+  .section-title__title h3 {
+    font-size: 20px !important;
+  }
+  
+  /* Buttons */
+  .thm-btn {
+    font-size: 13px !important;
+    padding: 10px 20px !important;
+  }
+  
+  /* Testimonials Section */
+  .testimonial-one__text-box p {
+    font-size: 13px !important;
+  }
+  
+  .testimonial-one__client-name {
+    font-size: 15px !important;
+  }
+  
+  .testimonial-one__client-name a {
+    font-size: 15px !important;
+  }
+  
+  .testimonial-one__client-sub-title {
+    font-size: 12px !important;
+  }
+  
+  /* Contact Persons Section */
+  .state-contact-persons {
+    padding: 18px 12px !important;
+    margin-top: 20px !important;
+  }
+  
+  .state-contact-persons-title {
+    font-size: 12px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .state-employee-buttons-container {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
+    gap: 6px !important;
+  }
+  
+  .state-employee-button {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+  }
+  
+  .phone-tooltip {
+    font-size: 10px !important;
+    padding: 4px 8px !important;
+  }
+  
+  /* Map Section */
+  .map-section {
+    padding: 40px 0 !important;
+  }
+  
+  .map-section-tagline {
+    font-size: 11px !important;
+  }
+  
+  .map-section-heading {
+    font-size: 20px !important;
+  }
+  
+  .map-container {
+    height: 300px !important;
+    min-height: 250px !important;
+  }
+  
+  /* Contact Buttons */
+  .contact-buttons {
+    gap: 10px !important;
+  }
+  
+  .contact-buttons > div {
+    gap: 10px !important;
+  }
+  
+  .contact-buttons a {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    min-width: 120px !important;
+    min-height: 40px !important;
+  }
+  
+  .contact-buttons a .icon-call,
+  .contact-buttons a .fab {
+    font-size: 16px !important;
+  }
+  
+  .contact-buttons p {
+    font-size: 10px !important;
+  }
+  
+  /* ===== FAQ PAGE EXTRA SMALL DEVICE OPTIMIZATIONS ===== */
+  .faq-page {
+    padding: 30px 0 !important;
+  }
+  
+  .faq-page .container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  
+  .faq-page .row > [class*="col-"] {
+    margin-bottom: 15px !important;
+  }
+  
+  .faq-page__right {
+    margin-bottom: 15px !important;
+  }
+  
+  .accrodion-title {
+    padding: 12px 45px 12px 15px !important;
+  }
+  
+  .accrodion-title h4 {
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+    padding-right: 8px !important;
+  }
+  
+  .accrodion-title h4::before {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 12px !important;
+    right: 10px !important;
+    left: auto !important;
+    position: absolute !important;
+  }
+  
+  .faq-one__right .faq-one-accrodion .accrodion-title h4::before,
+  .accrodion-title h4::before {
+    right: 10px !important;
+    left: auto !important;
+  }
+  
+  .accrodion-content {
+    padding: 0 15px 15px !important;
+  }
+  
+  .accrodion-content .inner {
+    padding: 0 !important;
+  }
+  
+  .accrodion-content .inner p {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+  }
+  
+  .accrodion + .accrodion {
+    margin-top: 10px !important;
   }
 }

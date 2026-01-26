@@ -194,7 +194,7 @@ export function Footer({ variant = 'default' }: FooterProps) {
             <div className="col-xl-12">
               <div className="site-footer__bottom-inner">
                 <div className="site-footer__copyright">
-                  <p className="site-footer__copyright-text">Copyright@ 2025 <Link href="/">Green Gold Seeds</Link>. All Rights Reserved.</p>
+                  <p className="site-footer__copyright-text">Copyright © 2025 <Link href="/">Green Gold Seeds</Link>. All Rights Reserved.</p>
                 </div>
                 <div className="site-footer__bottom-menu-box">
                   <ul className="list-unstyled site-footer__bottom-menu">
