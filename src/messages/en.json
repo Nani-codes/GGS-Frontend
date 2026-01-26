@@ -139,7 +139,7 @@
   },
   "footer": {
     "about": {
-      "text": "Believe that great food starts with great farming. For 40 years, our farm has been committed to sustainable, eco-friendly and full of goodness.",
+      "text": "At the heart of Green Gold Seeds lies a simple belief — strong agriculture begins with quality seeds. Since 2001, we have been committed to providing high-quality, research-driven seed solutions that empower farmers and contribute to sustainable agricultural growth.",
       "weAccept": "We Accept"
     },
     "quickLinks": {
@@ -181,7 +181,7 @@
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy policy",
     "support": "Support",
-    "termsAndCondition": "Terms and Condition",
+    "termsAndCondition": "Terms and Conditions",
     "privacyAndPolicy": "Privacy and Policy",
     "categories": "Categories",
     "tipsTricks": "Tips & Tricks",
@@ -276,10 +276,10 @@
       "rdWheat": "Wheat Research:",
       "rdWheatGold": "Wheat Gold-21 and Gold-23: These are leading products in the market from GGSPL's research. They are popular for their quality parameters suitable for domestic use, minimal irrigation requirements, and high market value.",
       "rdWheatOngoing": "Ongoing research aims for further genetic improvement of wheat, focusing on physical and quality parameters, and yield potential. This research is conducted in collaboration with the University of Queensland. Additional research efforts are directed towards developing thermo-insensitive and drought-tolerant wheat varieties.",
-      "qcOverview": "Quality control is an important part of Quality assurance which leads operational technique and activities that are used to satisfy Quality requirements. Green Gold Seeds are known by their quality. All the activities such as seed production and processing of seeds are done as per quality assurance norms through 1) Field inspection 2) Seed testing 3) Grow-out tests",
-      "qcFieldInspection": "Field inspection of various crop is undertaken by technically trained personal by maintaining isolation distance, timely roughing, harvesting and threshing etc. to make available high quality seeds to the farming community at reasonable rate.",
-      "qcLaboratory": "The GGSPL is having its own laboratory where seed testing in respect of moisture, physical purity, ODV and germination of seeds is being tested as per the ISTA rules. The seed testing laboratory have been participated in inter-laboratory seed testing program with Govt. seed testing laboratory parbhani from 2013-14.",
-      "qcGrowOut": "Quality control wing also conducting grow-out test for all the crop irrespective of stages of seed to assess the genetic purity of every cultivar. Field staff working in quality control squad undertake periodical visits of seed processing plant and seed storage godown and suggest corrective steps if necessary to ensure the quality of seed.",
+      "qcOverview": "Quality control is an important part of Quality assurance which guides operational techniques and activities that are used to satisfy Quality requirements. Green Gold Seeds are known for their quality. All the activities such as seed production and processing of seeds are done as per quality assurance norms through 1) Field inspection 2) Seed testing 3) Grow-out tests",
+      "qcFieldInspection": "Field inspection of various crops is undertaken by technically trained personnel by maintaining isolation distance, timely rogueing, harvesting and threshing etc. to make available high quality seeds to the farming community at reasonable rates.",
+      "qcLaboratory": "GGSPL has its own laboratory where seed testing in respect of moisture, physical purity, ODV and germination of seeds is tested as per the ISTA rules. The seed testing laboratory has participated in inter-laboratory seed testing program with Govt. seed testing laboratory Parbhani from 2013-14.",
+      "qcGrowOut": "Quality control wing also conducts grow-out tests for all crops irrespective of stages of seed to assess the genetic purity of every cultivar. Field staff working in quality control squad undertake periodic visits of seed processing plant and seed storage godown and suggest corrective steps if necessary to ensure the quality of seed.",
       "spOverview": "Seed from fields meeting prescribed standards is brought to a processing plant after harvesting. Seed processing is essential to: 1) Dry seeds to a safe moisture level. 2) Remove or reduce undesirable materials such as weed seed, damaged seed, and other crop seeds. 3) Ensure uniform size grading. 4) Perform seed treatment to upgrade overall seed quality.",
       "spDefinition": "Seed processing is defined as all steps necessary for the preparation of harvested seed for marketing, specifically: handling, drying, shelling, cleaning, size grading, treating, and packaging.",
       "spLocations": "Processing Plant Locations: The main processing plant is located at Narayanpur shivar waluj, Dist. Chh. Sambhajinagar (Aurangabad). Additional contract processing plants are located at Chikhali (Buldhana) and Shrirampur (A'Nagar) in Maharashtra. Ginning and delinting of cotton are done at Bodeli and Idar in Gujarat state."
@@ -319,7 +319,7 @@
       "signatureName": "Shree. Ajeet Mulay",
       "signatureDesignation": "Managing Director"
     },
-    "closingStatement": "A company with excellence and earnestly dedicated to agriculture farming.",
+    "closingStatement": "A company of excellence, earnestly dedicated to agricultural farming.",
     "enterEmail": "Enter email"
   },
   "products": {
@@ -438,13 +438,13 @@
       "tagline": "Got Questions?",
       "title": "We’ve Got The Answers<br />You Need.",
       "q1": "What crops do Green Gold Seeds offer?",
-      "a1": "We provide high-performing hybrids and varieties in cotton, wheat, maize, pulses and oilseeds tailored to different agro-climatic zones.",
+      "a1": "We provide high-performing hybrids and varieties in cotton, wheat, maize, pulses, and oilseeds tailored to different agro-climatic zones.",
       "q2": "Where can I buy Green Gold Seeds products?",
       "a2": "Our seeds are available through authorized dealers and distributors across India. You can also contact us directly for dealer details in your area.",
       "q3": "Do you provide agronomy or field support?",
-      "a3": "Yes, our field team advises farmers on sowing, nutrition, crop protection and best agronomic practices for each hybrid.",
+      "a3": "Yes, our field team advises farmers on sowing, nutrition, crop protection, and best agronomic practices for each hybrid.",
       "q4": "Are your seeds tested for quality?",
-      "a4": "Every seed lot goes through stringent field, laboratory and grow-out tests to ensure genetic purity and strong germination before packing.",
+      "a4": "Every seed lot goes through stringent field, laboratory, and grow-out tests to ensure genetic purity and strong germination before packing.",
       "q5": "How can I contact Green Gold Seeds?",
       "a5": "You can reach us at +91 88888 66031 or email us at greengoldseeds@rediffmail.com for product or technical support."
     },
@@ -459,7 +459,7 @@
       "t2Text": "Our farmers trust Green Gold Seeds for timely supply and strong-performing hybrids. The company stands firmly behind its products in the field.",
       "t3Role": "Seed Producer",
       "t3Region": "Maharashtra",
-      "t3Text": "Working with Green Gold Seeds has been smooth and professional. Their focus on quality at every stage reflects in the performance of seeds at farmer level.",
+      "t3Text": "Working with Green Gold Seeds has been smooth and professional. Their focus on quality at every stage reflects in the performance of seeds at the farmer level.",
       "t4Role": "Cotton Grower",
       "t4Region": "Maharashtra",
       "t4Text": "Green Gold cotton hybrids have helped us achieve good boll setting and fibre quality. The brand has become a preferred choice in our village.",
@@ -547,7 +547,7 @@
     "productName": "Fresh Capsicum",
     "price": "$86.00",
     "reviews": "{count} customer reviews",
-    "description": "The power to be found between the pages of a book is formidable, indeed. And these 80 inspiring quotes about books and importance of reading are here to remind you of that. From beloved bestsellers to iconic celebrities, these quotes exemplify the benefits of reading and of a good books to comfort, challenge, and inspire you.",
+    "description": "The power to be found between the pages of a book is formidable, indeed. And these 80 inspiring quotes about books and importance of reading are here to remind you of that. From beloved bestsellers to iconic celebrities, these quotes exemplify the benefits of reading and of good books to comfort, challenge, and inspire you.",
     "reference": "REF. 4231/406",
     "availability": "Available in store",
     "size": "Size",

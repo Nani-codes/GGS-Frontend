@@ -159,7 +159,7 @@ export function AboutContent() {
       <section className="infrastructure-highlights-section" style={{ padding: '80px 0', backgroundColor: '#faf8f0' }}>
         <div className="container">
           <div className="section-title text-center">
-            <h3 style={{ fontSize: '32px', fontWeight: '700', color: '#190f06', marginBottom: '10px' }}>{t('about.infrastructureHighlights')}</h3>
+            <h3 className="infrastructure-highlights-title" style={{ fontSize: '32px', fontWeight: '700', color: '#190f06', marginBottom: '10px' }}>{t('about.infrastructureHighlights')}</h3>
             <div style={{ width: '60px', height: '3px', backgroundColor: '#f5cb4b', margin: '0 auto 40px' }}></div>
           </div>
           <div className="row justify-content-center">
@@ -206,7 +206,7 @@ export function AboutContent() {
                             transition: 'background-color 0.3s ease'
                           }}
                         ></div>
-                        <div style={{ flex: 1, fontSize: '18px', fontWeight: '500', color: '#190f06' }}>
+                        <div className="infrastructure-item-label" style={{ flex: 1, fontSize: '18px', fontWeight: '500', color: '#190f06' }}>
                           {item.label}
                         </div>
                         <div
@@ -231,10 +231,10 @@ export function AboutContent() {
                             marginTop: '-8px'
                           }}
                         >
-                          <div style={{ fontSize: '16px', lineHeight: '1.8', color: '#190f06' }}>
+                          <div className="infrastructure-content-text" style={{ fontSize: '16px', lineHeight: '1.8', color: '#190f06' }}>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.rdOverview')}</p>
 
-                            <h5 style={{ fontSize: '18px', fontWeight: '600', marginTop: '20px', marginBottom: '10px', color: '#190f06' }}>
+                            <h5 className="infrastructure-subheading" style={{ fontSize: '18px', fontWeight: '600', marginTop: '20px', marginBottom: '10px', color: '#190f06' }}>
                               {t('about.infrastructure.rdCottonHybrids')}
                             </h5>
                             <ul style={{ marginLeft: '20px', marginBottom: '15px' }}>
@@ -245,12 +245,12 @@ export function AboutContent() {
                             </ul>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.rdPipeline')}</p>
 
-                            <h5 style={{ fontSize: '18px', fontWeight: '600', marginTop: '20px', marginBottom: '10px', color: '#190f06' }}>
+                            <h5 className="infrastructure-subheading" style={{ fontSize: '18px', fontWeight: '600', marginTop: '20px', marginBottom: '10px', color: '#190f06' }}>
                               {t('about.infrastructure.rdBollgard')}
                             </h5>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.rdBollgardDesc')}</p>
 
-                            <h5 style={{ fontSize: '18px', fontWeight: '600', marginTop: '20px', marginBottom: '10px', color: '#190f06' }}>
+                            <h5 className="infrastructure-subheading" style={{ fontSize: '18px', fontWeight: '600', marginTop: '20px', marginBottom: '10px', color: '#190f06' }}>
                               {t('about.infrastructure.rdWheat')}
                             </h5>
                             <p style={{ marginBottom: '8px' }}>{t('about.infrastructure.rdWheatGold')}</p>
@@ -269,7 +269,7 @@ export function AboutContent() {
                             marginTop: '-8px'
                           }}
                         >
-                          <div style={{ fontSize: '16px', lineHeight: '1.8', color: '#190f06' }}>
+                          <div className="infrastructure-content-text" style={{ fontSize: '16px', lineHeight: '1.8', color: '#190f06' }}>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.qcOverview')}</p>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.qcFieldInspection')}</p>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.qcLaboratory')}</p>
@@ -288,7 +288,7 @@ export function AboutContent() {
                             marginTop: '-8px'
                           }}
                         >
-                          <div style={{ fontSize: '16px', lineHeight: '1.8', color: '#190f06' }}>
+                          <div className="infrastructure-content-text" style={{ fontSize: '16px', lineHeight: '1.8', color: '#190f06' }}>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.spOverview')}</p>
                             <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.spDefinition')}</p>
                             <p>{t('about.infrastructure.spLocations')}</p>
@@ -376,7 +376,7 @@ export function AboutContent() {
             </div>
             <div className="col-xl-7 col-lg-7 col-md-12">
               <div className="founder-section__content" style={{ paddingLeft: '40px', paddingTop: '20px', maxWidth: '600px' }}>
-                <h2 style={{ 
+                <h2 className="founder-title" style={{ 
                   fontSize: '14px', 
                   fontWeight: '700', 
                   color: '#666', 
@@ -386,7 +386,7 @@ export function AboutContent() {
                 }}>
                   {t('about.founder.title')}
                 </h2>
-                <h3 style={{ 
+                <h3 className="founder-name" style={{ 
                   fontSize: '24px', 
                   fontWeight: '600', 
                   color: '#190f06', 
@@ -396,7 +396,7 @@ export function AboutContent() {
                   {t('about.founder.name')}
                 </h3>
                 <div style={{ marginBottom: '30px' }}>
-                  <p style={{ 
+                  <p className="founder-quote" style={{ 
                     fontSize: '17px', 
                     fontStyle: 'italic', 
                     color: '#f5cb4b', 
@@ -407,7 +407,7 @@ export function AboutContent() {
                   }}>
                     "{t('about.founder.sanskritQuote')}"
                   </p>
-                  <p style={{ 
+                  <p className="founder-description" style={{ 
                     fontSize: '16px', 
                     color: '#555', 
                     lineHeight: '1.7',
@@ -443,7 +443,7 @@ export function AboutContent() {
             </div>
             <div className="col-xl-7 col-lg-7 col-md-12">
               <div className="md-desk-section__content" style={{ paddingLeft: '40px', paddingTop: '20px', maxWidth: '600px' }}>
-                <h2 style={{ 
+                <h2 className="md-desk-title" style={{ 
                   fontSize: '36px', 
                   fontWeight: '700', 
                   color: '#190f06', 
@@ -452,7 +452,7 @@ export function AboutContent() {
                 }}>
                   {t('about.mdDesk.title')}
                 </h2>
-                <h3 style={{ 
+                <h3 className="md-desk-name" style={{ 
                   fontSize: '24px', 
                   fontWeight: '600', 
                   color: '#190f06', 
@@ -461,7 +461,7 @@ export function AboutContent() {
                 }}>
                   {t('about.mdDesk.name')}
                 </h3>
-                <p style={{ 
+                <p className="md-desk-designation" style={{ 
                   fontSize: '14px', 
                   color: '#666', 
                   fontWeight: '400',
@@ -472,31 +472,31 @@ export function AboutContent() {
                 }}>
                   {t('about.mdDesk.designation')}
                 </p>
-                <div style={{ 
+                <div className="md-desk-text-container" style={{ 
                   fontSize: '16px', 
                   lineHeight: '1.7', 
                   color: '#555',
                   fontFamily: 'system-ui, -apple-system, sans-serif'
                 }}>
-                  <p style={{ 
+                  <p className="md-desk-paragraph" style={{ 
                     marginBottom: '25px',
                     fontWeight: '400'
                   }}>
                     {t('about.mdDesk.paragraph1')}
                   </p>
-                  <p style={{ 
+                  <p className="md-desk-paragraph" style={{ 
                     marginBottom: '25px',
                     fontWeight: '400'
                   }}>
                     {t('about.mdDesk.paragraph2')}
                   </p>
-                  <p style={{ 
+                  <p className="md-desk-paragraph" style={{ 
                     marginBottom: '25px',
                     fontWeight: '400'
                   }}>
                     {t('about.mdDesk.paragraph3')}
                   </p>
-                  <p style={{ 
+                  <p className="md-desk-paragraph md-desk-paragraph-last" style={{ 
                     marginBottom: '40px',
                     fontWeight: '400'
                   }}>
@@ -508,7 +508,7 @@ export function AboutContent() {
                     borderTop: '2px solid #f5cb4b',
                     paddingBottom: '20px'
                   }}>
-                    <p style={{ 
+                    <p className="md-desk-quote" style={{ 
                       fontSize: '17px', 
                       fontStyle: 'italic', 
                       color: '#f5cb4b', 
@@ -519,10 +519,10 @@ export function AboutContent() {
                     }}>
                       "{t('about.mdDesk.quote')}"
                     </p>
-                    <div style={{ 
+                    <div className="md-desk-signature" style={{ 
                       marginTop: '15px'
                     }}>
-                      <p style={{ 
+                      <p className="md-desk-signature-name" style={{ 
                         fontSize: '18px', 
                         color: '#190f06', 
                         fontWeight: '600',
@@ -530,7 +530,7 @@ export function AboutContent() {
                       }}>
                         {t('about.mdDesk.signatureName')}
                       </p>
-                      <p style={{ 
+                      <p className="md-desk-signature-designation" style={{ 
                         fontSize: '16px', 
                         color: '#666', 
                         fontWeight: '400'

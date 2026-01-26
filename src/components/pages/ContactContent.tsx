@@ -108,7 +108,7 @@ export function ContactContent() {
               </div>
             </div>
             <h2 className="section-title__title">{t('contact.stateContacts.title') || 'State-wise Contacts'}</h2>
-            <p style={{ maxWidth: '700px', margin: '20px auto 0', color: '#666', fontSize: '16px' }}>
+            <p className="state-contacts-description" style={{ maxWidth: '700px', margin: '20px auto 0', color: '#666', fontSize: '16px' }}>
               {t('contact.stateContacts.description') || 'Select your state to find contact information for your region'}
             </p>
           </div>
@@ -117,6 +117,7 @@ export function ContactContent() {
             <div className="col-xl-12">
               <div
                 ref={dropdownRef}
+                className="state-dropdown-wrapper"
                 style={{
                   maxWidth: '600px',
                   margin: '0 auto',
@@ -125,6 +126,7 @@ export function ContactContent() {
               >
                 {/* Dropdown Button */}
                 <div
+                  className="state-dropdown-button"
                   onClick={() => {
                     if (selectedState === 'open') {
                       // Close dropdown if already open
@@ -195,6 +197,7 @@ export function ContactContent() {
                           setSelectedState(contact.state);
                           setDisplayedState(contact.state);
                         }}
+                        className="state-dropdown-item"
                         style={{
                           padding: '15px 25px',
                           fontSize: '15px',
@@ -225,6 +228,7 @@ export function ContactContent() {
               {displayedState && (
                 <div
                   ref={contactDetailsRef}
+                  className="state-contact-details"
                   style={{
                     maxWidth: '800px',
                     margin: '40px auto 0',
@@ -243,7 +247,7 @@ export function ContactContent() {
                     if (!contact) return null;
                     return (
                       <>
-                        <div style={{
+                        <div className="state-contact-header" style={{
                           display: 'flex',
                           justifyContent: 'space-between',
                           alignItems: 'center',
@@ -251,7 +255,7 @@ export function ContactContent() {
                           paddingBottom: '20px',
                           borderBottom: '2px solid #f5cb4b'
                         }}>
-                          <h3 style={{
+                          <h3 className="state-contact-state-name" style={{
                             fontSize: '24px',
                             fontWeight: '700',
                             color: '#190f06',
@@ -260,6 +264,7 @@ export function ContactContent() {
                             {contact.state}
                           </h3>
                           <button
+                            className="state-contact-close"
                             onClick={() => {
                               setSelectedState(null);
                               setDisplayedState(null);
@@ -282,19 +287,19 @@ export function ContactContent() {
                           </button>
                         </div>
 
-                        <div style={{
+                        <div className="state-contact-grid" style={{
                           display: 'grid',
                           gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
                           gap: '25px'
                         }}>
                           {/* Phone Number with Call and WhatsApp Buttons */}
-                          <div style={{
+                          <div className="state-contact-card" style={{
                             padding: '20px',
                             backgroundColor: '#faf8f0',
                             borderRadius: '12px',
                             textAlign: 'center'
                           }}>
-                            <div style={{
+                            <div className="state-contact-icon" style={{
                               width: '60px',
                               height: '60px',
                               borderRadius: '50%',
@@ -306,7 +311,7 @@ export function ContactContent() {
                             }}>
                               <span className="icon-call" style={{ fontSize: '24px', color: '#190f06' }} />
                             </div>
-                            <p style={{
+                            <p className="state-contact-label" style={{
                               fontSize: '14px',
                               color: '#666',
                               marginBottom: '10px',
@@ -314,7 +319,7 @@ export function ContactContent() {
                             }}>
                               {t('contact.stateContacts.phone') || 'Phone'}
                             </p>
-                            <h4 style={{
+                            <h4 className="state-contact-value" style={{
                               fontSize: '20px',
                               fontWeight: '700',
                               color: '#190f06',
@@ -331,13 +336,13 @@ export function ContactContent() {
 
                           {/* Email */}
                           {contact.email && (
-                            <div style={{
+                            <div className="state-contact-card" style={{
                               padding: '20px',
                               backgroundColor: '#faf8f0',
                               borderRadius: '12px',
                               textAlign: 'center'
                             }}>
-                              <div style={{
+                              <div className="state-contact-icon" style={{
                                 width: '60px',
                                 height: '60px',
                                 borderRadius: '50%',
@@ -349,7 +354,7 @@ export function ContactContent() {
                               }}>
                                 <span className="icon-email" style={{ fontSize: '24px', color: '#190f06' }} />
                               </div>
-                              <p style={{
+                              <p className="state-contact-label" style={{
                                 fontSize: '14px',
                                 color: '#666',
                                 marginBottom: '10px',
@@ -357,7 +362,7 @@ export function ContactContent() {
                               }}>
                                 {t('contact.stateContacts.email') || 'Email'}
                               </p>
-                              <h4 style={{
+                              <h4 className="state-contact-value state-contact-email" style={{
                                 fontSize: '16px',
                                 fontWeight: '600',
                                 color: '#190f06',
@@ -392,7 +397,7 @@ export function ContactContent() {
                               borderRadius: '12px',
                               textAlign: 'center'
                             }}>
-                              <div style={{
+                              <div className="state-contact-icon" style={{
                                 width: '60px',
                                 height: '60px',
                                 borderRadius: '50%',
@@ -404,7 +409,7 @@ export function ContactContent() {
                               }}>
                                 <span className="icon-pin" style={{ fontSize: '24px', color: '#190f06' }} />
                               </div>
-                              <p style={{
+                              <p className="state-contact-label" style={{
                                 fontSize: '14px',
                                 color: '#666',
                                 marginBottom: '10px',
@@ -412,7 +417,7 @@ export function ContactContent() {
                               }}>
                                 {t('contact.stateContacts.location') || 'Location'}
                               </p>
-                              <h4 style={{
+                              <h4 className="state-contact-value" style={{
                                 fontSize: '16px',
                                 fontWeight: '600',
                                 color: '#190f06',
@@ -426,16 +431,18 @@ export function ContactContent() {
 
                         {/* Employees List */}
                         {contact.employees && contact.employees.length > 0 && (
-                          <div style={{
+                          <div className="state-contact-persons" style={{
                             marginTop: '30px',
                             padding: '25px',
-                            paddingBottom: '50px',
+                            paddingBottom: '25px',
                             backgroundColor: '#faf8f0',
                             borderRadius: '12px',
                             overflow: 'visible',
-                            position: 'relative'
+                            position: 'relative',
+                            width: '100%',
+                            boxSizing: 'border-box'
                           }}>
-                            <p style={{
+                            <p className="state-contact-persons-title" style={{
                               fontSize: '14px',
                               color: '#666',
                               marginBottom: '15px',
@@ -444,12 +451,11 @@ export function ContactContent() {
                             }}>
                               Contact Persons
                             </p>
-                            <div style={{
-                              display: 'flex',
-                              flexWrap: 'wrap',
+                            <div className="state-employee-buttons-container" style={{
+                              display: 'grid',
+                              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
                               gap: '10px',
                               justifyContent: 'center',
-                              paddingBottom: '40px',
                               overflow: 'visible',
                               position: 'relative'
                             }}>
@@ -465,6 +471,7 @@ export function ContactContent() {
                                     href={whatsappHref}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    className="state-employee-button"
                                     style={{
                                       padding: '8px 16px',
                                       backgroundColor: '#ffffff',
@@ -481,26 +488,30 @@ export function ContactContent() {
                                       zIndex: 1
                                     }}
                                     onMouseEnter={(e) => {
-                                      e.currentTarget.style.backgroundColor = '#f5cb4b';
-                                      e.currentTarget.style.borderColor = '#f5cb4b';
-                                      e.currentTarget.style.transform = 'translateY(-2px)';
-                                      e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                                      e.currentTarget.style.zIndex = '1000';
-                                      const tooltip = e.currentTarget.querySelector('.phone-tooltip') as HTMLElement;
+                                      const target = e.currentTarget;
+                                      target.style.backgroundColor = '#f5cb4b';
+                                      target.style.borderColor = '#f5cb4b';
+                                      target.style.transform = 'translateY(-2px)';
+                                      target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                                      target.style.zIndex = '1000';
+                                      const tooltip = target.querySelector('.phone-tooltip') as HTMLElement;
                                       if (tooltip) {
                                         tooltip.style.opacity = '1';
+                                        tooltip.style.visibility = 'visible';
                                         tooltip.style.zIndex = '1001';
                                       }
                                     }}
                                     onMouseLeave={(e) => {
-                                      e.currentTarget.style.backgroundColor = '#ffffff';
-                                      e.currentTarget.style.borderColor = '#e5e5e5';
-                                      e.currentTarget.style.transform = 'translateY(0)';
-                                      e.currentTarget.style.boxShadow = 'none';
-                                      e.currentTarget.style.zIndex = '1';
-                                      const tooltip = e.currentTarget.querySelector('.phone-tooltip') as HTMLElement;
+                                      const target = e.currentTarget;
+                                      target.style.backgroundColor = '#ffffff';
+                                      target.style.borderColor = '#e5e5e5';
+                                      target.style.transform = 'translateY(0)';
+                                      target.style.boxShadow = 'none';
+                                      target.style.zIndex = '1';
+                                      const tooltip = target.querySelector('.phone-tooltip') as HTMLElement;
                                       if (tooltip) {
                                         tooltip.style.opacity = '0';
+                                        tooltip.style.visibility = 'hidden';
                                       }
                                     }}
                                     title={`${employee.name} - ${employeePhoneDisplay}`}
@@ -513,20 +524,21 @@ export function ContactContent() {
                                         fontSize: '12px',
                                         fontWeight: '400',
                                         opacity: 0,
-                                        transition: 'opacity 0.3s ease',
+                                        visibility: 'hidden',
+                                        transition: 'opacity 0.3s ease, visibility 0.3s ease',
                                         position: 'absolute',
-                                        bottom: '-35px',
+                                        bottom: '100%',
                                         left: '50%',
-                                        transform: 'translateX(-50%)',
+                                        transform: 'translateX(-50%) translateY(-8px)',
                                         whiteSpace: 'nowrap',
                                         backgroundColor: '#190f06',
                                         color: '#ffffff',
-                                        padding: '6px 10px',
+                                        padding: '6px 12px',
                                         borderRadius: '6px',
                                         pointerEvents: 'none',
                                         zIndex: 1001,
-                                        boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-                                        marginTop: '4px'
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+                                        marginBottom: '8px'
                                       }}
                                     >
                                       {employeePhoneDisplay}
@@ -552,41 +564,45 @@ export function ContactContent() {
         <div className="container">
           <div className="row">
             <div className="col-xl-12">
-              <div className="section-title text-center" style={{ marginBottom: '50px' }}>
+              <div className="section-title text-center map-section-title" style={{ marginBottom: '50px' }}>
                 <div className="section-title__tagline-box">
                   <div className="section-title__shape-1">
                     <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
-                  <h6 className="section-title__tagline">{t('contact.ourOfficeLocation') || 'Our Office Location'}</h6>
+                  <h6 className="section-title__tagline map-section-tagline">{t('contact.ourOfficeLocation') || 'Our Office Location'}</h6>
                   <div className="section-title__shape-1">
                     <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
-                <h2 className="section-title__title" style={{ marginBottom: '20px' }}>{t('contact.location')}</h2>
+                <h2 className="section-title__title map-section-heading" style={{ marginBottom: '20px' }}>{t('contact.location')}</h2>
               </div>
-              <div
-                className="map-container"
-                style={{
-                  maxWidth: '100%',
-                  margin: '0 auto',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                  height: '450px',
-                  minHeight: '300px'
-                }}
-              >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1232.1010381010683!2d75.21006631056184!3d19.785209794267075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdb9d9734c4d705%3A0xb5c013d011fcf81f!2sGreen%20Gold%20Seeds!5e0!3m2!1sen!2sin!4v1768751321112!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Green Gold Seeds Office Location"
-                  aria-label="Google Maps showing Green Gold Seeds office location"
-                />
+              <div className="map-wrapper">
+                <div
+                  className="map-container"
+                  style={{
+                    maxWidth: '100%',
+                    margin: '0 auto',
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                    height: '450px',
+                    minHeight: '300px',
+                    position: 'relative',
+                    width: '100%'
+                  }}
+                >
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1232.1010381010683!2d75.21006631056184!3d19.785209794267075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdb9d9734c4d705%3A0xb5c013d011fcf81f!2sGreen%20Gold%20Seeds!5e0!3m2!1sen!2sin!4v1768751321112!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, display: 'block' }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Green Gold Seeds Office Location"
+                    aria-label="Google Maps showing Green Gold Seeds office location"
+                  />
+                </div>
               </div>
             </div>
           </div>
