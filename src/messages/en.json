@@ -73,7 +73,7 @@
     "banner": {
       "subtitle": "Established in 2001",
       "title": "Welcome to Green Gold Seeds Pvt. Ltd.",
-      "description": "Green Gold Seeds Pvt. Ltd. (GGSPL), a Chh. Sambhajinagar (Aurangabad)-based Mulay Group company, focuses on research and development with high qualitative standards. With state-of-the-art facilities, updated technology, and an efficient team, we have expanded across 13 states including Maharashtra, Madhya Pradesh, Gujarat, Rajasthan, West Bengal, and more. Today, GGSPL is emerging as one of the most trusted and fast-growing Indian seed companies, helping farmers improve yields and income."
+      "description": "At the heart of Green Gold Seeds lies a simple belief — strong agriculture begins with quality seeds. Seeds are not just a product; they are the foundation of a farmer's trust, a symbol of partnership, and the promise of a better tomorrow. We strive to deliver products that offer consistency, resilience, and higher yields, guided by continuous research, stringent quality assurance, and ethical practices. Our strength is deeply rooted in the dedication of our team and our commitment to standing beside farmers, supporting sustainable farming practices and contributing to a stronger agricultural future. Your trust inspires us to grow responsibly and serve with integrity."
     },
     "video": {
       "subtitle": "Watch Our Journey of Seed Innovation",
@@ -95,7 +95,7 @@
     },
     "values": {
       "title": "Our Values",
-      "description": "These brands are popular for their quality parameters for domestic purpose use of wheat, minimum requirement of irrigation and high market value."
+      "description": "• Farmer First<br />• Quality Without Compromise<br />• Research & Innovation<br />• Integrity & Ethical Practices<br />• Partnership & Collaboration<br />• Compliance & Accountability<br />• Teamwork & Shared Commitment"
     },
     "counter": {
       "products": "Products",
@@ -113,12 +113,12 @@
       "videoText": "Research in Action",
       "ourStory": "Our Story",
       "growingWithFarmers": "Growing with Indian farmers",
-      "storyText1": "Established in 2001, Green Gold Seeds Pvt. Ltd. (GGSPL) is a Chh. Sambhajinagar (Aurangabad)-based Mulay Group company focused on research and development with high qualitative standards. Over the last decade and a half, GGSPL has transformed the quality of seeds supplied to Indian farmers across the country.",
-      "storyText2": "With state-of-the-art facilities, updated technology, and an efficient team, GGSPL has expanded across 10 states including Maharashtra, Madhya Pradesh, Gujarat, Rajasthan, West Bengal, Assam, Odisha, Chhattisgarh, Karnataka, and Andhra Pradesh. Today, Green Gold Seeds is emerging as one of the most trusted and fastest growing Indian seed companies, helping farmers improve yields and income.",
+      "storyText1": "Green Gold Seeds, established in 2001, is an Indian seed company with a pan-India presence, engaged in the development and supply of seeds across major crop segments including oilseeds, pulses, cereals, cotton, and vegetables.",
+      "storyText2": "Headquartered in Waluj, Chhatrapati Sambhajinagar (Maharashtra), the company operates across diverse climatic regions of the country, serving a broad and evolving product portfolio. Green Gold Seeds is supported by strong infrastructure, including seed processing plants in Maharashtra, Gujarat, and Telangana, along with research centres spread across Maharashtra, Punjab, and Telangana. This integrated infrastructure strengthens region-specific research, quality seed multiplication, and efficient processing across diverse agro-climatic zones. Over the years, the company has built a strong distribution network supported by experienced professionals and long-standing associations across the agricultural value chain.",
       "highlightsAtGlance": "Highlights at a glance",
-      "highlight1": "Established in 2001 with focus on<br />research and development excellence.",
-      "highlight2": "Expanded across 10 states helping<br />farmers improve yields and income.",
-      "highlight3": "Modern facilities and technology<br />ensure quality seeds for farmers.",
+      "highlight1": "Pan-India presence serving major<br />crop segments across diverse regions.",
+      "highlight2": "Strong infrastructure with processing<br />plants and research centres nationwide.",
+      "highlight3": "Experienced distribution network<br />supporting farmers across India.",
       "progressSince": "Progress since",
       "cropsHarvested": "Crops<br /> Harvested",
       "fieldsOfGrowth": "Fields of Growth"
@@ -242,8 +242,8 @@
     "description": "Learn about our company, mission, and values.",
     "ourStory": "Our Story",
     "growingWithFarmers": "Growing with Indian farmers",
-    "storyText1": "Established in 2001, Green Gold Seeds Pvt. Ltd. (GGSPL) is an Aurangabad-based Mulay Group company focused on research and development with high qualitative standards. Over the last decade and a half, GGSPL has transformed the quality of seeds supplied to Indian farmers across the country.",
-    "storyText2": "With state-of-the-art facilities, updated technology, and an efficient team, GGSPL has expanded across 10 states including Maharashtra, Madhya Pradesh, Gujarat, Rajasthan, West Bengal, Assam, Odisha, Chhattisgarh, Karnataka, and Andhra Pradesh. Today, Green Gold Seeds is emerging as one of the most trusted and fastest growing Indian seed companies, helping farmers improve yields and income.",
+    "storyText1": "Green Gold Seeds, established in 2001, is an Indian seed company with a pan-India presence, engaged in the development and supply of seeds across major crop segments including oilseeds, pulses, cereals, cotton, and vegetables.",
+    "storyText2": "Headquartered in Waluj, Chhatrapati Sambhajinagar (Maharashtra), the company operates across diverse climatic regions of the country, serving a broad and evolving product portfolio. Green Gold Seeds is supported by strong infrastructure, including seed processing plants in Maharashtra, Gujarat, and Telangana, along with research centres spread across Maharashtra, Punjab, and Telangana. This integrated infrastructure strengthens region-specific research, quality seed multiplication, and efficient processing across diverse agro-climatic zones. Over the years, the company has built a strong distribution network supported by experienced professionals and long-standing associations across the agricultural value chain.",
     "highlightsAtGlance": "Highlights at a glance",
     "highlight1": "Established in 2001 with focus on<br />research and development excellence.",
     "highlight2": "Expanded across 10 states helping<br />farmers improve yields and income.",
@@ -254,8 +254,8 @@
     "researchInAction": "Research in Action",
     "ourMission": "Our Mission",
     "ourVision": "Our Vision",
-    "missionText": "To achieve the highest level of customer satisfaction by providing quality seeds with better yields, value-added features, and products tailored to meet Indian farmers' needs.",
-    "visionText": "To be the leader amongst research oriented, customer focused Indian Seed Companies.",
+    "missionText": "Our mission is to deliver well-researched, high-yielding, quality-assured, and dependable seed solutions, guided by ethical practices, integrity, and regulatory compliance, while supporting farmers with knowledge, innovation, and sustainable agricultural solutions.",
+    "visionText": "We envision a resilient agricultural ecosystem that empowers farmers through dependable seed solutions, enabling stability, abundance, long-term success, and sustainability in Indian agriculture.",
     "whatWereDoing": "What we're doing",
     "ourDepartments": "Our Departments",
     "infrastructureHighlights": "INFRASTRUCTURE HIGHLIGHTS",
@@ -296,9 +296,28 @@
     "professionalPeople": "Professional People",
     "boardOfDirectors": "Our Leaders",
     "ourLeaders": "Our Leaders",
+    "ourFounder": "Our Founder",
     "chairman": "Chairman",
     "managingDirector": "Managing Director",
     "director": "Director",
+    "founder": {
+      "title": "Founder & Visionary",
+      "name": "Late Shree. Madhukar Anna Mulay",
+      "sanskritQuote": "कर्तव्यतया सरम्; आशीर्वादः जीवाम् ॥",
+      "description": "In loving remembrance of Late Shree. Madhukar Anna Mulay, whose vision, values, and unwavering dedication laid the foundation of our journey. His wisdom, principles, and blessings continue to inspire our work and guide our path forward."
+    },
+    "mdDesk": {
+      "title": "From the Managing Director",
+      "name": "Shree. Ajeet Mulay",
+      "designation": "Managing Director, Green Gold Seeds",
+      "paragraph1": "At the heart of our company lies a simple belief — strong agriculture begins with quality seeds. At Green Gold Seeds, seeds are not just a product; they are the foundation of a farmer's trust, a symbol of partnership, and the promise of a better tomorrow.",
+      "paragraph2": "In line with the evolving needs of farmers across regions, we strive to deliver products that offer consistency, resilience, and higher yields, guided by on-ground realities and local growing conditions. We place strong emphasis on continuous research, stringent quality assurance, and ethical practices in everything we do. Our strength and success are deeply rooted in the dedication, loyalty, and long-standing association of our employees and colleagues, whose teamwork drives our shared vision forward.",
+      "paragraph3": "As agriculture continues to evolve, Green Gold Seeds remains committed to standing beside farmers — supporting sustainable farming practices and contributing to a stronger agricultural future.",
+      "paragraph4": "We extend our heartfelt gratitude to farmers, whose relentless efforts have made India self-sufficient in agriculture and continue to nourish the nation.",
+      "quote": "Your trust inspires us to grow responsibly and serve with integrity.",
+      "signatureName": "Shree. Ajeet Mulay",
+      "signatureDesignation": "Managing Director"
+    },
     "closingStatement": "A company with excellence and earnestly dedicated to agriculture farming.",
     "enterEmail": "Enter email"
   },

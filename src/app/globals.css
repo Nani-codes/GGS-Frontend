@@ -2441,6 +2441,71 @@ body {
   .about-one__right {
     padding-left: 0 !important;
   }
+  
+  /* Founder and MD Desk Sections */
+  .founder-section,
+  .md-desk-section {
+    padding: 60px 0 !important;
+  }
+  
+  .founder-section__content,
+  .md-desk-section__content {
+    padding-left: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  .founder-section__content h2,
+  .md-desk-section__content h2 {
+    font-size: 32px !important;
+  }
+  
+  .founder-section__content h3 {
+    font-size: 24px !important;
+  }
+  
+  .founder-section__content p:first-of-type {
+    font-size: 18px !important;
+  }
+  
+  .founder-section__content p:last-of-type {
+    font-size: 16px !important;
+  }
+  
+  .md-desk-section__content > div {
+    font-size: 16px !important;
+  }
+  
+  .md-desk-section__content p {
+    margin-bottom: 20px !important;
+  }
+  
+  .md-desk-section__content div p:first-of-type {
+    font-size: 18px !important;
+  }
+  
+  .md-desk-section__content div div p:first-of-type {
+    font-size: 20px !important;
+  }
+  
+  .founder-section__img,
+  .md-desk-section__img {
+    min-height: 300px !important;
+    margin-bottom: 30px !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .founder-section__content,
+  .md-desk-section__content {
+    padding-left: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  .founder-section__img,
+  .md-desk-section__img {
+    min-height: 400px !important;
+    margin-bottom: 40px !important;
+  }
 }
 
 /* ===== BANNER SLIDER RESPONSIVE FIXES ===== */
