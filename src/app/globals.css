@@ -2753,6 +2753,11 @@ body {
     font-size: 16px !important;
   }
   
+.md-desk-paragraph-last {
+  font-weight: 500;
+  color: #000000;
+}
+
   .md-desk-section__content p {
     margin-bottom: 20px !important;
   }

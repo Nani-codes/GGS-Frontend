@@ -498,7 +498,7 @@ export function AboutContent() {
                   </p>
                   <p className="md-desk-paragraph md-desk-paragraph-last" style={{ 
                     marginBottom: '40px',
-                    fontWeight: '400'
+                    fontWeight: '500'
                   }}>
                     {t('about.mdDesk.paragraph4')}
                   </p>

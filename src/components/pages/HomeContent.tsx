@@ -222,12 +222,15 @@ export function HomeContent() {
             <section className="banner-one banner-one--bg-only" style={{ backgroundImage: 'url(/assets/images/backgrounds/smart-agriculture-iot-with-hand-planting-tree-background.jpg)' }}>
             </section>
           </div>
-          {/* Slide 4 - Website Map */}
+          {/* Slide 4 - Website Map (desktop) / Mobile Map (mobile) */}
           <div className="swiper-slide">
             <section 
               className="banner-one banner-one--bg-only" 
               style={{ 
-                backgroundImage: `url(/assets/images/backgrounds/Website_Map_new.jpeg)`,
+                backgroundImage: `url(${isMobile 
+                  ? '/assets/images/backgrounds/Mobile_Map_newmoible.jpg.jpeg' 
+                  : '/assets/images/backgrounds/Website_Map_new.jpg.jpeg'
+                })`,
                 backgroundSize: isMobile ? 'contain' : 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
@@ -604,7 +607,7 @@ export function HomeContent() {
             <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '0 15px' }}>
               <div style={{ width: '100%', height: 'auto', minHeight: '450px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
                 <img 
-                  src="/assets/images/backgrounds/Website_Map _new.jpg.jpeg" 
+                  src="/assets/images/backgrounds/Website_Map_new.jpg.jpeg" 
                   alt={t('home.distributorsNetwork.title')}
                   style={{ 
                     width: '100%', 
