@@ -3969,4 +3969,121 @@ section.banner-one.banner-one--bg-only {
   .accrodion + .accrodion {
     margin-top: 10px !important;
   }
+  
+  /* Market Rates Cards Mobile Responsive */
+  .market-rates-cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 0 15px !important;
+  }
+  
+  .market-rates-card {
+    padding: 24px 18px !important;
+  }
+  
+  .market-rates-card-icon {
+    width: 64px !important;
+    height: 64px !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .market-rates-card-icon-svg {
+    font-size: 28px !important;
+  }
+  
+  .market-rates-card-title {
+    font-size: 16px !important;
+  }
+  
+  /* Market Rates Table Improvements */
+  .market-rates-section table thead {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+  }
+  
+  .market-rates-section table thead th {
+    background-color: #e6b800 !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+  }
+  
+  .market-rates-section table tbody tr:nth-child(even) {
+    background-color: #faf9f5 !important;
+  }
+  
+  .market-rates-section table tbody tr:nth-child(odd) {
+    background-color: #ffffff !important;
+  }
+  
+  /* Market Rates Page Header - Reduce Hero Image Height on Mobile */
+  .market-rates-page-header {
+    min-height: 38vh !important;
+    max-height: 45vh !important;
+    height: 42vh !important;
+    position: relative !important;
+  }
+  
+  .market-rates-page-header .page-header__bg {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    height: 42vh !important;
+    min-height: 38vh !important;
+    max-height: 45vh !important;
+  }
+  
+  .market-rates-page-header .container {
+    position: relative !important;
+    z-index: 1 !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  .market-rates-page-header .page-header__inner {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 20px 15px !important;
+    min-height: auto !important;
+    height: auto !important;
+  }
+  
+  .market-rates-page-header .page-header__inner h3 {
+    margin-bottom: 12px !important;
+  }
+  
+  /* Market Rates Filter Buttons - Side by Side on Mobile */
+  .view-toggle-buttons.market-rates-filter-buttons,
+  .market-rates-filter-buttons {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 15px !important;
+    display: flex !important;
+  }
+  
+  .view-toggle-buttons.market-rates-filter-buttons button,
+  .market-rates-filter-buttons button {
+    flex: 1 1 calc(50% - 6px) !important;
+    min-width: 0 !important;
+    max-width: calc(50% - 6px) !important;
+    padding: 12px 14px !important;
+    font-size: 14px !important;
+    width: auto !important;
+  }
+  
+  /* Ensure buttons don't wrap */
+  .market-rates-filter-buttons button:first-child,
+  .market-rates-filter-buttons button:last-child {
+    flex-shrink: 1 !important;
+    flex-grow: 1 !important;
+  }
 }
