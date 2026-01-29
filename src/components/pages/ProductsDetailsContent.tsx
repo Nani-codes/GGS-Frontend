@@ -17,8 +17,9 @@ const formatKeyValuePair = (text: string): React.JSX.Element => {
   let hasMatches = false;
 
   // Find all key-value pairs: look for pattern like "Crop Period:", "Boll Shape:", etc.
-  // Key pattern: starts with capital, contains letters/spaces, ends with colon
-  const keyPattern = /\b([A-Z][A-Za-z\s]{2,}?):\s*/g;
+  // Key pattern: any text up to a colon (excluding the colon itself)
+  // This is intentionally permissive so keys with characters like '&', '/' etc. are supported.
+  const keyPattern = /([^:]+):\s*/g;
   const matches: Array<{ key: string; keyEnd: number; valueStart: number }> = [];
 
   let match;

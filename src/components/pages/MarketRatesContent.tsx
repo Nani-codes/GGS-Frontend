@@ -119,8 +119,8 @@ export function MarketRatesContent() {
   return (
     <PageLayout currentPage="/market-rates">
       {/* ===== PAGE HEADER ===== */}
-      <section className="page-header">
-        <div className="page-header__bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>
+      <section className="page-header market-rates-page-header">
+        <div className="page-header__bg market-rates-header-bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>
         </div>
         <div className="container">
           <div className="page-header__inner">
@@ -137,7 +137,10 @@ export function MarketRatesContent() {
       </section>
 
       {/* ===== MARKET RATES SECTION ===== */}
-      <section className="market-rates-section" style={{ padding: '80px 0', backgroundColor: '#faf8f0' }}>
+      <section className="market-rates-section" style={{ 
+        padding: '80px 0', 
+        background: 'linear-gradient(135deg, #faf8f0 0%, #f5f7f0 50%, #faf8f0 100%)'
+      }}>
         <div className="container">
           <div className="section-title text-center sec-title-animation animation-style1">
             <div className="section-title__tagline-box">
@@ -156,26 +159,38 @@ export function MarketRatesContent() {
 
             {/* Back Button - Show when viewing rates */}
             {selectedCommodity && (
-              <div style={{ marginBottom: '20px' }}>
+              <div style={{ marginBottom: '24px' }}>
                 <button
                   onClick={handleBackClick}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '8px',
-                    padding: '10px 20px',
-                    fontSize: '14px',
+                    gap: '10px',
+                    padding: '12px 24px',
+                    fontSize: '15px',
                     fontWeight: '600',
-                    border: 'none',
+                    border: '1px solid rgba(0,0,0,0.12)',
                     borderRadius: '25px',
                     cursor: 'pointer',
                     backgroundColor: '#ffffff',
                     color: '#333',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
                     transition: 'all 0.3s ease',
                   }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#f8f8f8';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
+                    e.currentTarget.style.borderColor = 'rgba(0,0,0,0.2)';
+                    e.currentTarget.style.transform = 'translateX(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#ffffff';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
+                    e.currentTarget.style.borderColor = 'rgba(0,0,0,0.12)';
+                    e.currentTarget.style.transform = 'translateX(0)';
+                  }}
                 >
-                  <span className="fas fa-arrow-left" />
+                  <span className="fas fa-arrow-left" style={{ fontSize: '16px' }} />
                   {t('marketRates.backToList')}
                 </button>
               </div>
@@ -183,53 +198,99 @@ export function MarketRatesContent() {
 
             {/* Toggle Buttons - View Type (hide when viewing specific commodity) */}
             {!selectedCommodity && (
-              <div className="view-toggle-buttons" style={{
+              <div style={{
                 display: 'flex',
-                justifyContent: 'center',
-                gap: '15px',
-                marginBottom: '30px',
-                flexWrap: 'wrap'
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '12px',
+                marginBottom: '40px'
               }}>
-                <button
-                  onClick={() => setViewType('all')}
-                  style={{
-                    padding: '12px 30px',
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    border: 'none',
-                    borderRadius: '30px',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    backgroundColor: viewType === 'all' ? '#f5cb4b' : '#ffffff',
-                    color: viewType === 'all' ? '#190f06' : '#666',
-                    boxShadow: viewType === 'all'
-                      ? '0 4px 15px rgba(245, 203, 75, 0.4)'
-                      : '0 2px 8px rgba(0,0,0,0.1)',
-                  }}
-                >
-                  <span className="fas fa-store" style={{ marginRight: '8px' }} />
-                  {t('marketRates.allMarkets')}
-                </button>
-                <button
-                  onClick={() => setViewType('district')}
-                  style={{
-                    padding: '12px 30px',
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    border: 'none',
-                    borderRadius: '30px',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    backgroundColor: viewType === 'district' ? '#f5cb4b' : '#ffffff',
-                    color: viewType === 'district' ? '#190f06' : '#666',
-                    boxShadow: viewType === 'district'
-                      ? '0 4px 15px rgba(245, 203, 75, 0.4)'
-                      : '0 2px 8px rgba(0,0,0,0.1)',
-                  }}
-                >
-                  <span className="fas fa-map-marker-alt" style={{ marginRight: '8px' }} />
-                  {t('marketRates.districtWise')}
-                </button>
+                <div className="view-toggle-buttons market-rates-filter-buttons" style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: '15px',
+                  flexWrap: 'wrap'
+                }}>
+                  <button
+                    onClick={() => setViewType('all')}
+                    style={{
+                      padding: '14px 32px',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      border: 'none',
+                      borderRadius: '30px',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      backgroundColor: viewType === 'all' ? '#f5cb4b' : '#ffffff',
+                      color: viewType === 'all' ? '#190f06' : '#666',
+                      boxShadow: viewType === 'all'
+                        ? '0 6px 20px rgba(245, 203, 75, 0.35), 0 2px 8px rgba(245, 203, 75, 0.2)'
+                        : '0 3px 12px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05)',
+                      transform: viewType === 'all' ? 'translateY(-2px)' : 'translateY(0)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (viewType !== 'all') {
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = '0 5px 16px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08)';
+                        e.currentTarget.style.backgroundColor = '#f8f8f8';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (viewType !== 'all') {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 3px 12px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05)';
+                        e.currentTarget.style.backgroundColor = '#ffffff';
+                      }
+                    }}
+                  >
+                    <span className="fas fa-store" style={{ marginRight: '8px' }} />
+                    {t('marketRates.allMarkets')}
+                  </button>
+                  <button
+                    onClick={() => setViewType('district')}
+                    style={{
+                      padding: '14px 32px',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      border: 'none',
+                      borderRadius: '30px',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      backgroundColor: viewType === 'district' ? '#f5cb4b' : '#ffffff',
+                      color: viewType === 'district' ? '#190f06' : '#666',
+                      boxShadow: viewType === 'district'
+                        ? '0 6px 20px rgba(245, 203, 75, 0.35), 0 2px 8px rgba(245, 203, 75, 0.2)'
+                        : '0 3px 12px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05)',
+                      transform: viewType === 'district' ? 'translateY(-2px)' : 'translateY(0)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (viewType !== 'district') {
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = '0 5px 16px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08)';
+                        e.currentTarget.style.backgroundColor = '#f8f8f8';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (viewType !== 'district') {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 3px 12px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05)';
+                        e.currentTarget.style.backgroundColor = '#ffffff';
+                      }
+                    }}
+                  >
+                    <span className="fas fa-map-marker-alt" style={{ marginRight: '8px' }} />
+                    {t('marketRates.districtWise')}
+                  </button>
+                </div>
+                {/* Last Updated Info */}
+                <p style={{
+                  fontSize: '13px',
+                  color: '#999',
+                  margin: 0,
+                  fontStyle: 'italic'
+                }}>
+                  Updated today at {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}
+                </p>
               </div>
             )}
 
@@ -262,68 +323,152 @@ export function MarketRatesContent() {
 
             {/* Commodity Cards Grid */}
             {!loadingCommodities && !selectedCommodity && commodities.length > 0 && (
-              <div style={{
+              <div className="market-rates-cards-grid" style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-                gap: '20px',
+                gap: '28px',
                 maxWidth: '1200px',
-                margin: '0 auto'
+                margin: '0 auto',
+                padding: '0 10px'
               }}>
-                {commodities.map((commodity, index) => (
-                  <div
-                    key={commodity.slug || index}
-                    onClick={() => handleCommodityClick(commodity)}
-                    style={{
-                      backgroundColor: '#ffffff',
-                      borderRadius: '12px',
-                      padding: '24px 20px',
-                      textAlign: 'center',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      boxShadow: '0 4px 15px rgba(0,0,0,0.08)',
-                      border: '2px solid transparent',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-5px)';
-                      e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.12)';
-                      e.currentTarget.style.borderColor = '#f5cb4b';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.08)';
-                      e.currentTarget.style.borderColor = 'transparent';
-                    }}
-                  >
-                    <div style={{
-                      width: '60px',
-                      height: '60px',
-                      borderRadius: '50%',
-                      backgroundColor: '#f5cb4b20',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      margin: '0 auto 15px auto'
-                    }}>
-                      <span className="fas fa-seedling" style={{ fontSize: '24px', color: '#f5cb4b' }} />
+                {commodities.map((commodity, index) => {
+                  // Get commodity-specific accent color for top strip only
+                  const getCommodityAccent = (title: string, slug: string) => {
+                    const lowerTitle = title.toLowerCase();
+                    const lowerSlug = slug.toLowerCase();
+                    
+                    if (lowerTitle.includes('सोयाबिन') || lowerTitle.includes('soybean') || lowerSlug.includes('soybean')) {
+                      return '#4CAF50';
+                    }
+                    if (lowerTitle.includes('कापूस') || lowerTitle.includes('cotton') || lowerSlug.includes('cotton')) {
+                      return '#FFC107';
+                    }
+                    if (lowerTitle.includes('कांदा') || lowerTitle.includes('onion') || lowerSlug.includes('onion')) {
+                      return '#FF6B6B';
+                    }
+                    if (lowerTitle.includes('तूर') || lowerTitle.includes('toor') || lowerSlug.includes('toor')) {
+                      return '#FF9800';
+                    }
+                    if (lowerTitle.includes('कोथिंबिर') || lowerTitle.includes('coriander') || lowerSlug.includes('coriander')) {
+                      return '#66BB6A';
+                    }
+                    if (lowerTitle.includes('उडीद') || lowerTitle.includes('urad') || lowerSlug.includes('urad')) {
+                      return '#9C27B0';
+                    }
+                    if (lowerTitle.includes('हरभरा') || lowerTitle.includes('chana') || lowerSlug.includes('chana')) {
+                      return '#FFA726';
+                    }
+                    if (lowerTitle.includes('मिरची') || lowerTitle.includes('chili') || lowerSlug.includes('chili')) {
+                      return '#E53935';
+                    }
+                    if (lowerTitle.includes('मका') || lowerTitle.includes('maize') || lowerSlug.includes('maize')) {
+                      return '#FFD700';
+                    }
+                    if (lowerTitle.includes('मेथी') || lowerTitle.includes('fenugreek') || lowerSlug.includes('fenugreek')) {
+                      return '#8BC34A';
+                    }
+                    return '#f5cb4b'; // Default brand yellow
+                  };
+
+                  const accentColor = getCommodityAccent(commodity.title, commodity.slug);
+
+                  return (
+                    <div
+                      key={commodity.slug || index}
+                      className="market-rates-card"
+                      onClick={() => handleCommodityClick(commodity)}
+                      style={{
+                        background: 'linear-gradient(135deg, #f8f9f5 0%, #f0f2eb 100%)',
+                        borderRadius: '18px',
+                        padding: '28px 22px',
+                        textAlign: 'center',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)',
+                        border: '1px solid rgba(0,0,0,0.04)',
+                        position: 'relative',
+                        overflow: 'hidden',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-6px)';
+                        e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08), 0 0 0 2px rgba(245, 203, 75, 0.3)';
+                        e.currentTarget.style.borderColor = 'rgba(245, 203, 75, 0.4)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)';
+                        e.currentTarget.style.borderColor = 'rgba(0,0,0,0.04)';
+                      }}
+                    >
+                      {/* Top accent strip */}
+                      <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: '4px',
+                        background: accentColor,
+                        borderRadius: '18px 18px 0 0',
+                        transition: 'height 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.height = '5px';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.height = '4px';
+                      }}
+                      />
+                      
+                      {/* Icon with subtle background circle */}
+                      <div className="market-rates-card-icon" style={{
+                        width: '72px',
+                        height: '72px',
+                        borderRadius: '50%',
+                        backgroundColor: 'rgba(245, 203, 75, 0.08)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: '0 auto 20px auto',
+                        position: 'relative',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.08)';
+                        e.currentTarget.style.backgroundColor = 'rgba(245, 203, 75, 0.12)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.backgroundColor = 'rgba(245, 203, 75, 0.08)';
+                      }}
+                      >
+                        <span className="fas fa-seedling market-rates-card-icon-svg" style={{ fontSize: '32px', color: '#f5cb4b' }} />
+                      </div>
+                      
+                      {/* Crop name - bold, primary focus */}
+                      <h4 className="market-rates-card-title" style={{
+                        fontSize: '18px',
+                        fontWeight: '700',
+                        color: '#190f06',
+                        margin: 0,
+                        lineHeight: '1.4',
+                        marginBottom: '10px'
+                      }}>
+                        {commodity.title}
+                      </h4>
+                      
+                      {/* Action text - lighter, subtle */}
+                      <p style={{
+                        fontSize: '12px',
+                        color: '#888',
+                        margin: 0,
+                        fontWeight: '400',
+                        letterSpacing: '0.3px'
+                      }}>
+                        {t('marketRates.viewRates')}
+                      </p>
                     </div>
-                    <h4 style={{
-                      fontSize: '16px',
-                      fontWeight: '600',
-                      color: '#190f06',
-                      margin: 0
-                    }}>
-                      {commodity.title}
-                    </h4>
-                    <p style={{
-                      fontSize: '12px',
-                      color: '#999',
-                      marginTop: '8px',
-                      marginBottom: 0
-                    }}>
-                      {t('marketRates.viewRates')}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
 
@@ -351,11 +496,12 @@ export function MarketRatesContent() {
               <div style={{
                 backgroundColor: '#f5cb4b',
                 borderRadius: '12px',
-                padding: '20px 30px',
-                marginBottom: '30px',
+                padding: '16px 30px',
+                marginBottom: '20px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '15px'
+                gap: '15px',
+                boxShadow: '0 2px 8px rgba(245, 203, 75, 0.2)'
               }}>
                 <div style={{
                   width: '50px',
@@ -447,20 +593,36 @@ export function MarketRatesContent() {
                 backgroundColor: '#ffffff',
                 borderRadius: '12px',
                 boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                marginTop: '16px',
+                borderTop: '3px solid rgba(255,255,255,0.8)',
+                position: 'relative'
               }}>
-                <div style={{ overflowX: 'auto' }}>
+                {/* Subtle separator shadow */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '1px',
+                  background: 'linear-gradient(to right, transparent, rgba(0,0,0,0.08), transparent)',
+                  zIndex: 1
+                }} />
+                <div style={{ overflowX: 'auto', maxHeight: '70vh', overflowY: 'auto' }}>
                   <table style={{
                     width: '100%',
                     borderCollapse: 'collapse',
                     minWidth: '700px'
                   }}>
-                    <thead>
-                      <tr style={{ backgroundColor: '#f5cb4b' }}>
+                    <thead style={{ position: 'sticky', top: 0, zIndex: 10 }}>
+                      <tr style={{ 
+                        backgroundColor: '#e6b800',
+                        boxShadow: '0 4px 8px rgba(0,0,0,0.15)'
+                      }}>
                         <th style={tableHeaderStyle}>{t('marketRates.table.market')}</th>
                         <th style={tableHeaderStyle}>{t('marketRates.table.variety')}</th>
-                        <th style={tableHeaderStyle}>{t('marketRates.table.unit')}</th>
-                        <th style={{ ...tableHeaderStyle, textAlign: 'right' }}>{t('marketRates.table.arrival')}</th>
+                        <th style={{ ...tableHeaderStyle, textAlign: 'center' }}>{t('marketRates.table.unit')}</th>
+                        <th style={{ ...tableHeaderStyle, textAlign: 'center' }}>{t('marketRates.table.arrival')}</th>
                         <th style={{ ...tableHeaderStyle, textAlign: 'right' }}>{t('marketRates.table.minPrice')}</th>
                         <th style={{ ...tableHeaderStyle, textAlign: 'right' }}>{t('marketRates.table.maxPrice')}</th>
                         <th style={{ ...tableHeaderStyle, textAlign: 'right' }}>{t('marketRates.table.modalPrice')}</th>
@@ -471,16 +633,16 @@ export function MarketRatesContent() {
                         <tr
                           key={index}
                           style={{
-                            backgroundColor: index % 2 === 0 ? '#ffffff' : '#fafafa',
-                            borderBottom: '1px solid #eee'
+                            backgroundColor: index % 2 === 0 ? '#ffffff' : '#faf9f5',
+                            borderBottom: '1px solid #f0f0f0'
                           }}
                         >
                           <td style={tableCellStyle}>
                             <strong>{item.market}</strong>
                           </td>
                           <td style={tableCellStyle}>{item.variety}</td>
-                          <td style={tableCellStyle}>{item.unit}</td>
-                          <td style={{ ...tableCellStyle, textAlign: 'right' }}>
+                          <td style={{ ...tableCellStyle, textAlign: 'center' }}>{item.unit}</td>
+                          <td style={{ ...tableCellStyle, textAlign: 'center' }}>
                             {item.arrival}
                           </td>
                           <td style={{ ...tableCellStyle, color: '#4caf50', fontWeight: '600', textAlign: 'right' }}>
@@ -489,7 +651,7 @@ export function MarketRatesContent() {
                           <td style={{ ...tableCellStyle, color: '#f44336', fontWeight: '600', textAlign: 'right' }}>
                             {formatPrice(item.max_price)}
                           </td>
-                          <td style={{ ...tableCellStyle, color: '#2196f3', fontWeight: '700', textAlign: 'right' }}>
+                          <td style={{ ...tableCellStyle, color: '#1565c0', fontWeight: '700', textAlign: 'right', fontSize: '15px' }}>
                             {formatPrice(item.modal_price)}
                           </td>
                         </tr>
@@ -558,12 +720,13 @@ export function MarketRatesContent() {
 }
 
 const tableHeaderStyle: React.CSSProperties = {
-  padding: '15px 12px',
+  padding: '16px 12px',
   textAlign: 'left',
-  fontWeight: '700',
+  fontWeight: '800',
   color: '#190f06',
-  fontSize: '14px',
-  whiteSpace: 'nowrap'
+  fontSize: '15px',
+  whiteSpace: 'nowrap',
+  letterSpacing: '0.3px'
 };
 
 const tableCellStyle: React.CSSProperties = {
