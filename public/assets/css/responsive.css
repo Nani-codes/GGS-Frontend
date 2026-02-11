@@ -1324,8 +1324,9 @@
     }
 
     .video-one__title {
-        font-size: 22px;
-        line-height: 32px;
+        font-size: 20px;
+        line-height: 30px;
+        margin-top: 10px;
     }
 
     .brand-one__single {
@@ -1334,7 +1335,28 @@
     }
 
     .video-one {
-        padding: 102px 0 80px;
+        padding: 80px 0 60px;
+    }
+
+    .video-one__sub-title {
+        font-size: 16px;
+        line-height: 24px;
+        margin: 18px 0 6px;
+    }
+
+    .video-one__curved-circle,
+    .video-one__curved-circle-2 {
+        font-size: 14px;
+    }
+
+    .video-one__curved-circle {
+        top: -135px;
+        white-space: nowrap;
+        letter-spacing: 0.08em;
+    }
+
+    .video-one__curved-circle-2 {
+        top: 150px;
     }
 
     .products-one__icon-and-title {
