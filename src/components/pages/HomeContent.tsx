@@ -7,6 +7,7 @@ import { CONTACT_INFO, SOCIAL_LINKS, INSTAGRAM_ACCOUNT } from '@/config/constant
 import { IMAGE_PATHS } from '@/config/images';
 import { useEffect, useRef, useState } from 'react';
 import { InstagramPost } from '@/types/instagram';
+import { VideoSection } from '@/components/sections/VideoSection';
 import { InstagramPostsSlider } from '@/components/InstagramPostsSlider';
 
 // Hook to detect mobile screen size
@@ -653,6 +654,8 @@ export function HomeContent() {
               </div>
             </div>
           </section>
+          {/* ===== VIDEO SECTION ===== */}
+          <VideoSection />
           {/* ===== PRODUCTS SECTION ===== */}
           <section className="products-one">
             <div className="container">
