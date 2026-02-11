@@ -6165,7 +6165,7 @@ About One
 .vision-mission-flow-section {
   position: relative;
   display: block;
-  padding: 100px 0;
+  padding: 0px 0 30px;
   background-color: #ffffff;
 }
 
@@ -6178,8 +6178,8 @@ About One
   gap: 0;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 0;
-  min-height: 800px;
+  padding: 20px 0 0;
+  min-height: 600px;
 }
 
 .vision-mission-flow--vshape {

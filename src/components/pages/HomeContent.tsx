@@ -241,7 +241,41 @@ export function HomeContent() {
               </div>
             </section>
           </div>
-          {/* Slides 5-7 - Hidden until content is ready
+          {/* Slide 5 - Product banner (Website-banner-1Artboard-1) */}
+          <div className="swiper-slide">
+            <section 
+              className="banner-one banner-one--bg-only" 
+              style={{ 
+                backgroundImage: 'url(/assets/images/backgrounds/Website-banner-1Artboard-1.png)',
+              }}
+            >
+            </section>
+          </div>
+          {/* Slide 6 - Product banner (Website-banner-1Artboard-2) */}
+          <div className="swiper-slide">
+            <section 
+              className="banner-one banner-one--bg-only" 
+              style={{ 
+                backgroundImage: 'url(/assets/images/backgrounds/Website-banner-1Artboard-2.png)',
+              }}
+            >
+            </section>
+          </div>
+          {/* Slide 7 - Product video banner */}
+          <div className="swiper-slide">
+            <section className="banner-one banner-one--bg-only">
+              <video
+                className="banner-one__video"
+                src="/assets/images/output.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </section>
+          </div>
+          {/* Additional slides can be added here in future
           <div className="swiper-slide">
             <section className="banner-one" style={{ backgroundColor: 'transparent' }}>
             </section>
