@@ -925,16 +925,13 @@
       }
     });
   });
-
-
-
-  if ($(".video-popup").length) {
-    $(".video-popup").magnificPopup({
+  if ($.fn.magnificPopup) {
+    $("body").magnificPopup({
+      delegate: "a.video-popup",
       type: "iframe",
       mainClass: "mfp-fade",
       removalDelay: 160,
       preloader: true,
-
       fixedContentPos: false
     });
   }

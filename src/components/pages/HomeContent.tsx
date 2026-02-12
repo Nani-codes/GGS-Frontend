@@ -218,11 +218,13 @@ export function HomeContent() {
             <section className="banner-one banner-one--bg-only" style={{ backgroundImage: 'url(/assets/images/backgrounds/indian-farmer-working-green-pigeon-peas-field-with-bullock.jpg)' }}>
             </section>
           </div>
-          {/* Slide 3 - Smart agriculture IoT */}
+          {/*
+          Slide 3 - Smart agriculture IoT (disabled)
           <div className="swiper-slide">
             <section className="banner-one banner-one--bg-only" style={{ backgroundImage: 'url(/assets/images/backgrounds/smart-agriculture-iot-with-hand-planting-tree-background.jpg)' }}>
             </section>
           </div>
+          */}
           {/* Slide 4 - Website Map (desktop) / Mobile Map (mobile) */}
           <div className="swiper-slide">
             <section 
@@ -262,7 +264,8 @@ export function HomeContent() {
             >
             </section>
           </div>
-          {/* Slide 7 - Product video banner */}
+          {/*
+          Slide 7 - Product video banner (disabled)
           <div className="swiper-slide">
             <section className="banner-one banner-one--bg-only">
               <video
@@ -276,6 +279,7 @@ export function HomeContent() {
               />
             </section>
           </div>
+          */}
           {/* Additional slides can be added here in future
           <div className="swiper-slide">
             <section className="banner-one" style={{ backgroundColor: 'transparent' }}>
