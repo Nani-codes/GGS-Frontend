@@ -249,7 +249,10 @@ export function HomeContent() {
             <section 
               className="banner-one banner-one--bg-only" 
               style={{ 
-                backgroundImage: 'url(/assets/images/backgrounds/Website-banner-1Artboard-1.png)',
+                backgroundImage: `url(${isMobile 
+                  ? '/assets/images/backgrounds/WebsitebannerMobilesize_newchanged0moible.jpg.jpeg' 
+                  : '/assets/images/backgrounds/Websitebanner1_changednewArtboard1.jpg.jpeg'
+                })`,
               }}
             >
             </section>
@@ -259,7 +262,10 @@ export function HomeContent() {
             <section 
               className="banner-one banner-one--bg-only" 
               style={{ 
-                backgroundImage: 'url(/assets/images/backgrounds/Website-banner-1Artboard-2.png)',
+                backgroundImage: `url(${isMobile 
+                  ? '/assets/images/backgrounds/WebsitebannerMobilesize_newchanged0Artboard2.jpg.jpeg' 
+                  : '/assets/images/backgrounds/Websitebanner1_changednewArtboard2.jpg.jpeg'
+                })`,
               }}
             >
             </section>
