@@ -115,12 +115,12 @@
       "ourStory": "Our Story",
       "growingWithFarmers": "Growing with Indian farmers",
       "storyText1": "Green Gold Seeds, established in 2001, is an Indian seed company with a pan-India presence, engaged in the development and supply of seeds across major crop segments including oilseeds, pulses, cereals, cotton, and vegetables.",
-      "storyText2": "Headquartered in Waluj, Chhatrapati Sambhajinagar (Maharashtra), the company operates across diverse climatic regions of the country, serving a broad and evolving product portfolio. Green Gold Seeds is supported by strong infrastructure, including seed processing plants in Maharashtra, Gujarat, and Telangana, along with research centres spread across Maharashtra, Punjab, and Telangana. This integrated infrastructure strengthens region-specific research, quality seed multiplication, and efficient processing across diverse agro-climatic zones. Over the years, the company has built a strong distribution network supported by experienced professionals and long-standing associations across the agricultural value chain.",
+      "storyText2": "Headquartered in Waluj, Chhatrapati Sambhajinagar (Maharashtra), the company operates across diverse climatic regions of the country, serving a broad and evolving product portfolio. Green Gold Seeds is supported by strong infrastructure, including seed processing plants in Maharashtra, Gujarat, Telangana, Rajasthan, and Karnataka, along with research centres spread across Maharashtra, Punjab, and Telangana. This integrated infrastructure strengthens region-specific research, quality seed multiplication, and efficient processing across diverse agro-climatic zones. Over the years, the company has built a strong distribution network supported by experienced professionals and long-standing associations across the agricultural value chain.",
       "highlightsAtGlance": "Highlights at a glance",
       "highlight1": "Pan-India presence serving major<br />crop segments across diverse regions.",
       "highlight2": "Strong infrastructure with processing<br />plants and research centres nationwide.",
       "highlight3": "Experienced distribution network<br />supporting farmers across India.",
-      "progressSince": "Progress since",
+      "progressSince": "Serving since",
       "cropsHarvested": "Crops<br /> Harvested",
       "fieldsOfGrowth": "Fields of Growth"
     },
@@ -234,7 +234,8 @@
     "title": "Career & Opportunities",
     "description": "We are always looking for talented individuals to join our team. Explore exciting career opportunities with Green Gold Seeds Pvt. Ltd. and be part of our mission to transform Indian agriculture.",
     "ctaTitle": "Interested in Joining Our Team?",
-    "ctaDescription": "Send us your resume or contact us for more information about current openings."
+    "ctaDescription": "Send us your resume or contact us for more information about current openings.",
+    "formTitle": "Apply for a position"
   },
   "about": {
     "pageTitle": "About Us",
@@ -249,7 +250,7 @@
     "highlight1": "Established in 2001 with focus on<br />research and development excellence.",
     "highlight2": "Expanded across 10 states helping<br />farmers improve yields and income.",
     "highlight3": "Modern facilities and technology<br />ensure quality seeds for farmers.",
-    "progressSince": "Progress since",
+    "progressSince": "Serving since",
     "cropsHarvested": "Crops<br /> Harvested",
     "fieldsOfGrowth": "Fields of Growth",
     "researchInAction": "Research in Action",
@@ -282,7 +283,7 @@
       "qcGrowOut": "Quality control wing also conducts grow-out tests for all crops irrespective of stages of seed to assess the genetic purity of every cultivar. Field staff working in quality control squad undertake periodic visits of seed processing plant and seed storage godown and suggest corrective steps if necessary to ensure the quality of seed.",
       "spOverview": "Seed from fields meeting prescribed standards is brought to a processing plant after harvesting. Seed processing is essential to: 1) Dry seeds to a safe moisture level. 2) Remove or reduce undesirable materials such as weed seed, damaged seed, and other crop seeds. 3) Ensure uniform size grading. 4) Perform seed treatment to upgrade overall seed quality.",
       "spDefinition": "Seed processing is defined as all steps necessary for the preparation of harvested seed for marketing, specifically: handling, drying, shelling, cleaning, size grading, treating, and packaging.",
-      "spLocations": "Processing Plant Locations: The main processing plant is located at Narayanpur shivar waluj, Dist. Chh. Sambhajinagar (Aurangabad). Additional contract processing plants are located at Chikhali (Buldhana) and Shrirampur (A'Nagar) in Maharashtra. Ginning and delinting of cotton are done at Bodeli and Idar in Gujarat state."
+      "spLocations": "Processing Plant Locations: The main processing plant is located at Narayanpur shivar waluj, Dist. Chh. Sambhajinagar (Aurangabad). Additional contract processing plants are located at Chikhali (Buldhana) and Shrirampur (A'Nagar) in Maharashtra, as well as facilities in Rajasthan and Karnataka. Ginning and delinting of cotton are done at Bodeli and Idar in Gujarat state."
     },
     "rAndD": "R & D",
     "rAndDDesc": "Genetic research and hybrid development led by the Plant Biotechnology Research Center.",

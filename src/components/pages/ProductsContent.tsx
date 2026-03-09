@@ -90,7 +90,7 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
         },
         pagination: {
           page,
-          pageSize: 100, // Fetch more to account for locale variants, will deduplicate
+          pageSize: 25,
         },
       };
 
@@ -196,22 +196,28 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
         locale,
       });
 
-      // Apply pagination to merged products
-      const pageSize = 25;
-      const startIndex = (page - 1) * pageSize;
-      const endIndex = startIndex + pageSize;
-      const paginatedProducts = mergedProducts.slice(startIndex, endIndex);
+      // Use Strapi server-side pagination metadata when available
+      const metaPagination = data.meta?.pagination;
 
-      // Calculate pagination metadata
-      const totalPages = Math.ceil(mergedProducts.length / pageSize);
-
-      setProducts(paginatedProducts);
-      setPagination({
-        page,
-        pageSize,
-        pageCount: totalPages,
-        total: mergedProducts.length,
-      });
+      setProducts(mergedProducts);
+      if (metaPagination) {
+        setPagination({
+          page: metaPagination.page,
+          pageSize: metaPagination.pageSize,
+          pageCount: metaPagination.pageCount,
+          total: metaPagination.total,
+        });
+      } else {
+        // Fallback to a simple client-side calculation if meta is missing
+        const pageSize = 25;
+        const totalPages = Math.ceil(mergedProducts.length / pageSize) || 1;
+        setPagination({
+          page,
+          pageSize,
+          pageCount: totalPages,
+          total: mergedProducts.length,
+        });
+      }
 
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -416,8 +422,12 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
   }, [isDropdownOpen]);
 
   const getProductImage = (product: Product) => {
+    // Plain white background placeholder (1x1 white SVG as data URL)
+    const whitePlaceholder =
+      'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><rect width="1" height="1" fill="white"/></svg>';
+
     if (!product.Image) {
-      return '/assets/images/backgrounds/1-1.png';
+      return whitePlaceholder;
     }
 
     // Handle array of image objects: Image[0].url (most common in Strapi v5)
@@ -449,9 +459,9 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
       return `/strapi${flatSingleUrl}`;
     }
 
-    // Fallback to default image
+    // Fallback to plain white background
     console.warn('No image URL found for product:', product.id, 'Image data:', product.Image);
-    return '/assets/images/backgrounds/1-1.png';
+    return whitePlaceholder;
   };
 
 

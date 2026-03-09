@@ -95,7 +95,20 @@ export function Footer({ variant = 'default' }: FooterProps) {
               <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
                 <div className="footer-widget__about">
                   <div className="footer-widget__about-logo">
-                    <Link href="/"><img src={IMAGE_PATHS.logo11} alt="" style={{ width: '160px', height: '50px', objectFit: 'contain' }} /></Link>
+                    <Link href="/">
+                      <img
+                        src={IMAGE_PATHS.logo11}
+                        alt=""
+                        style={{
+                          width: '160px',
+                          height: '50px',
+                          objectFit: 'contain',
+                          backgroundColor: '#ffffff',
+                          padding: '8px',
+                          borderRadius: '4px',
+                        }}
+                      />
+                    </Link>
                   </div>
                   <p className="footer-widget__about-text">{t('footer.about.text')}</p>
                 </div>

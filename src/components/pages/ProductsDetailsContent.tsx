@@ -8,6 +8,10 @@ import { PageLayout } from '@/components/layout/PageLayout';
 import { IMAGE_PATHS } from '@/config/images';
 import { SocialMediaPosts } from '@/components/SocialMediaPosts';
 
+// Plain white background placeholder (1x1 white SVG as data URL)
+const WHITE_IMAGE_PLACEHOLDER =
+  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><rect width="1" height="1" fill="white"/></svg>';
+
 // Helper function to format key-value pairs with bold keys
 const formatKeyValuePair = (text: string): React.JSX.Element => {
   // Split text by key-value pattern: "Key: Value" where Key starts with capital letter
@@ -584,7 +588,7 @@ export function ProductsDetailsContent() {
 
   const getProductImage = (product: Product | null) => {
     if (!product || !product.Image) {
-      return '/assets/images/backgrounds/1-1.png';
+      return WHITE_IMAGE_PLACEHOLDER;
     }
 
     // Handle array of image objects: Image[0].url (most common in Strapi v5)
@@ -616,14 +620,14 @@ export function ProductsDetailsContent() {
       return `/strapi${flatSingleUrl}`;
     }
 
-    // Fallback to default image
+    // Fallback to plain white background
     console.warn('No image URL found for product:', product.id, 'Image data:', product.Image);
-    return '/assets/images/backgrounds/1-1.png';
+    return WHITE_IMAGE_PLACEHOLDER;
   };
 
   const getAllProductImages = (product: Product | null): string[] => {
     if (!product || !product.Image) {
-      return ['/assets/images/backgrounds/1-1.png'];
+      return [WHITE_IMAGE_PLACEHOLDER];
     }
 
     const images: string[] = [];
@@ -670,8 +674,8 @@ export function ProductsDetailsContent() {
       return [`/strapi${flatSingleUrl}`];
     }
 
-    // Fallback to default image
-    return ['/assets/images/backgrounds/1-1.png'];
+    // Fallback to plain white background
+    return [WHITE_IMAGE_PLACEHOLDER];
   };
 
   const fetchRelatedProducts = async (groupName: string, currentProduct: Product) => {

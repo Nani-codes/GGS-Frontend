@@ -134,25 +134,25 @@ export function HomeContent() {
             <section className="banner-one">
               <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/banner-one-shape-bg.png)' }}>
               </div>
-              <div className="banner-one__shape-4 float-bob-x">
+              {/* <div className="banner-one__shape-4 float-bob-x">
                 <img src="/assets/images/shapes/banner-one-shape-4.png" alt="" />
-              </div>
+              </div> */}
               {/* Commented out - not needed
               <div className="banner-one__shape-5 float-bob-y">
                 <img src="/assets/images/shapes/banner-one-shape-5.png" alt="" />
               </div>
               */}
-              <div className="banner-one__shape-6">
+              {/* <div className="banner-one__shape-6">
                 <img src="/assets/images/shapes/banner-one-shape-6.png" alt="" />
-              </div>
+              </div> */}
               {/* Commented out - not needed
               <div className="banner-one__shape-7 img-bounce">
                 <img src="/assets/images/shapes/banner-one-shape-7.png" alt="" />
               </div>
               */}
-              <div className="banner-one__shape-8 float-bob-y">
+              {/* <div className="banner-one__shape-8 float-bob-y">
                 <img src="/assets/images/shapes/banner-one-shape-8.png" alt="" />
-              </div>
+              </div> */}
               <div className="container">
                 <div className="banner-one__inner">
                   <div className="row">
