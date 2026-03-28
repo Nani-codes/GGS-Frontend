@@ -1257,7 +1257,7 @@ body {
   /* Set fixed aspect ratio (4:3) to ensure all containers have the same height */
   aspect-ratio: 4 / 3;
   /* Add background color to handle any empty space gracefully */
-  background-color: #f5f5f5;
+  background-color: var(--farmology-white, #ffffff);
   /* Ensure container maintains aspect ratio - height will be calculated automatically */
   min-height: 0;
   /* Ensure the container has a defined height for absolutely positioned children */
@@ -1272,15 +1272,15 @@ body {
   }
 }
 
-/* Position both images absolutely to fill the container - works with Next.js Image component */
-.single-product-style1__img img,
+/* Next.js Image wrappers: layer full size, center img inside with flex */
 .single-product-style1__img > span {
   position: absolute !important;
-  top: 0;
-  left: 0;
+  inset: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
   width: 100% !important;
   height: 100% !important;
-  /* Maintain transitions for hover effects */
   -webkit-transition: all 500ms ease;
   -moz-transition: all 500ms ease;
   -ms-transition: all 500ms ease;
@@ -1288,42 +1288,39 @@ body {
   transition: all 500ms ease;
 }
 
-/* Next.js Image component wrapper (span) */
-.single-product-style1__img > span {
-  display: block !important;
-  position: absolute !important;
-  inset: 0;
-}
-
-/* Next.js Image component itself (img inside span) */
-.single-product-style1__img img {
-  /* Apply object-fit: contain so the entire image is visible and fills the container */
+/* Override Next.js fill inline styles so the bitmap can shrink and stay centered */
+.single-product-style1__img > span > img {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: block;
   object-fit: contain;
-  /* Center the image within the container */
-  object-position: center;
-  /* Ensure minimum size to prevent pixelation */
-  min-width: 200px;
-  min-height: 150px;
+  object-position: center center;
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
 }
 
-/* First image (hover effect) - ensure it's absolutely positioned and on top */
-.single-product-style1__img img:first-child,
-.single-product-style1__img .single-product-style1__img-hover {
-  position: absolute !important;
-  z-index: 2;
-}
-
-/* Second image (default visible) - ensure it's absolutely positioned */
-.single-product-style1__img img:nth-child(2),
-.single-product-style1__img .single-product-style1__img-default {
-  position: absolute !important;
-  z-index: 1;
+/* Raw img pair (e.g. related products): keep theme positioning, center the bitmap */
+.single-product-style1__img > img {
+  object-fit: contain !important;
+  object-position: center center !important;
 }
 
 /* Initial state for hover image (hidden) - apply to span wrapper */
 .single-product-style1__img .single-product-style1__img-hover {
+  z-index: 2;
   -webkit-transform: translatex(50%) scalex(2);
   transform: translatex(50%) scalex(2);
+  transform-origin: center center;
   opacity: 0;
 }
 
@@ -1336,8 +1333,10 @@ body {
 
 /* Initial state for default image (visible) - apply to span wrapper */
 .single-product-style1__img .single-product-style1__img-default {
+  z-index: 1;
   -webkit-transform: translatex(0) scalex(1);
   transform: translatex(0) scalex(1);
+  transform-origin: center center;
   opacity: 1;
 }
 
