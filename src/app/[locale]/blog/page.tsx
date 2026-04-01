@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from "next";
-import { BlogContent } from "@/components/pages/BlogContent";
+import { QualityControlContent } from "@/components/pages/QualityControlContent";
 
 export async function generateMetadata({
   params,
@@ -15,6 +15,6 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPage() {
-  return <BlogContent />;
+export default async function QualityControlPage() {
+  return <QualityControlContent />;
 }

@@ -693,6 +693,35 @@ export function MarketRatesContent() {
               </div>
             )}
           </div>
+
+          {/* Disclaimer */}
+          <div style={{
+            marginTop: '40px',
+            padding: '20px 24px',
+            backgroundColor: '#fffdf0',
+            border: '1px solid #f5cb4b33',
+            borderLeft: '4px solid #f5cb4b',
+            borderRadius: '8px',
+            display: 'flex',
+            gap: '12px',
+            alignItems: 'flex-start',
+          }}>
+            <span className="fas fa-info-circle" style={{
+              color: '#e6b800',
+              fontSize: '18px',
+              marginTop: '2px',
+              flexShrink: 0,
+            }} />
+            <p style={{
+              margin: 0,
+              fontSize: '13px',
+              color: '#666',
+              lineHeight: '1.7',
+              fontStyle: 'italic',
+            }}>
+              {t('marketRates.disclaimer')}
+            </p>
+          </div>
         </div>
       </section>
 

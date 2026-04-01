@@ -12,7 +12,7 @@ export const CONTACT_INFO = {
 export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/GreenGoldSeedsAurangabad',
   youtube: 'https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured',
-  instagram: 'https://www.instagram.com/greegoldseeds/',
+  instagram: 'https://www.instagram.com/greengoldseedsaurangabad/',
 } as const;
 
 export const INSTAGRAM_ACCOUNT = {

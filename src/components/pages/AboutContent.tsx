@@ -270,10 +270,14 @@ export function AboutContent() {
                           }}
                         >
                           <div className="infrastructure-content-text" style={{ fontSize: '16px', lineHeight: '1.8', color: '#190f06' }}>
-                            <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.qcOverview')}</p>
-                            <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.qcFieldInspection')}</p>
-                            <p style={{ marginBottom: '15px' }}>{t('about.infrastructure.qcLaboratory')}</p>
-                            <p>{t('about.infrastructure.qcGrowOut')}</p>
+                            <p style={{ marginBottom: '15px' }}>Our ISO 9001:2008 certified quality management system covers production, processing, packing, and dispatch — ensuring standardized operations across the entire value chain.</p>
+                            <p style={{ marginBottom: '15px' }}>With NABL accredited Seed Testing Laboratory (since April 2024), we follow ISTA & IMSCS protocols for accuracy and reliability. Every seed lot undergoes rigorous testing before release.</p>
+                            <p style={{ marginBottom: '15px' }}>Our quality framework includes mandatory Grow-Out Testing (GOT), advanced Molecular & Biotech validation with DNA fingerprinting, and end-to-end traceability from production to distribution.</p>
+                            <div style={{ marginTop: '20px' }}>
+                              <Link href="/blog" style={{ color: '#f5cb4b', fontWeight: '600', textDecoration: 'none' }}>
+                                View Complete Quality Control Details →
+                              </Link>
+                            </div>
                           </div>
                         </div>
                       )}

@@ -86,53 +86,6 @@ export function DiagnosticTestContent() {
     };
   }, []);
 
-  useEffect(() => {
-    // Initialize Magnific Popup for certification images
-    const initCertificationPopup = () => {
-      if (typeof window !== 'undefined' && (window as any).jQuery) {
-        const $ = (window as any).jQuery;
-        if ($.fn.magnificPopup) {
-          $('.certification-popup').magnificPopup({
-            type: 'image',
-            gallery: {
-              enabled: true,
-              navigateByImgClick: true,
-              preload: [0, 1]
-            },
-            image: {
-              titleSrc: function (item: any) {
-                return item.el.attr('alt') || '';
-              }
-            }
-          });
-        }
-      }
-    };
-
-    // Add hover effect styles
-    const style = document.createElement('style');
-    style.textContent = `
-      .certification-item:hover .certification-overlay {
-        opacity: 1 !important;
-      }
-      .certification-item img {
-        transition: transform 0.3s;
-      }
-      .certification-item:hover img {
-        transform: scale(1.05);
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Initialize popup after a delay to ensure jQuery is loaded
-    const timeoutId = setTimeout(initCertificationPopup, 500);
-
-    return () => {
-      clearTimeout(timeoutId);
-      document.head.removeChild(style);
-    };
-  }, []);
-
   return (
     <PageLayout currentPage="/diagnostics-test">
       {/* ===== PAGE HEADER ===== */}
@@ -207,73 +160,6 @@ export function DiagnosticTestContent() {
                         <span className="hover-btn hover-bx4" />
                       </Link>
                     </div>
-                  </div>
-                </div>
-                <div className="service-details__sidebar-download-box">
-                  <h3 className="service-details__services-title">{t('diagnosticsTest.certifications')}</h3>
-                  <div className="service-details__sidebar-single-download">
-                    <ul className="clearfix list-unstyled">
-                      <li>
-                        <div className="content-box">
-                          <div className="icon" style={{ width: '60px', height: '60px', overflow: 'hidden', borderRadius: '5px' }}>
-                            <img src="/assets/images/quality_assurance/certificate1.png" alt={t('diagnosticsTest.certification1')} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                          </div>
-                          <div className="text-box">
-                            <h2>
-                              <Link href="/diagnostics-test">{t('diagnosticsTest.certification1')}</Link>
-                            </h2>
-                            <p>
-                              <Link href="/diagnostics-test">{t('diagnosticsTest.viewCertificate')}</Link>
-                            </p>
-                          </div>
-                        </div>
-                        <div className="btn-box">
-                          <a href="/assets/images/quality_assurance/certificate1.png" className="certification-popup">
-                            <span className="fas fa-plus" />
-                          </a>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="content-box">
-                          <div className="icon" style={{ width: '60px', height: '60px', overflow: 'hidden', borderRadius: '5px' }}>
-                            <img src="/assets/images/quality_assurance/certificate2.png" alt={t('diagnosticsTest.certification2')} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                          </div>
-                          <div className="text-box">
-                            <h2>
-                              <Link href="/diagnostics-test">{t('diagnosticsTest.certification2')}</Link>
-                            </h2>
-                            <p>
-                              <Link href="/diagnostics-test">{t('diagnosticsTest.viewCertificate')}</Link>
-                            </p>
-                          </div>
-                        </div>
-                        <div className="btn-box">
-                          <a href="/assets/images/quality_assurance/certificate2.png" className="certification-popup">
-                            <span className="fas fa-plus" />
-                          </a>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="content-box">
-                          <div className="icon" style={{ width: '60px', height: '60px', overflow: 'hidden', borderRadius: '5px' }}>
-                            <img src="/assets/images/quality_assurance/certificate3.png" alt={t('diagnosticsTest.certification3')} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                          </div>
-                          <div className="text-box">
-                            <h2>
-                              <Link href="/diagnostics-test">{t('diagnosticsTest.certification3')}</Link>
-                            </h2>
-                            <p>
-                              <Link href="/diagnostics-test">{t('diagnosticsTest.viewCertificate')}</Link>
-                            </p>
-                          </div>
-                        </div>
-                        <div className="btn-box">
-                          <a href="/assets/images/quality_assurance/certificate3.png" className="certification-popup">
-                            <span className="fas fa-plus" />
-                          </a>
-                        </div>
-                      </li>
-                    </ul>
                   </div>
                 </div>
               </div>

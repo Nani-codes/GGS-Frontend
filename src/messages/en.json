@@ -6,7 +6,7 @@
     "productDetails": "Product Details",
     "services": "Services",
     "diagnosticsTest": "Diagnostic Test",
-    "blog": "News & Blogs",
+    "blog": "Quality Control",
     "faq": "FAQ",
     "contact": "Contact",
     "calendar": "Calendar",
@@ -21,7 +21,7 @@
     "services": "Services",
     "shop": "Shop",
     "products": "Products",
-    "blog": "News & Blogs",
+    "blog": "Quality Control",
     "contact": "Contact",
     "diagnosticTest": "Diagnostic Test",
     "productDetails": "Product Details",
@@ -150,7 +150,7 @@
       "helpFaqs": "Help & FAQs",
       "contactUs": "Contact Us",
       "portfolio": "Portfolio",
-      "blog": "News & Blogs",
+      "blog": "Quality Control",
       "services": "Services",
       "contact": "Contact"
     },
@@ -353,17 +353,12 @@
     "pageTitle": "Diagnostic Test",
     "breadcrumb": "Home / Diagnostic Test",
     "title": "Diagnostic Test",
-    "certifications": "Certifications",
     "ourServices": "Our Services",
     "diagnosticsTest": "Diagnostics Test",
     "diagnosticsTestDetails": "Diagnostics Test Details",
     "ifYouNeedHelp": "If You Need Any Help",
     "contactWithUs": "Contact With Us",
     "contactUs": "Contact Us",
-    "certification1": "Certification 1",
-    "certification2": "Certification 2",
-    "certification3": "Certification 3",
-    "viewCertificate": "View Certificate",
     "modernTestingLaboratory": "Modern Testing Laboratory",
     "dnaServices": "DNA Diagnostic Services",
     "elisaServices": "ELISA Diagnostic Services",
@@ -412,8 +407,8 @@
     "lateralFlowCP4EPSPS": "Lateral Flow strip for detection of CP4EPSPS (50 Strips)"
   },
   "blog": {
-    "pageTitle": "Blog",
-    "breadcrumb": "Home / Blog"
+    "pageTitle": "Quality Control",
+    "breadcrumb": "Home / Quality Control"
   },
   "homeExtra": {
     "doDonts": {
@@ -505,7 +500,8 @@
       "date": "Date"
     },
     "ctaTitle": "Need Help with Market Information?",
-    "ctaDescription": "Contact our team for personalized guidance on market trends and pricing information."
+    "ctaDescription": "Contact our team for personalized guidance on market trends and pricing information.",
+    "disclaimer": "Disclaimer: The market rates displayed on this page are sourced from public market data and are updated as per market updates. Green Gold Seeds Pvt. Ltd. is not responsible for the accuracy, completeness, or timeliness of the information provided. These rates are for informational purposes only and should not be considered as trading advice. Please verify with your local market committee before making any decisions."
   },
   "weather": {
     "pageTitle": "Weather",
