@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 export function WhatsAppPopup() {
-  const whatsappGroupLink = "https://chat.whatsapp.com/EzoQyhdO1ns6abtg58q7t8";
+  const whatsappGroupLink = "https://chat.whatsapp.com/";
   
   useEffect(() => {
     // Add styles to document head if not already added

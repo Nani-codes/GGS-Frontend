@@ -1252,16 +1252,23 @@ body {
 }
 
 /* ===== PRODUCT CARD IMAGE ALIGNMENT FIX ===== */
-/* Fix product card image containers to have uniform height and proper image fitting */
+/* Uniform card image area + fixed on-screen product size for every SKU */
 .single-product-style1__img {
-  /* Set fixed aspect ratio (4:3) to ensure all containers have the same height */
+  --product-image-display-size: 85%;
   aspect-ratio: 4 / 3;
-  /* Add background color to handle any empty space gracefully */
+  position: relative;
   background-color: var(--farmology-white, #ffffff);
-  /* Ensure container maintains aspect ratio - height will be calculated automatically */
   min-height: 0;
-  /* Ensure the container has a defined height for absolutely positioned children */
   height: auto;
+  overflow: hidden;
+}
+
+.single-product-style2__img {
+  --product-image-display-size: 85%;
+  aspect-ratio: 4 / 3;
+  position: relative;
+  background-color: var(--farmology-white, #ffffff);
+  overflow: hidden;
 }
 
 /* For browsers that don't support aspect-ratio, use padding-bottom technique */
@@ -1288,17 +1295,18 @@ body {
   transition: all 500ms ease;
 }
 
-/* Override Next.js fill inline styles so the bitmap can shrink and stay centered */
+/* Same fixed display box for every product (Next.js grid cards) */
 .single-product-style1__img > span > img {
   position: relative !important;
   top: auto !important;
   left: auto !important;
   right: auto !important;
   bottom: auto !important;
-  width: auto !important;
-  height: auto !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
+  flex: 0 0 auto;
+  width: var(--product-image-display-size) !important;
+  height: var(--product-image-display-size) !important;
+  max-width: var(--product-image-display-size) !important;
+  max-height: var(--product-image-display-size) !important;
   display: block;
   object-fit: contain;
   object-position: center center;
@@ -1309,10 +1317,71 @@ body {
   transition: all 500ms ease;
 }
 
-/* Raw img pair (e.g. related products): keep theme positioning, center the bitmap */
-.single-product-style1__img > img {
+/* List view + related products: same fixed display size */
+.single-product-style1__img:not(:has(> span)) > img,
+.single-product-style2__img > img {
+  position: absolute !important;
+  width: var(--product-image-display-size) !important;
+  height: var(--product-image-display-size) !important;
+  max-width: var(--product-image-display-size) !important;
+  max-height: var(--product-image-display-size) !important;
+  left: 50% !important;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
   object-fit: contain !important;
   object-position: center center !important;
+}
+
+.single-product-style1__img:not(:has(> span)) > img:first-child,
+.single-product-style2__img > img:first-child {
+  transform: translate(-50%, -50%) translatex(50%) scalex(2);
+}
+
+.single-product-style1__img:not(:has(> span)) > img:nth-child(2),
+.single-product-style2__img > img:nth-child(2) {
+  transform: translate(-50%, -50%) translatex(0) scalex(1);
+}
+
+/* Homepage featured products */
+.products-one__img {
+  --product-image-display-size: 85%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--farmology-white, #ffffff);
+}
+
+.products-one__img img {
+  position: relative !important;
+  width: var(--product-image-display-size) !important;
+  height: var(--product-image-display-size) !important;
+  max-width: var(--product-image-display-size) !important;
+  max-height: var(--product-image-display-size) !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  transform: none !important;
+}
+
+.products-one__single:hover .products-one__img img {
+  transform: none !important;
+}
+
+.single-product-style1:hover .single-product-style1__img:not(:has(> span)) > img:first-child {
+  transform: translate(-50%, -50%) translatex(0) scalex(1);
+}
+
+.single-product-style1:hover .single-product-style1__img:not(:has(> span)) > img:nth-child(2) {
+  transform: translate(-50%, -50%) translatex(-50%) scalex(2);
+}
+
+.single-product-style2:hover .single-product-style2__img > img:first-child {
+  transform: translate(-50%, -50%) translatex(0) scalex(1);
+}
+
+.single-product-style2:hover .single-product-style2__img > img:nth-child(2) {
+  transform: translate(-50%, -50%) translatex(-50%) scalex(2);
 }
 
 /* Initial state for hover image (hidden) - apply to span wrapper */
@@ -1436,14 +1505,17 @@ body {
   }
   
   .products-one__img {
-    height: 100px !important;
+    aspect-ratio: 4 / 3;
+    height: auto !important;
     margin-bottom: 0 !important;
   }
   
   .products-one__img img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+    width: var(--product-image-display-size, 85%) !important;
+    height: var(--product-image-display-size, 85%) !important;
+    max-width: var(--product-image-display-size, 85%) !important;
+    max-height: var(--product-image-display-size, 85%) !important;
+    object-fit: contain !important;
   }
   
   .products-one__content {

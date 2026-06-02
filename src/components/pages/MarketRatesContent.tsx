@@ -57,17 +57,24 @@ export function MarketRatesContent() {
           : '/api/market-rates';
 
         const response = await fetch(url);
+        const result = await response.json().catch(() => ({}));
         if (!response.ok) {
+          if (response.status === 503 && result?.code === 'UPSTREAM_UNAVAILABLE') {
+            throw new Error('UPSTREAM_UNAVAILABLE');
+          }
           throw new Error('Failed to fetch commodities');
         }
-        const result = await response.json();
 
         // Handle response - expecting array of { id, title, slug, tags }
         const items = Array.isArray(result) ? result : [];
         setCommodities(items);
       } catch (err) {
         console.error('Error fetching commodities:', err);
-        setError(t('marketRates.errorLoading'));
+        setError(
+          err instanceof Error && err.message === 'UPSTREAM_UNAVAILABLE'
+            ? t('marketRates.errorUpstream')
+            : t('marketRates.errorLoading')
+        );
       } finally {
         setLoadingCommodities(false);
       }
@@ -84,14 +91,21 @@ export function MarketRatesContent() {
 
     try {
       const response = await fetch(`/api/market-rates?slug=${encodeURIComponent(commodity.slug)}`);
+      const result = await response.json().catch(() => ({}));
       if (!response.ok) {
+        if (response.status === 503 && result?.code === 'UPSTREAM_UNAVAILABLE') {
+          throw new Error('UPSTREAM_UNAVAILABLE');
+        }
         throw new Error('Failed to fetch rates');
       }
-      const result: RatesResponse = await response.json();
       setRatesResponse(result);
     } catch (err) {
       console.error('Error fetching rates:', err);
-      setError(t('marketRates.errorLoading'));
+      setError(
+        err instanceof Error && err.message === 'UPSTREAM_UNAVAILABLE'
+          ? t('marketRates.errorUpstream')
+          : t('marketRates.errorLoading')
+      );
     } finally {
       setLoadingRates(false);
     }
