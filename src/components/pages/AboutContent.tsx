@@ -365,7 +365,7 @@ export function AboutContent() {
             <div className="col-xl-5 col-lg-5 col-md-12">
               <div className="founder-section__img" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '40px' }}>
                 <img 
-                  src="/assets/images/board_member/IMG_6190.PNG" 
+                  src="/assets/images/board_member/IMG_6190.jpeg" 
                   alt={t('about.founder.name')} 
                   style={{ 
                     width: '100%', 
