@@ -231,7 +231,7 @@ export function HomeContent() {
               className="banner-one banner-one--bg-only" 
               style={{ 
                 backgroundImage: `url(${isMobile 
-                  ? '/assets/images/backgrounds/Mobile_Map_newmoible.jpg.jpeg' 
+                  ? '/assets/images/backgrounds/Mobile_Map_newmoible.jpeg' 
                   : '/assets/images/backgrounds/Website_Map_new.jpeg'
                 })`,
                 backgroundSize: isMobile ? 'contain' : 'cover',
