@@ -5,6 +5,7 @@ import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { IMAGE_PATHS } from '@/config/images';
+import { CERTIFICATE_PATHS } from '@/config/constants';
 
 const qcSections = [
   {
@@ -307,8 +308,118 @@ export function QualityControlContent() {
         </div>
       </section>
 
+      {/* ===== CERTIFICATES SECTION ===== */}
+      <section id="certificates" className="qc-certificates-section" style={{ padding: '60px 0 80px', backgroundColor: '#faf8f0' }}>
+        <div className="container">
+          <div className="section-title text-center sec-title-animation animation-style1" style={{ marginBottom: '40px' }}>
+            <div className="section-title__tagline-box" style={{ justifyContent: 'center' }}>
+              <div className="section-title__shape-1">
+                <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
+              </div>
+              <h6 className="section-title__tagline">{t('qualityControlPage.certificatesTagline')}</h6>
+              <div className="section-title__shape-1">
+                <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
+              </div>
+            </div>
+            <h3 className="section-title__title title-animation" style={{ fontSize: '32px' }}>
+              {t('qualityControlPage.certificatesTitle')}
+            </h3>
+            <p style={{
+              fontSize: '16px',
+              color: '#666',
+              lineHeight: '1.7',
+              maxWidth: '720px',
+              margin: '16px auto 0',
+            }}>
+              {t('qualityControlPage.certificatesDescription')}
+            </p>
+          </div>
+
+          <div style={{
+            maxWidth: '900px',
+            margin: '0 auto',
+            backgroundColor: '#ffffff',
+            borderRadius: '12px',
+            border: '1px solid #e8e8e8',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+            overflow: 'hidden',
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '16px',
+              padding: '24px 28px',
+              borderBottom: '1px solid #f0f0f0',
+              flexWrap: 'wrap',
+            }}>
+              <div style={{
+                width: '52px',
+                height: '52px',
+                borderRadius: '12px',
+                backgroundColor: '#faf8f0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}>
+                <span className="fas fa-certificate" style={{ fontSize: '22px', color: '#f5cb4b' }} />
+              </div>
+              <div style={{ flex: 1, minWidth: '220px' }}>
+                <h4 style={{ fontSize: '20px', fontWeight: '600', color: '#190f06', margin: '0 0 8px' }}>
+                  {t('qualityControlPage.nablTitle')}
+                </h4>
+                <p style={{ fontSize: '15px', color: '#666', lineHeight: '1.6', margin: 0 }}>
+                  {t('qualityControlPage.nablDescription')}
+                </p>
+              </div>
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <a
+                  href={CERTIFICATE_PATHS.nabl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="thm-btn"
+                  style={{ padding: '10px 20px', fontSize: '14px' }}
+                >
+                  {t('qualityControlPage.viewCertificate')}
+                  <i className="fal fa-external-link" style={{ marginLeft: '8px' }} />
+                </a>
+                <a
+                  href={CERTIFICATE_PATHS.nabl}
+                  download="NABL-certificate.pdf"
+                  className="thm-btn"
+                  style={{
+                    padding: '10px 20px',
+                    fontSize: '14px',
+                    backgroundColor: '#190f06',
+                  }}
+                >
+                  {t('qualityControlPage.downloadCertificate')}
+                  <i className="fal fa-download" style={{ marginLeft: '8px' }} />
+                </a>
+              </div>
+            </div>
+
+            <div style={{ backgroundColor: '#f5f5f5', padding: '12px' }}>
+              <iframe
+                src={CERTIFICATE_PATHS.nabl}
+                title={t('qualityControlPage.nablTitle')}
+                style={{
+                  width: '100%',
+                  height: 'min(75vh, 720px)',
+                  minHeight: '420px',
+                  border: 'none',
+                  borderRadius: '8px',
+                  backgroundColor: '#ffffff',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ===== CTA SECTION ===== */}
-      <section style={{ padding: '60px 0', backgroundColor: '#faf8f0' }}>
+      <section style={{ padding: '60px 0', backgroundColor: '#ffffff' }}>
         <div className="container">
           <div style={{
             textAlign: 'center' as const,

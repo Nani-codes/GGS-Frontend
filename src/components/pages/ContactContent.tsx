@@ -67,7 +67,7 @@ export function ContactContent() {
                 <div className="contact-info__icon">
                   <span className="icon-call" />
                 </div>
-                <p>{t('contact.title')}</p>
+                <p>{t('contact.stateContacts.phone')}</p>
                 <h3><a href={CONTACT_INFO.phoneHref}>{CONTACT_INFO.phoneDisplay}</a></h3>
               </div>
             </div>
@@ -76,7 +76,7 @@ export function ContactContent() {
                 <div className="contact-info__icon">
                   <span className="icon-email" />
                 </div>
-                <p>{t('contact.title')}</p>
+                <p>{t('contact.email')}</p>
                 <h3><a href={CONTACT_INFO.emailHref}>{CONTACT_INFO.email}</a></h3>
               </div>
             </div>
@@ -453,97 +453,80 @@ export function ContactContent() {
                             </p>
                             <div className="state-employee-buttons-container" style={{
                               display: 'grid',
-                              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
                               gap: '10px',
                               justifyContent: 'center',
                               overflow: 'visible',
                               position: 'relative'
                             }}>
                               {contact.employees.map((employee, index) => {
-                                // Use employee's phone if available, otherwise use state default
                                 const employeePhone = employee.phone || contact.phone;
                                 const employeePhoneDisplay = employee.phoneDisplay || contact.phoneDisplay;
+                                const employeePhoneHref = `tel:${employeePhone.replace(/[^0-9+]/g, '')}`;
                                 const whatsappHref = `https://wa.me/${employeePhone.replace(/[^0-9]/g, '')}?text=Hello%20from%20GGS%20website`;
-                                
+
                                 return (
-                                  <a
+                                  <div
                                     key={index}
-                                    href={whatsappHref}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="state-employee-button"
+                                    className="state-employee-card"
                                     style={{
-                                      padding: '8px 16px',
+                                      padding: '14px 16px',
                                       backgroundColor: '#ffffff',
                                       borderRadius: '8px',
-                                      fontSize: '14px',
-                                      color: '#190f06',
-                                      fontWeight: '500',
                                       border: '1px solid #e5e5e5',
-                                      textDecoration: 'none',
-                                      cursor: 'pointer',
-                                      transition: 'all 0.3s ease',
-                                      position: 'relative',
-                                      display: 'inline-block',
-                                      zIndex: 1
+                                      textAlign: 'center',
                                     }}
-                                    onMouseEnter={(e) => {
-                                      const target = e.currentTarget;
-                                      target.style.backgroundColor = '#f5cb4b';
-                                      target.style.borderColor = '#f5cb4b';
-                                      target.style.transform = 'translateY(-2px)';
-                                      target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-                                      target.style.zIndex = '1000';
-                                      const tooltip = target.querySelector('.phone-tooltip') as HTMLElement;
-                                      if (tooltip) {
-                                        tooltip.style.opacity = '1';
-                                        tooltip.style.visibility = 'visible';
-                                        tooltip.style.zIndex = '1001';
-                                      }
-                                    }}
-                                    onMouseLeave={(e) => {
-                                      const target = e.currentTarget;
-                                      target.style.backgroundColor = '#ffffff';
-                                      target.style.borderColor = '#e5e5e5';
-                                      target.style.transform = 'translateY(0)';
-                                      target.style.boxShadow = 'none';
-                                      target.style.zIndex = '1';
-                                      const tooltip = target.querySelector('.phone-tooltip') as HTMLElement;
-                                      if (tooltip) {
-                                        tooltip.style.opacity = '0';
-                                        tooltip.style.visibility = 'hidden';
-                                      }
-                                    }}
-                                    title={`${employee.name} - ${employeePhoneDisplay}`}
                                   >
-                                    {employee.name}
-                                    <span
-                                      className="phone-tooltip"
+                                    <p
+                                      className="state-employee-name"
+                                      style={{
+                                        margin: '0 0 8px 0',
+                                        fontSize: '15px',
+                                        fontWeight: '600',
+                                        color: '#190f06',
+                                        lineHeight: 1.4,
+                                      }}
+                                    >
+                                      {employee.name}
+                                    </p>
+                                    <a
+                                      href={employeePhoneHref}
+                                      className="state-employee-phone"
                                       style={{
                                         display: 'block',
-                                        fontSize: '12px',
-                                        fontWeight: '400',
-                                        opacity: 0,
-                                        visibility: 'hidden',
-                                        transition: 'opacity 0.3s ease, visibility 0.3s ease',
-                                        position: 'absolute',
-                                        bottom: '100%',
-                                        left: '50%',
-                                        transform: 'translateX(-50%) translateY(-8px)',
-                                        whiteSpace: 'nowrap',
-                                        backgroundColor: '#190f06',
-                                        color: '#ffffff',
-                                        padding: '6px 12px',
-                                        borderRadius: '6px',
-                                        pointerEvents: 'none',
-                                        zIndex: 1001,
-                                        boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
-                                        marginBottom: '8px'
+                                        margin: '0 0 10px 0',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        color: '#666',
+                                        textDecoration: 'none',
                                       }}
                                     >
                                       {employeePhoneDisplay}
-                                    </span>
-                                  </a>
+                                    </a>
+                                    <a
+                                      href={whatsappHref}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="state-employee-button"
+                                      style={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: '6px',
+                                        padding: '6px 12px',
+                                        backgroundColor: '#faf8f0',
+                                        borderRadius: '6px',
+                                        fontSize: '13px',
+                                        color: '#190f06',
+                                        fontWeight: '500',
+                                        border: '1px solid #e5e5e5',
+                                        textDecoration: 'none',
+                                      }}
+                                    >
+                                      <i className="fab fa-whatsapp" style={{ color: '#25D366' }} />
+                                      {t('contact.stateContacts.whatsapp') || 'WhatsApp'}
+                                    </a>
+                                  </div>
                                 );
                               })}
                             </div>

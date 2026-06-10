@@ -214,7 +214,7 @@
     "company": "Company",
     "sendAMessage": "Send a Message",
     "ourOfficeLocation": "Our Office Location",
-    "location": "Green Gold Seeds Pvt.Ltd. Gut No. 65, Narayanpur Shivar, Waluj, Category: Gangapur, Dist: Chh. Sambhajinagar-431001",
+    "location": "Green Gold Seeds Pvt.Ltd. Gut No. 65, Narayanpur Shivar, Waluj, Taluka: Gangapur, Dist: Chh. Sambhajinagar-431001",
     "stateContacts": {
       "tagline": "Regional Offices",
       "title": "Find Your Regional Contact",
@@ -470,6 +470,15 @@
   "faq": {
     "pageTitle": "FAQ",
     "breadcrumb": "Home / FAQ"
+  },
+  "qualityControlPage": {
+    "certificatesTagline": "Certifications",
+    "certificatesTitle": "Accreditation & Certificates",
+    "certificatesDescription": "Green Gold Seeds maintains nationally recognized quality accreditations. View our official NABL accreditation certificate below.",
+    "nablTitle": "NABL Accreditation Certificate",
+    "nablDescription": "Our Seed Testing Laboratory is NABL accredited (since April 2024) and authorized to issue Seed Analysis Certificates in accordance with ISTA and IMSCS protocols.",
+    "viewCertificate": "Open Certificate",
+    "downloadCertificate": "Download PDF"
   },
   "marketRates": {
     "pageTitle": "Market Rates",

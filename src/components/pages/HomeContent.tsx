@@ -95,9 +95,13 @@ export function HomeContent() {
           slidesPerView: 1,
           spaceBetween: 0,
           loop: true,
-          speed: 1000,
+          speed: 1800,
+          effect: 'fade',
+          fadeEffect: {
+            crossFade: true,
+          },
           autoplay: {
-            delay: 3000,
+            delay: 7000,
             disableOnInteraction: false,
           },
           pagination: {

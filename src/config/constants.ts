@@ -24,6 +24,10 @@ export const FORM_CONFIG = {
   chatFormAction: 'https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php',
 } as const;
 
+export const CERTIFICATE_PATHS = {
+  nabl: '/NABL%20certificate.pdf',
+} as const;
+
 // State-wise contact information
 export interface EmployeeContact {
   name: string;
@@ -51,10 +55,10 @@ export const STATE_CONTACTS: StateContact[] = [
     whatsappHref: 'https://wa.me/919822913371?text=Hello%20from%20GGS%20website',
     email: 'greengoldseeds@rediffmail.com',
     employees: [
-      { name: 'Bhausaheb Tupe Sir', phone: '+919822913371', phoneDisplay: '+91 98229 13371' },
-      { name: 'Abhijeet Changole Sir', phone: '+917774026381', phoneDisplay: '+91 77740 26381' },
-      { name: 'Sanjay Mahajan Sir', phone: '+919850826217', phoneDisplay: '+91 98508 26217' },
-      { name: 'Sandip Baviskar Sir', phone: '+919822913372', phoneDisplay: '+91 98229 13372' }
+      { name: 'Bhausaheb Tupe', phone: '+919822913371', phoneDisplay: '+91 98229 13371' },
+      { name: 'Abhijeet Changole', phone: '+917774026381', phoneDisplay: '+91 77740 26381' },
+      { name: 'Sanjay Mahajan', phone: '+919850826217', phoneDisplay: '+91 98508 26217' },
+      { name: 'Sandip Baviskar', phone: '+919822913372', phoneDisplay: '+91 98229 13372' }
     ]
   },
   {
@@ -65,8 +69,8 @@ export const STATE_CONTACTS: StateContact[] = [
     whatsappHref: 'https://wa.me/918956643173?text=Hello%20from%20GGS%20website',
     email: 'customercare@greengoldseeds.co.in',
     employees: [
-      { name: 'Balaji Rao Sir', phone: '+918956643173', phoneDisplay: '+91 89566 43173' },
-      { name: 'Trinetra Kumar Sir' } // Uses state default phone
+      { name: 'Balaji Rao', phone: '+918956643173', phoneDisplay: '+91 89566 43173' },
+      { name: 'Trinetra Kumar' } // Uses state default phone
     ]
   },
   {
@@ -83,8 +87,8 @@ export const STATE_CONTACTS: StateContact[] = [
     phoneHref: 'tel:+919856643167',
     whatsappHref: 'https://wa.me/919856643167?text=Hello%20from%20GGS%20website',
     employees: [
-      { name: 'Rameah Pal Sir', phone: '+919856643167', phoneDisplay: '+91 98566 43167' },
-      { name: 'Vikas Jaiswal Sir' } // Uses state default phone
+      { name: 'Rameah Pal', phone: '+919856643167', phoneDisplay: '+91 98566 43167' },
+      { name: 'Vikas Jaiswal' } // Uses state default phone
     ]
   },
   {
@@ -94,7 +98,7 @@ export const STATE_CONTACTS: StateContact[] = [
     phoneHref: 'tel:+919822913372',
     whatsappHref: 'https://wa.me/919822913372?text=Hello%20from%20GGS%20website',
     employees: [
-      { name: 'Sandip Baviskar Sir', phone: '+919822913372', phoneDisplay: '+91 98229 13372' }
+      { name: 'Sandip Baviskar', phone: '+919822913372', phoneDisplay: '+91 98229 13372' }
     ]
   },
   {
@@ -114,7 +118,7 @@ export const STATE_CONTACTS: StateContact[] = [
     phoneHref: 'tel:+919657003673',
     whatsappHref: 'https://wa.me/919657003673?text=Hello%20from%20GGS%20website',
     employees: [
-      { name: 'Parkash sajjanar Sir', phone: '+919657003673', phoneDisplay: '+91 96570 03673' }
+      { name: 'Parkash sajjanar', phone: '+919657003673', phoneDisplay: '+91 96570 03673' }
     ]
   },
   {
@@ -124,7 +128,7 @@ export const STATE_CONTACTS: StateContact[] = [
     phoneHref: 'tel:+917774026378',
     whatsappHref: 'https://wa.me/917774026378?text=Hello%20from%20GGS%20website',
     employees: [
-      { name: 'Raj mishra Sir', phone: '+917774026378', phoneDisplay: '+91 77740 26378' }
+      { name: 'Raj mishra', phone: '+917774026378', phoneDisplay: '+91 77740 26378' }
     ]
   },
   {
@@ -134,8 +138,8 @@ export const STATE_CONTACTS: StateContact[] = [
     phoneHref: 'tel:+918888866031',
     whatsappHref: 'https://wa.me/918888866031?text=Hello%20from%20GGS%20website',
     employees: [
-      { name: 'Narayan Jana Sir' }, // Uses state default phone
-      { name: 'Arpitkumar Mishra Sir' } // Uses state default phone
+      { name: 'Narayan Jana' }, // Uses state default phone
+      { name: 'Arpitkumar Mishra' } // Uses state default phone
     ]
   },
   {
@@ -145,7 +149,7 @@ export const STATE_CONTACTS: StateContact[] = [
     phoneHref: 'tel:+918956643147',
     whatsappHref: 'https://wa.me/918956643147?text=Hello%20from%20GGS%20website',
     employees: [
-      { name: 'Sudhakar chavhan Sir', phone: '+918956643147', phoneDisplay: '+91 89566 43147' }
+      { name: 'Sudhakar chavhan', phone: '+918956643147', phoneDisplay: '+91 89566 43147' }
     ]
   },
   {
@@ -155,8 +159,8 @@ export const STATE_CONTACTS: StateContact[] = [
     phoneHref: 'tel:+918956643173',
     whatsappHref: 'https://wa.me/918956643173?text=Hello%20from%20GGS%20website',
     employees: [
-      { name: 'Balaji Rao Sir', phone: '+918956643173', phoneDisplay: '+91 89566 43173' },
-      { name: 'Trinetra Kumar Sir' } // Uses state default phone
+      { name: 'Balaji Rao', phone: '+918956643173', phoneDisplay: '+91 89566 43173' },
+      { name: 'Trinetra Kumar' } // Uses state default phone
     ]
   },
   {
@@ -167,7 +171,7 @@ export const STATE_CONTACTS: StateContact[] = [
     whatsappHref: 'https://wa.me/918956479062?text=Hello%20from%20GGS%20website',
     employees: [
       { name: 'Rakesh Mishra', phone: '+918956479062', phoneDisplay: '+91 89564 79062' },
-      { name: 'Nikhilkumar Singh Sir', phone: '+918956479029', phoneDisplay: '+91 89564 79029' }
+      { name: 'Nikhilkumar Singh', phone: '+918956479029', phoneDisplay: '+91 89564 79029' }
     ]
   },
   {
