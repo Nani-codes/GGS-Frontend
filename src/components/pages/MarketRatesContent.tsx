@@ -62,6 +62,9 @@ export function MarketRatesContent() {
           if (response.status === 503 && result?.code === 'UPSTREAM_UNAVAILABLE') {
             throw new Error('UPSTREAM_UNAVAILABLE');
           }
+          if (result?.code === 'UPSTREAM_AUTH_ERROR') {
+            throw new Error('UPSTREAM_AUTH_ERROR');
+          }
           throw new Error('Failed to fetch commodities');
         }
 
@@ -73,7 +76,9 @@ export function MarketRatesContent() {
         setError(
           err instanceof Error && err.message === 'UPSTREAM_UNAVAILABLE'
             ? t('marketRates.errorUpstream')
-            : t('marketRates.errorLoading')
+            : err instanceof Error && err.message === 'UPSTREAM_AUTH_ERROR'
+              ? t('marketRates.errorServerConfig')
+              : t('marketRates.errorLoading')
         );
       } finally {
         setLoadingCommodities(false);
@@ -96,6 +101,9 @@ export function MarketRatesContent() {
         if (response.status === 503 && result?.code === 'UPSTREAM_UNAVAILABLE') {
           throw new Error('UPSTREAM_UNAVAILABLE');
         }
+        if (result?.code === 'UPSTREAM_AUTH_ERROR') {
+          throw new Error('UPSTREAM_AUTH_ERROR');
+        }
         throw new Error('Failed to fetch rates');
       }
       setRatesResponse(result);
@@ -104,7 +112,9 @@ export function MarketRatesContent() {
       setError(
         err instanceof Error && err.message === 'UPSTREAM_UNAVAILABLE'
           ? t('marketRates.errorUpstream')
-          : t('marketRates.errorLoading')
+          : err instanceof Error && err.message === 'UPSTREAM_AUTH_ERROR'
+            ? t('marketRates.errorServerConfig')
+            : t('marketRates.errorLoading')
       );
     } finally {
       setLoadingRates(false);

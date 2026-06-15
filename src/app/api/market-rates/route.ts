@@ -1,32 +1,91 @@
+import { setDefaultResultOrder } from 'node:dns';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+// Prefer IPv4 on servers where IPv6 routes to api-prod.krushikranti.com fail.
+setDefaultResultOrder('ipv4first');
+
 const DEFAULT_API_BASE = 'https://api-prod.krushikranti.com/bajarbhav';
-const API_BASE = (process.env.KRUSHIKRANTI_API_BASE_URL || DEFAULT_API_BASE).replace(/\/$/, '');
-const API_KEY = process.env.KRUSHIKRANTI_API_KEY || 'krushikrantiytoierenfmdnclksajdsk';
+const DEFAULT_API_KEY = 'krushikrantiytoierenfmdnclksajdsk';
 
-const API_HEADERS = {
-  accept: 'application/json, text/plain, */*',
-  'accept-language': 'en-GB,en-IN;q=0.9,en-US;q=0.8,en;q=0.7,hi;q=0.6',
-  'cache-control': 'no-cache',
-  origin: 'https://www.krushikranti.com',
-  referer: 'https://www.krushikranti.com/',
-  'x-api-key': API_KEY,
-};
+function getApiBase(): string {
+  return (process.env.KRUSHIKRANTI_API_BASE_URL || DEFAULT_API_BASE).trim().replace(/\/$/, '');
+}
 
-const FETCH_TIMEOUT_MS = 20_000;
-const MAX_ATTEMPTS = 2;
+function getApiKey(): string {
+  const key = process.env.KRUSHIKRANTI_API_KEY?.trim();
+  return key || DEFAULT_API_KEY;
+}
+
+function buildApiHeaders(): Record<string, string> {
+  return {
+    accept: 'application/json, text/plain, */*',
+    'accept-language': 'en-GB,en-IN;q=0.9,en-US;q=0.8,en;q=0.7,hi;q=0.6',
+    'cache-control': 'no-cache',
+    origin: 'https://www.krushikranti.com',
+    referer: 'https://www.krushikranti.com/',
+    'user-agent': 'GreenGoldSeeds/1.0 (+https://www.greengoldseeds.co.in)',
+    'x-api-key': getApiKey(),
+  };
+}
+
+const FETCH_TIMEOUT_MS = 25_000;
+const MAX_ATTEMPTS = 3;
+
+function getErrorCode(error: unknown): string | undefined {
+  if (!(error instanceof Error)) return undefined;
+  const cause = error.cause as { code?: string } | undefined;
+  return cause?.code || (error as { code?: string }).code;
+}
 
 function isUpstreamNetworkError(error: unknown): boolean {
   if (!(error instanceof Error)) return false;
-  const cause = error.cause as NodeJS.ErrnoException | undefined;
-  const code = cause?.code;
+
+  const code = getErrorCode(error);
+  const message = error.message.toLowerCase();
+
+  if (error.name === 'AbortError' || message.includes('aborted')) {
+    return true;
+  }
+
+  const networkCodes = new Set([
+    'ENOTFOUND',
+    'ECONNREFUSED',
+    'ETIMEDOUT',
+    'EAI_AGAIN',
+    'ECONNRESET',
+    'EPROTO',
+    'EHOSTUNREACH',
+    'ENETUNREACH',
+    'UND_ERR_CONNECT_TIMEOUT',
+    'UND_ERR_SOCKET',
+    'CERT_HAS_EXPIRED',
+    'UNABLE_TO_VERIFY_LEAF_SIGNATURE',
+  ]);
+
   return (
-    error.message.includes('fetch failed') ||
-    code === 'ENOTFOUND' ||
-    code === 'ECONNREFUSED' ||
-    code === 'ETIMEDOUT' ||
-    code === 'EAI_AGAIN'
+    message.includes('fetch failed') ||
+    message.includes('network') ||
+    message.includes('socket') ||
+    message.includes('timed out') ||
+    (code ? networkCodes.has(code) : false)
   );
+}
+
+async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs: number): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, {
+      ...init,
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timeoutId);
+  }
 }
 
 async function fetchUpstream(url: string): Promise<Response> {
@@ -34,17 +93,20 @@ async function fetchUpstream(url: string): Promise<Response> {
 
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: API_HEADERS,
-        cache: 'no-store',
-        signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
-      });
+      const response = await fetchWithTimeout(
+        url,
+        {
+          method: 'GET',
+          headers: buildApiHeaders(),
+          cache: 'no-store',
+        },
+        FETCH_TIMEOUT_MS
+      );
       return response;
     } catch (error) {
       lastError = error;
       if (attempt < MAX_ATTEMPTS && isUpstreamNetworkError(error)) {
-        await new Promise((resolve) => setTimeout(resolve, 400));
+        await new Promise((resolve) => setTimeout(resolve, 500 * attempt));
         continue;
       }
       throw error;
@@ -98,6 +160,8 @@ function parseHtmlTable(html: string): any[] {
 }
 
 export async function GET(request: NextRequest) {
+  const apiBase = getApiBase();
+
   try {
     const { searchParams } = new URL(request.url);
     const district = searchParams.get('district');
@@ -106,9 +170,9 @@ export async function GET(request: NextRequest) {
     let apiUrl: string;
 
     if (slug) {
-      apiUrl = `${API_BASE}/${slug}`;
+      apiUrl = `${apiBase}/${slug}`;
     } else {
-      apiUrl = API_BASE;
+      apiUrl = apiBase;
       if (district === 'yes') {
         apiUrl += '?district=yes';
       }
@@ -117,18 +181,44 @@ export async function GET(request: NextRequest) {
     const response = await fetchUpstream(apiUrl);
 
     if (!response.ok) {
-      throw new Error(`API responded with status: ${response.status}`);
-    }
+      const errorBody = (await response.text()).slice(0, 200);
+      console.error('Market rates upstream HTTP error:', {
+        status: response.status,
+        url: apiUrl,
+        body: errorBody,
+        hostname: new URL(apiBase).hostname,
+      });
 
-    const data = await response.json();
-
-    if (slug && data.b_desc) {
-      const parsedRates = parseHtmlTable(data.b_desc);
       return NextResponse.json(
         {
-          title: data.b_title,
-          meta_title: data.meta_title,
-          image: data.filename1,
+          error: 'Market rates provider returned an error. Please verify server API credentials.',
+          code: response.status === 404 ? 'UPSTREAM_AUTH_ERROR' : 'UPSTREAM_HTTP_ERROR',
+          upstreamStatus: response.status,
+        },
+        { status: 502 }
+      );
+    }
+
+    let data: unknown;
+    try {
+      data = await response.json();
+    } catch (parseError) {
+      console.error('Market rates JSON parse error:', parseError);
+      return NextResponse.json(
+        { error: 'Invalid response from market rates provider', code: 'UPSTREAM_PARSE_ERROR' },
+        { status: 502 }
+      );
+    }
+
+    const payload = data as Record<string, any>;
+
+    if (slug && payload.b_desc) {
+      const parsedRates = parseHtmlTable(payload.b_desc);
+      return NextResponse.json(
+        {
+          title: payload.b_title,
+          meta_title: payload.meta_title,
+          image: payload.filename1,
           rates: parsedRates,
         },
         {
@@ -168,16 +258,21 @@ export async function GET(request: NextRequest) {
       const cause = error instanceof Error ? (error.cause as { hostname?: string } | undefined) : undefined;
       return NextResponse.json(
         {
-          error: 'Could not reach the market rates provider. Check your internet connection and DNS, then try again.',
+          error: 'Could not reach the market rates provider from the server. Check outbound network/DNS access.',
           code: 'UPSTREAM_UNAVAILABLE',
-          hostname: cause?.hostname ?? new URL(API_BASE).hostname,
+          hostname: cause?.hostname ?? new URL(apiBase).hostname,
+          detail: error instanceof Error ? error.message : 'Unknown network error',
         },
         { status: 503 }
       );
     }
 
     return NextResponse.json(
-      { error: 'Failed to fetch market rates', code: 'UPSTREAM_ERROR' },
+      {
+        error: 'Failed to fetch market rates',
+        code: 'UPSTREAM_ERROR',
+        detail: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }
