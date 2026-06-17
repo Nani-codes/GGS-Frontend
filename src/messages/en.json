@@ -512,7 +512,7 @@
     },
     "ctaTitle": "Need Help with Market Information?",
     "ctaDescription": "Contact our team for personalized guidance on market trends and pricing information.",
-    "disclaimer": "Disclaimer: The market rates displayed on this page are sourced from public market data and are updated as per market updates. Green Gold Seeds Pvt. Ltd. is not responsible for the accuracy, completeness, or timeliness of the information provided. These rates are for informational purposes only and should not be considered as trading advice. Please verify with your local market committee before making any decisions."
+    "disclaimer": "Disclaimer: Market rates are sourced from AGMARKNET via data.gov.in (Government of India) and reflect Maharashtra mandi prices. Green Gold Seeds Pvt. Ltd. is not responsible for the accuracy, completeness, or timeliness of the information provided. These rates are for informational purposes only and should not be considered as trading advice. Please verify with your local market committee before making any decisions."
   },
   "weather": {
     "pageTitle": "Weather",

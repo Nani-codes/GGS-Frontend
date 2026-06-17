@@ -95,7 +95,11 @@ export function MarketRatesContent() {
     setError(null);
 
     try {
-      const response = await fetch(`/api/market-rates?slug=${encodeURIComponent(commodity.slug)}`);
+      const params = new URLSearchParams({ slug: commodity.slug });
+      if (viewType === 'district') {
+        params.set('district', 'yes');
+      }
+      const response = await fetch(`/api/market-rates?${params.toString()}`);
       const result = await response.json().catch(() => ({}));
       if (!response.ok) {
         if (response.status === 503 && result?.code === 'UPSTREAM_UNAVAILABLE') {
