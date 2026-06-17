@@ -95,6 +95,7 @@ export function HomeContent() {
           slidesPerView: 1,
           spaceBetween: 0,
           loop: true,
+          autoHeight: false,
           speed: 1800,
           effect: 'fade',
           fadeEffect: {
@@ -232,20 +233,15 @@ export function HomeContent() {
           {/* Slide 4 - Website Map (desktop) / Mobile Map (mobile) */}
           <div className="swiper-slide">
             <section 
-              className="banner-one banner-one--bg-only" 
+              className="banner-one banner-one--bg-only banner-one--map" 
               style={{ 
                 backgroundImage: `url(${isMobile 
                   ? '/assets/images/backgrounds/Mobile_Map_newmoible.jpeg' 
                   : '/assets/images/backgrounds/Website_Map_new.jpeg'
                 })`,
-                backgroundSize: isMobile ? 'contain' : 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundColor: '#faf8f0'
+                backgroundColor: '#faf8f0',
               }}
             >
-              <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/banner-one-shape-bg.png)' }}>
-              </div>
             </section>
           </div>
           {/* Slide 5 - Product banner (Website-banner-1Artboard-1) */}
