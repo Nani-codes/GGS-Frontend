@@ -107,6 +107,18 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    if (error instanceof Error && error.message.startsWith('AGMARKNET_HTTP_429')) {
+      return NextResponse.json(
+        {
+          error:
+            'Market rates provider rate limit reached. Register a dedicated API key at data.gov.in, set DATA_GOV_IN_API_KEY, then try again in a few minutes.',
+          code: 'RATE_LIMIT',
+          upstreamStatus: 429,
+        },
+        { status: 503 }
+      );
+    }
+
     return NextResponse.json(
       {
         error: 'Failed to fetch market rates',

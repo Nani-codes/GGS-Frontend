@@ -491,6 +491,7 @@
     "allCommodities": "All",
     "errorLoading": "Failed to load market rates. Please try again.",
     "errorUpstream": "Could not reach the market rates service. Check your internet connection and try again.",
+    "errorRateLimit": "Market rates are temporarily busy. Wait a few minutes, or ask your administrator to set a dedicated data.gov.in API key (DATA_GOV_IN_API_KEY).",
     "errorServerConfig": "Market rates are temporarily unavailable due to a server configuration issue. Please contact the site administrator.",
     "retry": "Retry",
     "noData": "No market data available at the moment.",

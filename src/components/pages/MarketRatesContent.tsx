@@ -33,6 +33,29 @@ interface RatesResponse {
 
 type ViewType = 'all' | 'district';
 
+function getMarketRatesErrorMessage(
+  err: unknown,
+  result: { code?: string } | undefined,
+  t: ReturnType<typeof useTranslations>
+): string {
+  if (err instanceof Error && err.message === 'UPSTREAM_UNAVAILABLE') {
+    return t('marketRates.errorUpstream');
+  }
+  if (
+    (err instanceof Error && err.message === 'UPSTREAM_AUTH_ERROR') ||
+    result?.code === 'UPSTREAM_AUTH_ERROR'
+  ) {
+    return t('marketRates.errorServerConfig');
+  }
+  if (
+    (err instanceof Error && err.message === 'RATE_LIMIT') ||
+    result?.code === 'RATE_LIMIT'
+  ) {
+    return t('marketRates.errorRateLimit');
+  }
+  return t('marketRates.errorLoading');
+}
+
 export function MarketRatesContent() {
   const t = useTranslations();
   const [viewType, setViewType] = useState<ViewType>('all');
@@ -65,6 +88,9 @@ export function MarketRatesContent() {
           if (result?.code === 'UPSTREAM_AUTH_ERROR') {
             throw new Error('UPSTREAM_AUTH_ERROR');
           }
+          if (result?.code === 'RATE_LIMIT') {
+            throw new Error('RATE_LIMIT');
+          }
           throw new Error('Failed to fetch commodities');
         }
 
@@ -73,13 +99,7 @@ export function MarketRatesContent() {
         setCommodities(items);
       } catch (err) {
         console.error('Error fetching commodities:', err);
-        setError(
-          err instanceof Error && err.message === 'UPSTREAM_UNAVAILABLE'
-            ? t('marketRates.errorUpstream')
-            : err instanceof Error && err.message === 'UPSTREAM_AUTH_ERROR'
-              ? t('marketRates.errorServerConfig')
-              : t('marketRates.errorLoading')
-        );
+        setError(getMarketRatesErrorMessage(err, undefined, t));
       } finally {
         setLoadingCommodities(false);
       }
@@ -108,18 +128,15 @@ export function MarketRatesContent() {
         if (result?.code === 'UPSTREAM_AUTH_ERROR') {
           throw new Error('UPSTREAM_AUTH_ERROR');
         }
+        if (result?.code === 'RATE_LIMIT') {
+          throw new Error('RATE_LIMIT');
+        }
         throw new Error('Failed to fetch rates');
       }
       setRatesResponse(result);
     } catch (err) {
       console.error('Error fetching rates:', err);
-      setError(
-        err instanceof Error && err.message === 'UPSTREAM_UNAVAILABLE'
-          ? t('marketRates.errorUpstream')
-          : err instanceof Error && err.message === 'UPSTREAM_AUTH_ERROR'
-            ? t('marketRates.errorServerConfig')
-            : t('marketRates.errorLoading')
-      );
+      setError(getMarketRatesErrorMessage(err, undefined, t));
     } finally {
       setLoadingRates(false);
     }
