@@ -251,7 +251,7 @@ export function HomeContent() {
               style={{ 
                 backgroundImage: `url(${isMobile 
                   ? '/assets/images/backgrounds/WebsitebannerMobilesize_newchanged0moible.jpg.jpeg' 
-                  : '/assets/images/backgrounds/Websitebanner1_changednewArtboard1.jpg.jpeg'
+                  : '/assets/images/backgrounds/Websitebanner1_changednewArtboard1.png'
                 })`,
               }}
             >
@@ -687,7 +687,7 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="/assets/images/backgrounds/cotton_home.jpg" alt="Cotton lint close-up" />
+                        <img src="/assets/images/backgrounds/cotton.jpeg" alt="Cotton Hybrids" />
                       </div>
                     </div>
                     <div className="products-one__content">
@@ -712,7 +712,7 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="/assets/images/backgrounds/field_crop_home.jpg" alt="Field crops assortment" />
+                        <img src="/assets/images/backgrounds/field_crop.jpeg" alt="Field Crops" />
                       </div>
                     </div>
                     <div className="products-one__content">
@@ -737,7 +737,7 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="/assets/images/backgrounds/pulses_home.jpg" alt="Pulses and grains assortment" />
+                        <img src="/assets/images/backgrounds/pulses.jpeg" alt="Oilseeds & Pulses" />
                       </div>
                     </div>
                     <div className="products-one__content">
@@ -762,7 +762,7 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="/assets/images/backgrounds/vegetable_home.jpg" alt="Vegetable seeds assortment" />
+                        <img src="/assets/images/backgrounds/vegetables.jpeg" alt="Vegetable Seeds" />
                       </div>
                     </div>
                     <div className="products-one__content">
@@ -1313,9 +1313,6 @@ export function HomeContent() {
                   <div className="faq-one__left wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
                     <div className="faq-one__contact-box">
                       <div className="faq-one__contact-box-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/faq-one-contact-box-bg-shape.png)' }}>
-                      </div>
-                      <div className="faq-one__contact-shape-1">
-                        <img src="/assets/images/shapes/faq-one-contact-shape-1.png" alt="" />
                       </div>
                       <div className="faq-one__author-box-inner">
                         <div className="faq-one__author-shape-1">
@@ -1905,9 +1902,6 @@ export function HomeContent() {
                   <div className="faq-one__left">
                     <div className="faq-one__contact-box">
                       <div className="faq-one__contact-box-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/faq-one-contact-box-bg-shape.png)' }}>
-                      </div>
-                      <div className="faq-one__contact-shape-1">
-                        <img src="/assets/images/shapes/faq-one-contact-shape-1.png" alt="" />
                       </div>
                       <div className="faq-one__author-box-inner">
                         <div className="faq-one__author-shape-1">
