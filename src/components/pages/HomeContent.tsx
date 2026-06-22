@@ -233,7 +233,7 @@ export function HomeContent() {
           {/* Slide 4 - Website Map (desktop) / Mobile Map (mobile) */}
           <div className="swiper-slide">
             <section 
-              className="banner-one banner-one--bg-only banner-one--map" 
+              className="banner-one banner-one--bg-only banner-one--contain banner-one--map" 
               style={{ 
                 backgroundImage: `url(${isMobile 
                   ? '/assets/images/backgrounds/Mobile_Map_newmoible.jpeg' 
@@ -247,7 +247,7 @@ export function HomeContent() {
           {/* Slide 5 - Product banner (Website-banner-1Artboard-1) */}
           <div className="swiper-slide">
             <section 
-              className="banner-one banner-one--bg-only" 
+              className="banner-one banner-one--bg-only banner-one--contain" 
               style={{ 
                 backgroundImage: `url(${isMobile 
                   ? '/assets/images/backgrounds/WebsitebannerMobilesize_newchanged0moible.jpg.jpeg' 
@@ -260,7 +260,7 @@ export function HomeContent() {
           {/* Slide 6 - Product banner (Website-banner-1Artboard-2) */}
           <div className="swiper-slide">
             <section 
-              className="banner-one banner-one--bg-only" 
+              className="banner-one banner-one--bg-only banner-one--contain" 
               style={{ 
                 backgroundImage: `url(${isMobile 
                   ? '/assets/images/backgrounds/WebsitebannerMobilesize_newchanged0Artboard2.jpg.jpeg' 

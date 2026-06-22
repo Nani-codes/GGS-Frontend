@@ -1,0 +1,134 @@
+/* Green Gold Seeds — solid white navbar on every page */
+
+.main-header .main-menu__wrapper,
+.main-header--inner .main-menu__wrapper {
+  background-color: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+.main-header--inner .main-menu__wrapper-inner {
+  background: transparent !important;
+}
+
+/* Nav links — dark text on white background (all pages) */
+.main-header .main-menu__list > li > a,
+.main-header--inner .main-menu__list > li > a,
+.main-header .main-menu__list > li.dropdown > a:after,
+.main-header--inner .main-menu__list > li.dropdown > a:after {
+  color: var(--farmology-black, #190f06) !important;
+}
+
+.main-header .main-menu__list > li:hover > a,
+.main-header--inner .main-menu__list > li:hover > a {
+  color: var(--farmology-base, #1a6b3f) !important;
+}
+
+.main-header--inner .main-menu__call-sub-title,
+.main-header--inner .main-menu__call-number a {
+  color: var(--farmology-gray, #666) !important;
+}
+
+.main-header--inner .main-menu__call-number a {
+  color: var(--farmology-black, #190f06) !important;
+}
+
+/* Sticky header */
+.stricky-header.main-menu {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stricky-header.main-menu .main-menu__list > li > a {
+  color: var(--farmology-black, #190f06) !important;
+}
+
+/* Mobile menu toggler on white navbar */
+.main-header .mobile-nav__toggler,
+.main-header--inner .mobile-nav__toggler {
+  color: var(--farmology-black, #190f06) !important;
+}
+
+/* Page header — 1920×604 artwork; keep farmer (right side) fully visible */
+.page-header:not(.market-rates-page-header) {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1920 / 604;
+  overflow: hidden;
+}
+
+.page-header:not(.market-rates-page-header) .page-header__bg {
+  background-size: cover !important;
+  /* Subject (farmer) is on the right — anchor there instead of center crop */
+  background-position: 68% center !important;
+  background-repeat: no-repeat !important;
+}
+
+.page-header:not(.market-rates-page-header) .container {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.page-header:not(.market-rates-page-header) .page-header__inner {
+  padding: clamp(130px, 16vw, 180px) 15px clamp(24px, 4vw, 48px) !important;
+  margin-bottom: 0 !important;
+  width: 100%;
+  max-width: 58%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.page-header:not(.market-rates-page-header) .page-header__inner h3 {
+  font-size: clamp(28px, 3.8vw, 56px) !important;
+  line-height: 1.15 !important;
+  margin-bottom: 10px !important;
+}
+
+@media (min-width: 1200px) {
+  .page-header:not(.market-rates-page-header) .page-header__inner {
+    padding-left: clamp(40px, 5vw, 80px) !important;
+    max-width: 52%;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Stack header above hero on mobile — no overlap */
+  .main-header--inner {
+    position: relative !important;
+  }
+
+  .page-header:not(.market-rates-page-header) {
+    aspect-ratio: unset;
+    height: clamp(240px, 52vw, 320px);
+    min-height: 240px;
+  }
+
+  .page-header:not(.market-rates-page-header) .page-header__bg {
+    background-size: cover !important;
+    background-position: 88% center !important;
+  }
+
+  .page-header:not(.market-rates-page-header) .page-header__inner {
+    padding: clamp(28px, 7vw, 40px) 16px 20px !important;
+    max-width: 62%;
+  }
+
+  .page-header:not(.market-rates-page-header) .page-header__inner h3 {
+    font-size: clamp(22px, 6vw, 30px) !important;
+  }
+
+  .page-header:not(.market-rates-page-header) .thm-breadcrumb li,
+  .page-header:not(.market-rates-page-header) .thm-breadcrumb li a {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+  }
+}

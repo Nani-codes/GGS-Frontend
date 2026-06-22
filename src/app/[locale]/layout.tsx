@@ -23,6 +23,7 @@ const cssAssets = [
   "/assets/css/aos.css",
   "/assets/css/style.css",
   "/assets/css/responsive.css",
+  "/assets/css/ggs-header-overrides.css",
 ];
 
 const scriptAssets = [

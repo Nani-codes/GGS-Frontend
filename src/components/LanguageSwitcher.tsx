@@ -14,19 +14,15 @@ export function LanguageSwitcher() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Decide text color based on where the switcher is rendered.
-    // - `main-header--inner` uses a dark/glass header overlay -> needs white text
-    // - `main-menu-two` uses a darker background in this project -> needs white text
-    // - sticky header is white -> needs dark text
+    // White navbar on all pages — only main-menu-two uses light text on dark bg
     const detectContext = () => {
       const el = dropdownRef.current;
       if (!el) return;
 
       const inMenuTwo = Boolean(el.closest('.main-menu-two, .main-menu-two__right'));
-      const inInnerHeader = Boolean(el.closest('.main-header--inner'));
       const inStickyHeader = Boolean(el.closest('.stricky-header'));
 
-      setUseWhiteText((inMenuTwo || inInnerHeader) && !inStickyHeader);
+      setUseWhiteText(inMenuTwo && !inStickyHeader);
     };
     
     // Check on mount and after a short delay to ensure DOM is ready

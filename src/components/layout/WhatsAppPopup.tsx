@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect } from 'react';
+import { SOCIAL_LINKS } from '@/config/constants';
 
 export function WhatsAppPopup() {
-  const whatsappGroupLink = "https://chat.whatsapp.com/";
+  const whatsappGroupLink = SOCIAL_LINKS.whatsappGroup;
   
   useEffect(() => {
     // Add styles to document head if not already added

@@ -1345,12 +1345,13 @@ body {
 
 /* Homepage featured products */
 .products-one__img {
-  --product-image-display-size: 85%;
-  aspect-ratio: 4 / 3;
+  --product-image-display-size: 92%;
+  aspect-ratio: 1600 / 838;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--farmology-white, #ffffff);
+  overflow: hidden;
 }
 
 .products-one__img img {
@@ -1505,16 +1506,16 @@ body {
   }
   
   .products-one__img {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1600 / 838;
     height: auto !important;
     margin-bottom: 0 !important;
   }
-  
+
   .products-one__img img {
-    width: var(--product-image-display-size, 85%) !important;
-    height: var(--product-image-display-size, 85%) !important;
-    max-width: var(--product-image-display-size, 85%) !important;
-    max-height: var(--product-image-display-size, 85%) !important;
+    width: var(--product-image-display-size, 92%) !important;
+    height: var(--product-image-display-size, 92%) !important;
+    max-width: var(--product-image-display-size, 92%) !important;
+    max-height: var(--product-image-display-size, 92%) !important;
     object-fit: contain !important;
   }
   
@@ -3063,18 +3064,15 @@ body {
   }
 }
 
-/* ===== BANNER SLIDER — standard 16:9 hero ratio ===== */
-.banner-slider__carousel {
+/* ===== BANNER SLIDER — 16:9 @ 1920×1080, responsive on all screens ===== */
+.banner-slider__carousel,
+.banner-slider__carousel.swiper-container {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: min(85vh, 920px);
+  height: auto !important;
   overflow: hidden;
   background-color: #faf8f0;
-}
-
-.banner-slider__carousel.swiper-container {
-  height: 100%;
 }
 
 .banner-slider__carousel .swiper-wrapper {
@@ -3096,7 +3094,7 @@ body {
   background-repeat: no-repeat !important;
 }
 
-/* Image-only carousel slides */
+/* Photo backgrounds (farmer slide) */
 section.banner-one.banner-one--bg-only {
   padding: 0 !important;
   min-height: 100% !important;
@@ -3106,16 +3104,29 @@ section.banner-one.banner-one--bg-only {
   background-repeat: no-repeat !important;
 }
 
-/* Map slide: full image visible (portrait mobile + max-height squeeze on desktop) */
+/* Designed banners (1920×1080 desktop, 375×854 mobile) — full artwork visible */
+.banner-slider__carousel .swiper-slide .banner-one.banner-one--contain,
+section.banner-one.banner-one--contain,
 .banner-slider__carousel .swiper-slide .banner-one.banner-one--map,
 section.banner-one.banner-one--map {
   background-size: contain !important;
   background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Desktop/tablet: 16:9 frame matches 1920×1080 artwork exactly */
+@media (min-width: 768px) {
+  .banner-slider__carousel .swiper-slide .banner-one.banner-one--contain,
+  section.banner-one.banner-one--contain,
+  .banner-slider__carousel .swiper-slide .banner-one.banner-one--map,
+  section.banner-one.banner-one--map {
+    background-size: 100% 100% !important;
+  }
 }
 
 /* Slide 1: text + image hero within the same frame */
 .banner-slider__carousel .swiper-slide .banner-one:not(.banner-one--bg-only) {
-  padding: clamp(32px, 6vh, 100px) 0;
+  padding: clamp(32px, 5vw, 80px) 0;
   display: flex;
   align-items: center;
 }
@@ -3128,34 +3139,48 @@ section.banner-one.banner-one--map {
   width: 100%;
 }
 
-/* Tablet */
-@media (max-width: 991px) {
-  .banner-slider__carousel {
-    max-height: min(75vh, 720px);
-  }
-
+/* Large desktop — matches 1920×1080 banner art 1:1 at full width */
+@media (min-width: 1200px) {
   .banner-slider__carousel .swiper-slide .banner-one:not(.banner-one--bg-only) {
-    padding: clamp(28px, 5vh, 72px) 0;
+    padding: clamp(40px, 4vw, 72px) 0;
   }
 }
 
-/* Mobile — slightly taller ratio so slide-1 copy remains readable */
+/* Tablet — keep 16:9 proportion from width */
+@media (max-width: 991px) {
+  .banner-slider__carousel .swiper-slide .banner-one:not(.banner-one--bg-only) {
+    padding: clamp(24px, 4vw, 56px) 0;
+  }
+}
+
+/* Mobile — frame matches mobile banner art (375×854) */
 @media (max-width: 767px) {
-  .banner-slider__carousel {
-    aspect-ratio: 4 / 3;
-    max-height: none;
+  .banner-slider__carousel,
+  .banner-slider__carousel.swiper-container {
+    aspect-ratio: 375 / 854;
+  }
+
+  /* Mobile art in mobile frame */
+  .banner-slider__carousel .swiper-slide .banner-one.banner-one--contain,
+  section.banner-one.banner-one--contain {
+    background-size: 100% 100% !important;
   }
 
   .banner-slider__carousel .swiper-slide .banner-one:not(.banner-one--bg-only) {
-    padding: 28px 0;
+    padding: 20px 0;
     min-height: 100% !important;
     height: 100% !important;
     align-items: center;
     overflow-y: auto;
   }
 
+  .banner-slider__carousel .swiper-slide .banner-one.banner-one--bg-only:not(.banner-one--contain):not(.banner-one--map) {
+    background-size: cover !important;
+    background-position: center 35% !important;
+  }
+
   .banner-slider__pagination {
-    bottom: 15px !important;
+    bottom: 10px !important;
     left: 0;
     right: 0;
     text-align: center;
@@ -3165,7 +3190,7 @@ section.banner-one.banner-one--map {
     width: 8px;
     height: 8px;
     margin: 0 4px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.55);
     opacity: 1;
     border-radius: 50%;
     display: inline-block;
@@ -3178,8 +3203,14 @@ section.banner-one.banner-one--map {
   }
 }
 
+@media (max-width: 479px) {
+  .banner-slider__carousel .swiper-slide .banner-one:not(.banner-one--bg-only) {
+    padding: 16px 0;
+  }
+}
 
-/* Inner Page Header Overlay */
+
+/* Inner Page Header Overlay — layout only; colors in ggs-header-overrides.css */
 .main-header--inner {
   position: absolute !important;
   top: 0;
@@ -3190,48 +3221,7 @@ section.banner-one.banner-one--map {
 }
 
 .main-header--inner .main-menu__top-inner {
-  /* Softer, more transparent top strip on inner pages */
-  background-color: rgba(26, 107, 63, 0.6) !important;
-}
-
-.main-header--inner .main-menu__wrapper {
-  /* Dark glass overlay similar to the provided screenshot */
-  background-color: rgba(0, 0, 0, 0.25) !important;
-  backdrop-filter: blur(10px);
-}
-
-.main-header--inner .main-menu__wrapper-inner {
-    background: transparent !important;
-}
-
-.main-header--inner .main-menu__list > li > a {
-  color: #ffffff !important; /* White text for contrast on dark bg images */
-}
-
-.main-header--inner .main-menu__list > li.dropdown > a:after {
-  color: #ffffff !important;
-}
-
-.main-header--inner .main-menu__list > li:hover > a {
-    color: var(--farmology-base) !important;
-}
-
-/* Make the call widget readable on dark/glass headers */
-.main-header--inner .main-menu__call-sub-title,
-.main-header--inner .main-menu__call-number a {
-  color: #ffffff !important;
-}
-.main-header--inner .main-menu__call-icon {
-  background-color: rgba(245, 203, 75, 0.9) !important;
-  color: #12462b !important; /* keep contrast inside the icon */
-}
-
-/* Ensure sticky header still works */
-.stricky-header.main-menu {
-  background-color: #ffffff !important;
-}
-.stricky-header.main-menu .main-menu__list > li > a {
-    color: #000000 !important;
+  background-color: var(--farmology-extra, #1a6b3f) !important;
 }
 
 /* ========== Products Header Category Pills ========== */

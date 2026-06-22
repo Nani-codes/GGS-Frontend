@@ -239,7 +239,7 @@
   },
   "about": {
     "pageTitle": "About Us",
-    "breadcrumb": "Home / About",
+    "breadcrumb": "About",
     "title": "About Green Gold Seeds",
     "description": "Learn about our company, mission, and values.",
     "ourStory": "Our Story",
@@ -325,7 +325,7 @@
   },
   "products": {
     "pageTitle": "Products",
-    "breadcrumb": "Home / Products",
+    "breadcrumb": "Products",
     "sortByPopular": "Sort by popular",
     "sortByPrice": "Sort by Price",
     "sortByRatings": "Sort by Ratings",
@@ -345,13 +345,13 @@
   },
   "services": {
     "pageTitle": "Services",
-    "breadcrumb": "Home / Services",
+    "breadcrumb": "Services",
     "diagnosticsTest": "Diagnostics Test",
     "diagnosticsTestDescription": "Comprehensive crop and soil diagnostics to improve yield quality."
   },
   "diagnosticsTest": {
     "pageTitle": "Diagnostic Test",
-    "breadcrumb": "Home / Diagnostic Test",
+    "breadcrumb": "Diagnostic Test",
     "title": "Diagnostic Test",
     "ourServices": "Our Services",
     "diagnosticsTest": "Diagnostics Test",
@@ -408,7 +408,7 @@
   },
   "blog": {
     "pageTitle": "Quality Control",
-    "breadcrumb": "Home / Quality Control"
+    "breadcrumb": "Quality Control"
   },
   "homeExtra": {
     "doDonts": {
@@ -469,7 +469,7 @@
   },
   "faq": {
     "pageTitle": "FAQ",
-    "breadcrumb": "Home / FAQ"
+    "breadcrumb": "FAQ"
   },
   "qualityControlPage": {
     "certificatesTagline": "Certifications",

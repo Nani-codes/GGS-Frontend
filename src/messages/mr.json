@@ -239,7 +239,7 @@
   },
   "about": {
     "pageTitle": "आमच्याबद्दल",
-    "breadcrumb": "मुख्यपृष्ठ / आमच्याबद्दल",
+    "breadcrumb": "आमच्याबद्दल",
     "title": "ग्रीन गोल्ड सीड्स बद्दल",
     "description": "आमच्या कंपनी, मिशन आणि मूल्यांबद्दल जाणून घ्या.",
     "ourStory": "आमची कहाणी",
@@ -325,7 +325,7 @@
   },
   "products": {
     "pageTitle": "उत्पादने",
-    "breadcrumb": "मुख्यपृष्ठ / उत्पादने",
+    "breadcrumb": "उत्पादने",
     "sortByPopular": "लोकप्रियतेनुसार क्रमवारी लावा",
     "sortByPrice": "किंमतीनुसार क्रमवारी लावा",
     "sortByRatings": "रेटिंगनुसार क्रमवारी लावा",
@@ -345,13 +345,13 @@
   },
   "services": {
     "pageTitle": "सेवा",
-    "breadcrumb": "मुख्यपृष्ठ / सेवा",
+    "breadcrumb": "सेवा",
     "diagnosticsTest": "निदान चाचणी",
     "diagnosticsTestDescription": "उत्पादन गुणवत्ता सुधारण्यासाठी व्यापक पीक आणि माती निदान।"
   },
   "diagnosticsTest": {
     "pageTitle": "निदान चाचणी",
-    "breadcrumb": "मुख्यपृष्ठ / निदान चाचणी",
+    "breadcrumb": "निदान चाचणी",
     "title": "निदान चाचणी",
     "ourServices": "आमच्या सेवा",
     "diagnosticsTest": "निदान चाचणी",
@@ -407,7 +407,7 @@
   },
   "blog": {
     "pageTitle": "गुणवत्ता नियंत्रण",
-    "breadcrumb": "मुख्यपृष्ठ / गुणवत्ता नियंत्रण"
+    "breadcrumb": "गुणवत्ता नियंत्रण"
   },
   "homeExtra": {
     "doDonts": {
@@ -468,7 +468,7 @@
   },
   "faq": {
     "pageTitle": "सामान्य प्रश्न",
-    "breadcrumb": "मुख्यपृष्ठ / सामान्य प्रश्न"
+    "breadcrumb": "सामान्य प्रश्न"
   },
   "qualityControlPage": {
     "certificatesTagline": "प्रमाणपत्रे",
