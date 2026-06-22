@@ -3104,7 +3104,7 @@ section.banner-one.banner-one--bg-only {
   background-repeat: no-repeat !important;
 }
 
-/* Designed banners (1920×1080 desktop, 375×854 mobile) — full artwork visible */
+/* Designed banners (1920×1080 desktop, 1080×1960 mobile) — full artwork visible */
 .banner-slider__carousel .swiper-slide .banner-one.banner-one--contain,
 section.banner-one.banner-one--contain,
 .banner-slider__carousel .swiper-slide .banner-one.banner-one--map,
@@ -3153,11 +3153,11 @@ section.banner-one.banner-one--map {
   }
 }
 
-/* Mobile — frame matches mobile banner art (375×854) */
+/* Mobile — frame matches mobile banner art (1080×1960) */
 @media (max-width: 767px) {
   .banner-slider__carousel,
   .banner-slider__carousel.swiper-container {
-    aspect-ratio: 375 / 854;
+    aspect-ratio: 1080 / 1960;
   }
 
   /* Mobile art in mobile frame */

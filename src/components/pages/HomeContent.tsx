@@ -250,7 +250,7 @@ export function HomeContent() {
               className="banner-one banner-one--bg-only banner-one--contain" 
               style={{ 
                 backgroundImage: `url(${isMobile 
-                  ? '/assets/images/backgrounds/WebsitebannerMobilesize_newchanged0moible.jpg.jpeg' 
+                  ? '/assets/images/backgrounds/WebsitebannerMobilesize_newchanged0moible.png' 
                   : '/assets/images/backgrounds/Websitebanner1_changednewArtboard1.png'
                 })`,
               }}
