@@ -6,7 +6,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { ResponsiveLanguageSwitcher } from "@/components/ResponsiveLanguageSwitcher";
 import { CONTACT_INFO, SOCIAL_LINKS } from '@/config/constants';
 import { IMAGE_PATHS } from '@/config/images';
-const qs = require('qs');
+import { fetchProductCategories } from '@/lib/strapi';
 
 const MOBILE_MENU_STYLES = {
   display: 'flex',
@@ -28,56 +28,7 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
   const fetchCategories = async () => {
     try {
       setCategoriesLoading(true);
-      const apiKey = process.env.NEXT_STRAPI_API_KEY;
-      const headers: HeadersInit = apiKey
-        ? { Authorization: `Bearer ${apiKey}` }
-        : {};
-
-      // Skip custom endpoint if it's locale-aware (it returns different results per locale)
-      // Always use fallback to ensure consistent categories across all locales
-      // Fallback: fetch products and extract categories
-      // Fetch without locale filter since Group_Name is a shared field
-      const query = qs.stringify(
-        {
-          fields: ['documentId', 'Group_Name'],
-          pagination: {
-            page: 1,
-            pageSize: 1000, // Large page size to get all categories
-          },
-        },
-        { encodeValuesOnly: true }
-      );
-
-      const response = await fetch(
-        `/strapi/api/products?${query}`,
-        { headers }
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch products for categories');
-      }
-
-      const data = await response.json();
-      const products = data.data || [];
-
-      // Deduplicate by documentId and extract unique Group_Name values
-      // Group_Name is a shared field, so we can use any variant
-      const seenDocumentIds = new Set<string>();
-      const categoriesSet = new Set<string>();
-
-      products.forEach((product: any) => {
-        const docId = product.documentId || String(product.id);
-        // Only process each documentId once
-        if (!seenDocumentIds.has(docId)) {
-          seenDocumentIds.add(docId);
-          if (product.Group_Name && typeof product.Group_Name === 'string') {
-            categoriesSet.add(product.Group_Name.trim());
-          }
-        }
-      });
-
-      // Convert to sorted array
-      const sortedCategories = Array.from(categoriesSet).sort();
+      const sortedCategories = await fetchProductCategories(locale);
       setCategories(sortedCategories);
     } catch (err) {
       console.error('Error fetching categories:', err);

@@ -60,8 +60,8 @@
 
 .page-header:not(.market-rates-page-header) .page-header__bg {
   background-size: cover !important;
-  /* Subject (farmer) is on the right — anchor there instead of center crop */
-  background-position: 68% center !important;
+  /* Farmer is upper-right — anchor there so the face stays visible */
+  background-position: 72% 18% !important;
   background-repeat: no-repeat !important;
 }
 
@@ -114,7 +114,7 @@
 
   .page-header:not(.market-rates-page-header) .page-header__bg {
     background-size: cover !important;
-    background-position: 88% center !important;
+    background-position: 86% 12% !important;
   }
 
   .page-header:not(.market-rates-page-header) .page-header__inner {
