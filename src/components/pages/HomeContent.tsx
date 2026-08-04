@@ -7,6 +7,8 @@ import { CONTACT_INFO, SOCIAL_LINKS, INSTAGRAM_ACCOUNT } from '@/config/constant
 import { IMAGE_PATHS } from '@/config/images';
 import { useEffect, useRef, useState } from 'react';
 import { InstagramPost } from '@/types/instagram';
+import { Banner, BannersResponse, BannerDisplayMode } from '@/types/banner';
+import { getStrapiHeaders, getStrapiMediaUrl } from '@/lib/strapi';
 import { VideoSection } from '@/components/sections/VideoSection';
 import { InstagramPostsSlider } from '@/components/InstagramPostsSlider';
 
@@ -37,6 +39,25 @@ const BANNER_IMAGE_STYLES = {
   display: 'block',
 } as const;
 
+function getBannerSlideClass(displayMode: BannerDisplayMode): string {
+  const classes = ['banner-one', 'banner-one--bg-only'];
+  if (displayMode === 'contain') {
+    classes.push('banner-one--contain');
+  }
+  if (displayMode === 'map') {
+    classes.push('banner-one--map');
+  }
+  return classes.join(' ');
+}
+
+function getBannerImageUrl(banner: Banner, isMobile: boolean): string {
+  const imageUrl = isMobile && banner.Mobile_Image?.url
+    ? banner.Mobile_Image.url
+    : banner.Desktop_Image?.url;
+
+  return getStrapiMediaUrl(imageUrl);
+}
+
 export function HomeContent() {
   const t = useTranslations();
   const messages = useMessages() as any;
@@ -44,6 +65,7 @@ export function HomeContent() {
   const [instagramPosts, setInstagramPosts] = useState<InstagramPost[]>([]);
   const [postsLoading, setPostsLoading] = useState(true);
   const [postsError, setPostsError] = useState<string | null>(null);
+  const [banners, setBanners] = useState<Banner[]>([]);
   const isMobile = useIsMobile();
   
   // Get raw values description to avoid next-intl parsing HTML tags
@@ -55,7 +77,13 @@ export function HomeContent() {
       try {
         setPostsLoading(true);
         setPostsError(null);
-        const response = await fetch('/api/instagram/posts');
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+        const response = await fetch('/api/instagram/posts', {
+          signal: controller.signal,
+        });
+        clearTimeout(timeoutId);
         const data = await response.json();
 
         if (data.success && data.posts && data.posts.length > 0) {
@@ -80,6 +108,35 @@ export function HomeContent() {
   }, []);
 
   useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const query = new URLSearchParams({
+          sort: 'Sort_Order:asc',
+          'filters[Is_Active][$eq]': 'true',
+          'populate[Desktop_Image][fields][0]': 'url',
+          'populate[Mobile_Image][fields][0]': 'url',
+        });
+
+        const response = await fetch(`/strapi/api/banners?${query.toString()}`, {
+          headers: getStrapiHeaders(),
+        });
+
+        if (!response.ok) {
+          console.warn('Banners API warning:', response.status);
+          return;
+        }
+
+        const data: BannersResponse = await response.json();
+        setBanners(data.data || []);
+      } catch (error) {
+        console.error('Error fetching banners:', error);
+      }
+    };
+
+    fetchBanners();
+  }, []);
+
+  useEffect(() => {
     // Initialize Swiper when component mounts
     const initSwiper = () => {
       const Swiper = (window as any).Swiper;
@@ -90,8 +147,20 @@ export function HomeContent() {
       }
 
       const carouselEl = document.querySelector('.banner-slider__carousel');
-      if (carouselEl && !swiperRef.current) {
-        swiperRef.current = new Swiper('.banner-slider__carousel', {
+      if (!carouselEl) {
+        return;
+      }
+
+      if (swiperRef.current) {
+        try {
+          swiperRef.current.destroy(true, true);
+        } catch (e) {
+          // Ignore cleanup errors
+        }
+        swiperRef.current = null;
+      }
+
+      swiperRef.current = new Swiper('.banner-slider__carousel', {
           slidesPerView: 1,
           spaceBetween: 0,
           loop: true,
@@ -111,7 +180,6 @@ export function HomeContent() {
             type: 'bullets',
           },
         });
-      }
     };
 
     initSwiper();
@@ -127,7 +195,7 @@ export function HomeContent() {
         }
       }
     };
-  }, []);
+  }, [banners]);
 
   return (
     <PageLayout variant="default" currentPage="/" showSidebar={true}>
@@ -218,88 +286,25 @@ export function HomeContent() {
               </div>
             </section>
           </div>
-          {/* Slide 2 - Indian farmer with bullock */}
-          <div className="swiper-slide">
-            <section className="banner-one banner-one--bg-only" style={{ backgroundImage: 'url(/assets/images/backgrounds/indian-farmer-working-green-pigeon-peas-field-with-bullock.jpg)' }}>
-            </section>
-          </div>
-          {/*
-          Slide 3 - Smart agriculture IoT (disabled)
-          <div className="swiper-slide">
-            <section className="banner-one banner-one--bg-only" style={{ backgroundImage: 'url(/assets/images/backgrounds/smart-agriculture-iot-with-hand-planting-tree-background.jpg)' }}>
-            </section>
-          </div>
-          */}
-          {/* Slide 4 - Website Map (desktop) / Mobile Map (mobile) */}
-          <div className="swiper-slide">
-            <section 
-              className="banner-one banner-one--bg-only banner-one--contain banner-one--map" 
-              style={{ 
-                backgroundImage: `url(${isMobile 
-                  ? '/assets/images/backgrounds/Mobile_Map_newmoible.jpeg' 
-                  : '/assets/images/backgrounds/Website_Map_new.jpeg'
-                })`,
-                backgroundColor: '#faf8f0',
-              }}
-            >
-            </section>
-          </div>
-          {/* Slide 5 - Product banner (Website-banner-1Artboard-1) */}
-          <div className="swiper-slide">
-            <section 
-              className="banner-one banner-one--bg-only banner-one--contain" 
-              style={{ 
-                backgroundImage: `url(${isMobile 
-                  ? '/assets/images/backgrounds/WebsitebannerMobilesize_newchanged0moible.png' 
-                  : '/assets/images/backgrounds/Websitebanner1_changednewArtboard1.png'
-                })`,
-              }}
-            >
-            </section>
-          </div>
-          {/* Slide 6 - Product banner (Website-banner-1Artboard-2) */}
-          <div className="swiper-slide">
-            <section 
-              className="banner-one banner-one--bg-only banner-one--contain" 
-              style={{ 
-                backgroundImage: `url(${isMobile 
-                  ? '/assets/images/backgrounds/WebsitebannerMobilesize_newchanged0Artboard2.jpg.jpeg' 
-                  : '/assets/images/backgrounds/Websitebanner1_changednewArtboard2.jpg.jpeg'
-                })`,
-              }}
-            >
-            </section>
-          </div>
-          {/*
-          Slide 7 - Product video banner (disabled)
-          <div className="swiper-slide">
-            <section className="banner-one banner-one--bg-only">
-              <video
-                className="banner-one__video"
-                src="/assets/images/output.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-            </section>
-          </div>
-          */}
-          {/* Additional slides can be added here in future
-          <div className="swiper-slide">
-            <section className="banner-one" style={{ backgroundColor: 'transparent' }}>
-            </section>
-          </div>
-          <div className="swiper-slide">
-            <section className="banner-one" style={{ backgroundColor: 'transparent' }}>
-            </section>
-          </div>
-          <div className="swiper-slide">
-            <section className="banner-one" style={{ backgroundColor: 'transparent' }}>
-            </section>
-          </div>
-          */}
+          {banners.map((banner) => {
+            const imageUrl = getBannerImageUrl(banner, isMobile);
+            if (!imageUrl) {
+              return null;
+            }
+
+            return (
+              <div key={banner.documentId} className="swiper-slide">
+                <section
+                  className={getBannerSlideClass(banner.Display_Mode)}
+                  style={{
+                    backgroundImage: `url(${imageUrl})`,
+                    ...(banner.Background_Color ? { backgroundColor: banner.Background_Color } : {}),
+                  }}
+                  aria-label={banner.Title}
+                />
+              </div>
+            );
+          })}
         </div>
         {/* Pagination dots */}
         <div className="banner-slider__pagination swiper-pagination"></div>

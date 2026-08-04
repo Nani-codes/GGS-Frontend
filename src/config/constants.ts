@@ -9,6 +9,11 @@ export const CONTACT_INFO = {
   emailHref: 'mailto:greengoldseeds@rediffmail.com',
 } as const;
 
+export const CAREER_CONTACT = {
+  email: 'info@greengoldseeds.co.in',
+  emailHref: 'mailto:info@greengoldseeds.co.in?subject=Career%20Application',
+} as const;
+
 export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/GreenGoldSeedsAurangabad',
   youtube: 'https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured',

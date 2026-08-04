@@ -234,8 +234,8 @@
     "title": "Career & Opportunities",
     "description": "We are always looking for talented individuals to join our team. Explore exciting career opportunities with Green Gold Seeds Pvt. Ltd. and be part of our mission to transform Indian agriculture.",
     "ctaTitle": "Interested in Joining Our Team?",
-    "ctaDescription": "Send us your resume or contact us for more information about current openings.",
-    "formTitle": "Apply for a position"
+    "ctaDescription": "Send us your resume and contact details for more information about current openings.",
+    "applyInstructions": "Please email your name, phone number, address, and CV to:"
   },
   "about": {
     "pageTitle": "About Us",
